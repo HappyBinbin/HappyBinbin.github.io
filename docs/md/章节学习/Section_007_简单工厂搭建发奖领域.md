@@ -1,0 +1,205 @@
+# 简单工厂搭建发奖领域
+
+截止到目前我们开发实现的都是关于 `domain` 领域层的建设，当各项核心的领域服务开发完成以后，则会在 `application` 层做服务编排流程处理的开发。
+
+例如：从用户参与抽奖活动、过滤规则、执行抽奖、存放结果、发送奖品等内容的链路处理。
+
+涉及的领域如下：
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220217232044508.png" alt="image-20220217232044508" style="zoom: 67%;" />
+
+## 工程结构
+
+```basic
+lottery-domain
+└── src
+    └── main
+        └── java
+		└── cn.happy.lottery.domain.award
+                ├── model
+                ├── repository
+                │   ├── impl
+                │   │   └── AwardRepository
+                │   └── IAwardRepository
+                └── service
+                    ├── factory
+                    │   ├── DistributionGoodsFactory.java
+                    │   └── GoodsConfig.java
+                    └── goods
+                        ├── impl
+                        │   ├── CouponGoods.java
+                        │   ├── DescGoods.java
+                        │   ├── PhysicalGoods.java
+                        │   └── RedeemCodeGoods.java
+                        ├── DistributionBase.java
+                        └── IDistributionGoodsc.java
+```
+
+关于 award 发奖领域中主要的核心实现在于 service 中的两块功能逻辑实现，分别是：`goods 商品处理`、`factory 工厂🏭`
+
+goods：包装适配各类奖品的发放逻辑，虽然我们目前的抽奖系统仅是给用户返回一个中奖描述，但在实际的业务场景中，是真实的调用优惠券、兑换码、物流发货等操作，而这些内容经过封装后就可以在自己的商品类下实现了。
+
+factory：工厂模式通过调用方提供发奖类型，返回对应的发奖服务。通过这样由具体的子类决定返回结果，并做相应的业务处理。从而不至于让领域层包装太多的频繁变化的业务属性，因为如果你的核心功能域是在做业务逻辑封装，就会就会变得非常庞大且混乱。
+
+## 设计思路
+
+![image-20220217232449645](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220217232449645.png)
+
+
+
+## 开发说明
+
+- lottery-domain：新增 award 发奖领域建设
+- lottery-common：Constant 中引入对发奖状态 AwardState、奖品类型 AwardType 的枚举定义
+- lottery-interfaces：单元测试
+
+## 发奖适配策略
+
+**定义奖品配送接口**
+
+```java
+public interface IDistributionGoods {
+
+    /**
+     * 奖品配送接口，奖品类型（1:文字描述、2:兑换码、3:优惠券、4:实物奖品）
+     *
+     * @param req   物品信息
+     * @return      配送结果
+     */
+    DistributionRes doDistribution(GoodsReq req);
+
+}
+```
+
+- 抽奖，抽象出配送货物接口，把各类奖品模拟成货物、配送代表着发货，包括虚拟奖品和实物奖品
+
+**实现发送奖品：CouponGoods、DescGoods、PhysicalGoods、RedeemCodeGoods**
+
+```java
+@Component
+public class CouponGoods extends DistributionBase implements IDistributionGoods {
+
+    @Override
+    public DistributionRes doDistribution(GoodsReq req) {
+
+        // 模拟调用优惠券发放接口
+        logger.info("模拟调用优惠券发放接口 uId：{} awardContent：{}", req.getuId(), req.getAwardContent());
+
+        // 更新用户领奖结果
+        super.updateUserAwardState(req.getuId(), req.getOrderId(), req.getAwardId(), Constants.AwardState.SUCCESS.getCode(), Constants.AwardState.SUCCESS.getInfo());
+
+        return new DistributionRes(req.getuId(), Constants.AwardState.SUCCESS.getCode(), Constants.AwardState.SUCCESS.getInfo());
+    }
+
+}
+```
+
+- 由于抽奖系统并没有真的与外部系统对接，所以在例如优惠券、兑换码、实物发货上只能通过模拟的方式展示。另外四种发奖方式基本类似，可以参考源码。
+
+## 定义简单工厂
+
+**工厂配置**
+
+```java
+public class GoodsConfig {
+
+    /** 奖品发放策略组 */
+    protected static Map<Integer, IDistributionGoods> goodsMap = new ConcurrentHashMap<>();
+
+    @Resource
+    private DescGoods descGoods;
+
+    @Resource
+    private RedeemCodeGoods redeemCodeGoods;
+
+    @Resource
+    private CouponGoods couponGoods;
+
+    @Resource
+    private PhysicalGoods physicalGoods;
+
+    @PostConstruct
+    public void init() {
+        goodsMap.put(Constants.AwardType.DESC.getCode(), descGoods);
+        goodsMap.put(Constants.AwardType.RedeemCodeGoods.getCode(), redeemCodeGoods);
+        goodsMap.put(Constants.AwardType.CouponGoods.getCode(), couponGoods);
+        goodsMap.put(Constants.AwardType.PhysicalGoods.getCode(), physicalGoods);
+    }
+
+}
+```
+
+- 把四种奖品的发奖，放到一个统一的配置文件类 Map 中，便于通过 AwardType 获取相应的对象，减少 `if...else` 的使用。
+
+**工厂使用**
+
+```java
+@Service
+public class DistributionGoodsFactory extends GoodsConfig {
+
+    public IDistributionGoods getDistributionGoodsService(Integer awardType){
+        return goodsMap.get(awardType);
+    }
+
+}
+```
+
+- 配送商品简单工厂，提供获取配送服务。
+
+## 测试验证
+
+```java
+@Test
+public void test_award() {
+    // 执行抽奖
+    DrawResult drawResult = drawExec.doDrawExec(new DrawReq("happy", 10001L));
+
+    // 判断抽奖结果
+    if (Constants.DrawState.FAIL.getCode().equals(drawResult.getDrawState())) {
+        logger.info("未中奖 DrawAwardInfo is null");
+        return;
+    }
+
+    // 封装发奖参数，orderId：2109313442431 为模拟ID，需要在用户参与领奖活动时生成
+    DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+    GoodsReq goodsReq = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
+
+    // 根据 awardType 从抽奖工厂中获取对应的发奖服务
+    IDistributionGoods distributionGoodsService = distributionGoodsFactory.getDistributionGoodsService(drawAwardInfo.getAwardType());
+    DistributionRes distributionRes = distributionGoodsService.doDistribution(goodsReq);
+
+    logger.info("测试结果：{}", JSON.toJSONString(distributionRes));
+}
+```
+
+### 测试结果
+
+```java
+2022-02-18 07:55:39.629  INFO 24388 --- [           main] c.h.l.d.s.s.draw.impl.DrawExecImpl       : 执行抽奖策略 strategyId：10001，无库存排除奖品列表ID集合 awardIdList：["1","4"]
+2022-02-18 07:55:39.635  INFO 24388 --- [           main] c.h.l.d.s.service.draw.AbstractDrawBase  : 执行策略抽奖完成【已中奖】，用户：happy 策略ID：10001 奖品ID：3 奖品名称：ipad
+2022-02-18 07:55:39.638  INFO 24388 --- [           main] c.h.l.d.a.s.goods.DistributionBase       : TODO 后期添加更新分库分表中，用户个人的抽奖记录表中奖品发奖状态 uId：happy
+2022-02-18 07:55:39.795  INFO 24388 --- [           main] cn.happy.lottery.test.SpringRunnerTest   : 测试结果：{"code":1,"info":"发奖成功","uId":"happy"}
+```
+
+- 从测试结果可以看到，先是执行了我们已经开发好了的抽奖领域服务，之后执行发奖操作。不过目前的发奖还没有对个人用户表信息更新，这部分内容在我们后续开发分库分表逻辑的时候，补充添加上。
+
+## 总结
+
+1. 本章节注意库表字段的调整，如果你是之前的库表需要更新。
+2. 学习简单工厂模式的使用，利用工厂模式+接口封装奖品，让每一块功能都更加清晰易于扩展和维护。
+3. 简单工厂模式避免创建者与具体的产品逻辑耦合、满足单一职责，每一个业务逻辑实现都在所属自己的类中完成、满足开闭原则，无需更改使用调用方就可以在程序中引入新的产品类型。但这样也会带来一些问题，比如有非常多的奖品类型，那么实现的子类会极速扩张，对于这样的场景就需要在引入其他设计手段进行处理，例如抽象通用的发奖子领域，自动化配置奖品发奖。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,402 @@
+# 活动领域的配置与状态
+
+## 学习目的
+
+- 分支 20220218_happy_activity
+
+- 开发活动领域部分功能，包括：活动创建、活动状态变更。主要以 domain 领域层下添加 activity 为主，并在对应的 service 中添加 deploy(创建活动)、partake(领取活动，待开发)、stateflow(状态流转)三个模块
+- 调整仓储服务，将其实现放置到基础层
+
+## 开发日志
+
+- 按照 DDD 模型，调整包引用 lottery-infrastructure 引入 lottery-domain，调整后效果：`领域层 domain` 定义仓储接口，`基础层 infrastructure` 实现仓储接口。
+- 活动领域层需要提供的功能包括：活动创建、活动状态处理和用户领取活动操作，本章节先实现前两个需求，下个章节继续开发其他功能。
+- 活动创建的操作主要会用到事务，因为活动系统提供给运营后台创建活动时，需要包括：活动信息、奖品信息、策略信息、策略明细以及其他额外扩展的内容，这些信息都需要在一个事务下进行落库。
+- 活动状态的审核，【1编辑、2提审、3撤审、4通过、5运行(审核通过后worker扫描状态)、6拒绝、7关闭、8开启】，这里我们会用到设计模式中的`状态模式`进行处理。
+
+## DDD 模型适配
+
+原有工程在 lottery-domain 中定义 repository 实现仓储服务，按照 DDD 模型进行改造：在 lottery-domain 领域层定义仓储接口，在 lottery-infrastructure 基础层实现仓储接口，以 award 领域举例：
+
+两幅图分别为：改造前 and 改造后
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220218235632568.png" alt="image-20220218235632568" style="zoom:80%;" />
+
+### 构建过程
+
+#### 依赖调整
+
+- lottery-infrastructure 要实现仓储服务，则需要应用 lottery-domain 依赖，lottery-domain取消原有对lottery-infrastructure 的依赖（避免循环依赖）
+
+### 类型调整
+
+- 由于需要避免循环依赖，则原有 lottery-domain 对 基础层的基础类的依赖则要进行解绑。通过 BriefVO 的形式，在 domain 中定义需要的基础类。
+- 修改相应需要引用到地方
+
+### 领域构建
+
+- lottery-domain 中 activity 领域的构建，model、repository、service 
+- lottery-infrastructure 基础层中实现仓储接口
+- lottery-common 中新增活动状态枚举类 Constant.ActivityState
+- lottery-interfaces 新增活动等操作数据库接口以及对应的 mapper 文件 sql 写入
+
+
+
+## 活动领域构建
+
+### 工程结构
+
+```basic
+lottery-domain
+└── src
+    └── main
+        └── java
+            └── cn.itedus.lottery.domain.activity
+                ├── model
+                ├── repository
+                │   └── IActivityRepository
+                └── service
+                    ├── deploy
+                    ├── partake [待开发]
+                    └── stateflow
+                        ├── event
+                        │   ├── ArraignmentState.java
+                        │   ├── CloseState.java
+                        │   ├── DoingState.java
+                        │   ├── EditingState.java
+                        │   ├── OpenState.java
+                        │   ├── PassState.java
+                        │   └── RefuseState.java
+                        ├── impl
+                        │   └── StateHandlerImpl.java
+                        ├── AbstractState.java
+                        ├── IStateHandler.java
+                        └── StateConfig.java
+```
+
+### 活动发布（创建）
+
+- 活动的创建操作主要包括：添加活动配置、添加奖品配置、添加策略配置、添加策略明细配置，这些都是在同一个注解事务配置下进行处理 `@Transactional(rollbackFor = Exception.class)`
+- 这里需要注意一点，奖品配置和策略配置都是集合形式的，这里使用了 Mybatis 的一次插入多条数据配置。
+
+```java
+public class ActivityDeployImpl implements IActivityDeploy {
+
+    private Logger logger = LoggerFactory.getLogger(ActivityDeployImpl.class);
+
+    @Resource
+    private IActivityRepository activityRepository;
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void createActivity(ActivityConfigReq req) {
+        logger.info("创建活动配置开始，activityId：{}", req.getActivityId());
+        ActivityConfigRich activityConfigRich = req.getActivityConfigRich();
+        try {
+            // 添加活动配置
+            ActivityVO activity = activityConfigRich.getActivity();
+            activityRepository.addActivity(activity);
+
+            // 添加奖品配置
+            List<AwardVO> awardList = activityConfigRich.getAwardList();
+            activityRepository.addAward(awardList);
+
+            // 添加策略配置
+            StrategyVO strategy = activityConfigRich.getStrategy();
+            activityRepository.addStrategy(strategy);
+
+            // 添加策略明细配置
+            List<StrategyDetailVO> strategyDetailList = activityConfigRich.getStrategy().getStrategyDetailList();
+            activityRepository.addStrategyDetailList(strategyDetailList);
+
+            logger.info("创建活动配置完成，activityId：{}", req.getActivityId());
+        } catch (DuplicateKeyException e) {
+            logger.error("创建活动配置失败，唯一索引冲突 activityId：{} reqJson：{}", req.getActivityId(), JSON.toJSONString(req), e);
+            throw e;
+        }
+    }
+
+    @Override
+    public void updateActivity(ActivityConfigReq req) {
+        // TODO: 非核心功能后续补充
+    }
+
+}
+```
+
+### 活动状态流转（状态变更：状态模式）
+
+对于状态模式的介绍，=> [状态模式-个人笔记](https://gitee.com/HappyBinbin/my-notes/blob/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.md)
+
+- 业务流转：只需考虑当前节点能否流转到下一节点
+- 业务功能限制：需考虑当前节点的上一节点是什么，可以执行什么操作（可限制功能访问甚至是限制节点的流转）
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219002123670.png" alt="image-20220219002123670" style="zoom:80%;" />
+
+依据流程分析每个状态节点的状态和流转，只考虑当前节点状态的出入分析。针对某个状态节点只考虑“出”的情况，即由当前节点和可以执行什么操作（变更为指定状态），“入”的情况则可在其他状态中体现
+
+- 编辑态
+    - 可执行提审操作
+    - 活动可关闭
+- 提审态
+    - 可执行撤审操作
+    - 具有管理员权限用户可审核活动，“通过”、“不通过”
+
+等等
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219002515330.png" alt="image-20220219002515330" style="zoom:80%;" />
+
+#### 具体实现设计
+
+1、抽象类 AbstractState，提供所有状态接口
+
+```java
+@Component
+public class AbstractState {
+    @Resource
+    protected IActivityRepository activityRepository;
+    /**
+    * 流转操作
+    * activityId:活动ID
+    * currentState:活动状态枚举 对应当前活动状态
+    */
+    public abstract Result stateFlow(Long activityId, Enum<Constants.ActivityState>
+                                     currentState);
+}
+```
+
+2、定义所有活动状态，继承 AbstractState，实现各自在当前状态下向所有状态的转换具体操作
+
+```java
+@Component
+public class xxxState extends AbstractState {
+    @Override
+    public Result stateFlow(Long activityId, Enum<Constants.ActivityState>
+                       currentState) {
+        // 1.流转状态校验:根据当前状态进行判断或者其他限制判断是否放行
+        // 2.如果校验正常则执行流转操作，处理业务逻辑
+        return Result.buildResult(Constants.ResponseCode.SUCCESS, "xxx");
+    }
+}
+```
+
+3、StateConfig，配置并状态所有状态，提供策略组 Map<Enum<Constants.ActivityState>, AbstractState>
+
+```java
+public class StateConfig {
+    @Resource
+    private xxxState xxxState;
+    protected Map<Enum<Constants.ActivityState>, AbstractState> stateGroup = new
+        ConcurrentHashMap<>();
+    @PostConstruct
+    public void init() {
+        // 将指定状态装载入map
+        stateGroup.put(Constants.ActivityState.xxxState, xxxState);
+    }
+}
+```
+
+4、抽离 IStateHandler 接口（也定义了所有状态接口），StateHandlerImpl 实现后，继承 StateConfig，对外提供同一服务
+
+```java
+public interface IStateHandler {
+    // 定义相关处理方法
+    Result handle(Long activityId, Enum<Constants.ActivityState> currentStatus);
+}
+
+@Component
+public class StateHandlerImpl extends StateConfig implements IStateHandler {
+    // 重载处理方法实现，根据当前传入的状态获取相应的处理服务操作相应的流转变更
+    @Override
+    public Result handle(Long activityId, Enum<Constants.ActivityState>
+                         currentStatus) {
+        return stateGroup.get(currentStatus).oper(activityId, currentStatus);
+    }
+}
+```
+
+![image-20220219002759160](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219002759160.png)
+
+## 状态模式臃肿的改进方法
+
+在这个状态变更中，使用状态模式显得有些臃肿，每个状态实现类都要大量的实现方法进行操作
+
+下面提供了一种新的校验状态流转的方式,另外对状态流转有部分的调整
+
+```java
+public enum ActivityStateEnum {
+
+    /**
+     * 1.编辑
+     */
+    EDIT(1, "编辑", Sets.newHashSet(/**编辑*/1,/**撤审*/3,/**拒绝*/6)),
+    /**
+     * 2.提审
+     */
+    ARRAIGNMENT(2, "提审", Sets.newHashSet(/**编辑*/1,/**撤审*/3)),
+
+    /**
+     * 3.撤审
+     */
+    REVOKE(3, "撤审", Sets.newHashSet(/**提审*/2)),
+
+    /**
+     * 4.通过
+     */
+    PASS(4, "通过", Sets.newHashSet(/**提审*/2)),
+
+    /**
+     * 5.活动(运行中)
+     */
+    DOING(5, "活动(运行中)", Sets.newHashSet(/**通过*/2,/**开启*/8)),
+
+    /**
+     * 6.拒绝
+     */
+    REFUSE(6, "拒绝", Sets.newHashSet(/**提审*/2)),
+
+    /**
+     * 7.关闭
+     */
+    CLOSE(7, "关闭", Sets.newHashSet(/**运行中*/4,/**开启*/4)),
+
+    /**
+     * 8.开启
+     */
+    OPEN(8, "开启", Sets.newHashSet(/**关闭*/7));
+
+    @Getter
+    private final int code;
+
+    @Getter
+    private final String info;
+    /**
+     * 前置状态,有值时，集合中的状态才能流转为本状态
+     */
+    @Getter
+    Set<Integer> previousStatusSet = null;
+
+    ActivityStateEnum(int code, String info, Set<Integer> previousStatusSet) {
+        this.code = code;
+        this.info = info;
+        this.previousStatusSet = previousStatusSet;
+    }
+
+    /**
+     * 检测状态流转是否合理
+     *
+     * @param oriStatus
+     * @param nextStatus
+     */
+    public static void checkStatusTransfer(ActivityStateEnum oriStatus, ActivityStateEnum nextStatus) {
+        if (oriStatus == null || nextStatus == null) {
+            throw new IllegalStateException();
+        }
+
+        if (CollectionUtils.isNotEmpty(nextStatus.previousStatusSet) && !nextStatus.previousStatusSet.contains(oriStatus.code)) {
+            throw new IllegalStateException();
+        }
+    }
+}
+```
+
+## 活动领域构建测试
+
+### 单元测试
+
+cn.happy.lottery.test.domain.ActivityTest
+
+```java
+@Test
+public void test_alterState() {
+    logger.info("提交审核，测试：{}", JSON.toJSONString(stateHandler.arraignment(100001L, Constants.ActivityState.EDIT)));
+    logger.info("审核通过，测试：{}", JSON.toJSONString(stateHandler.checkPass(100001L, Constants.ActivityState.ARRAIGNMENT)));
+    logger.info("运行活动，测试：{}", JSON.toJSONString(stateHandler.doing(100001L, Constants.ActivityState.PASS)));
+    logger.info("二次提审，测试：{}", JSON.toJSONString(stateHandler.checkPass(100001L, Constants.ActivityState.EDIT)));
+}
+```
+
+测试验证之前先观察你的活动数据状态，因为后续会不断的变更这个状态，以及变更失败提醒
+
+- 从编辑状态到提审状态
+- 从提审状态到审核通过
+- 从审核通过到活动运行，也就是活动中
+- 接下来再二次提审，验证是否可以审核
+
+**测试结果**
+
+```java
+INFO 13743 --- [main] c.i.lottery.test.domain.ActivityTest     : 提交审核，测试：{"code":"0000","info":"活动提审成功"}
+INFO 13743 --- [main] c.i.lottery.test.domain.ActivityTest     : 审核通过，测试：{"code":"0000","info":"活动审核通过完成"}
+INFO 13743 --- [main] c.i.lottery.test.domain.ActivityTest     : 运行活动，测试：{"code":"0000","info":"活动变更活动中完成"}
+INFO 13743 --- [main] c.i.lottery.test.domain.ActivityTest     : 二次提审，测试：{"code":"0001","info":"编辑中不可审核通过"}
+```
+
+- 从测试结果可以看到，处于不同状态下的状态操作动作和反馈结果。
+
+## 总结
+
+------
+
+1. 注意 domain、lottery-infrastructure，包结构调整，涉及到 POM 配置文件的修改，在 lottery-infrastructure 引入 domain 的 POM 配置
+2. Activity 活动领域目前只开发了一部分内容，需要注意如何考虑把活动一个类思考🤔出部署活动、领取活动和状态流转的设计实现
+3. 目前我们看到的活动创建还没有一个活动号的设计，下个章节我们会涉及到活动ID策略生成以及领取活动的单号ID生成。
+
+## 遇到的问题
+
+### 循环依赖的问题
+
+#### 明确职责划分，避免循环依赖
+
+lottery-domain 中的仓储服务实现已经迁移到 lottery-infrastructure，说明 lottery-domain 中只需要根据业务定义相应的接口即可（不涉及dao相关调用的具体实现），因此 lottery-domain 中并不需要引用 lottery-infrastructure ，直接在pom.xml去除相关依赖即可
+
+#### 解决循环依赖（如果实在是不可避免多模块工程之间的相互调用问题）
+
+##### 1、借助build-helper-maven-plugin插件进行规避
+
+这个插件提供了一种规避措施，即临时地将工程A、B、C合并成一个中间工程，编译出临时的模块 D。然后A、B、C再分别依赖临时模块D进行编译），但这种方式只是一种规避措施，并没有从根本上解决工程间依赖关系混乱的问题
+
+![image-20220219000937019](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219000937019.png)
+
+##### 2、重构工程（从根上防止）
+
+平移：例如A、B相互依赖，则将B依赖A的代码平移到工程B中，则B不需要依赖依赖A，从而消除循环依赖
+
+下移：例如A、B互相依赖，且A、B依赖于C，则可将A、B中相互依赖的部分代码迁移到C中，让A、B只依赖于C，从而消除循环依赖（这种思路和上述build-helper-maven-plugin的思路是类似的，只不过一个从编译过程中解决循环依赖，一个是从实体项目结构过程中解决依赖）
+
+> 具体依赖消除的方式则要结合实际情况进行分析，如果能优化工程结构为上策，但有时得考虑整改成
+> 本问题，选择最合适的方案，但对于初始化构建项目工程而言一定得考虑好工程间的结构关系，打好基
+> 础、确定规范
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
