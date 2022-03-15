@@ -1,0 +1,3 @@
+- [返回上一级 [MySQL]](笔记/数据库/MySQL/)
+- [《MySQL是怎样运行的》](笔记/数据库/MySQL/《MySQL是怎样运行的》/)
+  - [第4章InnoDB记录存储结构](笔记/数据库/MySQL/《MySQL是怎样运行的》/第4章InnoDB记录存储结构.md)

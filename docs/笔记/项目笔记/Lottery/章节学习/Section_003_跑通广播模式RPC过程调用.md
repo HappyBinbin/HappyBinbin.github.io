@@ -1,0 +1,64 @@
+# 跑通广播模式RPC过程调用
+
+## POM 文件配置问题
+
+理清楚各个结构模块之间的依赖关系
+
+- lottery-application，应用层，引用：`domain`
+- lottery-common，通用包，引用：`无`
+- lottery-domain，领域层，引用：`infrastructure`
+- lottery-infrastructure，基础层，引用：`无`
+- lottery-interfaces，接口层，引用：`application`、`rpc`
+- lottery-rpc，RPC接口定义层，引用：`common`
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220127142553583.png" alt="image-20220127142553583" style="zoom:80%;" />
+
+该工程结构需要注意的一些事项
+
+- 不能造成循环依赖问题
+- 主工程 pom 文件的配置，需要完成对 SpringBoot 父文件的依赖，定义一些用于其他模块可引入的配置信息，比如：JDK 版本、编码方式等
+- 注意打包模块的 pom 文件配置信息
+- 其他模块在依赖主 pom 文件后，还需要配置自己的信息
+
+
+
+## 遇到的问题
+
+1、org.apache.ibatis.binding.BindingException 
+
+一般的原因是Mapper interface和xml文件的定义对应不上，需要检查包名，namespace，函数名称等能否对应上。
+
+但是我这里非常离谱，是因为新建包的时候，我直接使用 myabtis.mapper 的写法，idea 不知道为什么没给我分层，而是直接将它认为是一个包，导致我的 yml 配置文件中，出现了路径错误的问题，因此才报错，绑定异常
+
+![image-20220128143934247](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220128143934247.png)
+
+2、工程的打包顺序问题，应该先把 groupId 和 artifactId 确定好后，可以直接再主工程 install 即可
+
+3、为什么 DAO 的 .java 文件要和 .xml 文件放在两个模块下面，虽然可以。但是这样做的意义是什么，lottery-infrastructure  这个工程不是提供仓储服务的实现吗，那么为什么要把  mapper.xml  放在 lottery-interfaces  下面呢
+
+1. 其实就是按照不同方式进行分包，一种是把配置和各自服务放到一起，一种是把同类的放到一起。
+2. 配置都统一放到接口层，打包对外比较方便管理
+3. 一般按照各自所在公司和研发组的规范即可，不同种方式而已
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

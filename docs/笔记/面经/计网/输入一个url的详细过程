@@ -1,0 +1,232 @@
+
+
+[TOC]
+
+
+
+# 从输入URL到页面展示的详细过程
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190810155759517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Fpbmlhbjg=,size_16,color_FFFFFF,t_70)
+
+## 1. 输入地址
+
+​	在输入网址的时候，浏览器就可以开始解析输入的url，并进行智能匹配，从历史记录，书签等地方，寻找已经输入的字符串对应的url，然后给出补全提示。有些浏览器甚至直接从缓存中提取出页面直接展示
+
+## 2. 浏览器查询域名的IP地址
+
+##### 什么是DNS？
+
+　　DNS（Domain Name System，域名系统），因特网上作为域名和[IP地址](http://baike.baidu.com/item/IP地址)相互映射的一个[分布式数据库](http://baike.baidu.com/item/分布式数据库)，能够使用户更方便的访问[互联网](http://baike.baidu.com/item/互联网)，而不用去记住能够被机器直接读取的IP数串。通过[主机](http://baike.baidu.com/item/主机)名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。
+
+　　通俗的讲，我们更习惯于记住一个网站的名字，比如www.baidu.com,而不是记住它的ip地址，比如：167.23.10.2。而计算机更擅长记住网站的ip地址，而不是像www.baidu.com等链接。因为，DNS就相当于一个电话本，比如你要找www.baidu.com这个域名，那我翻一翻我的电话本，我就知道，哦，它的电话（ip）是167.23.10.2
+
+##### DNS域名称空间的组织方式
+
+![（）](https://img-blog.csdnimg.cn/20190810160607503.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Fpbmlhbjg=,size_16,color_FFFFFF,t_70)
+
+##### 举个例子
+
+1. 在浏览器中输入[http://www.qq.com](https://link.zhihu.com/?target=http%3A//www.qq.com)域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系，如果有，就先调用这个IP地址映射，完成域名解析。
+
+2. 如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存，是否有这个网址映射关系，如果有，直接返回，完成域名解析。
+3. 如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/ip参数中设置的首选DNS服务器，在此我们叫它本地DNS服务器，此服务器收到查询时，如果要查询的域名，包含在本地配置区域资源中，则返回解析结果给客户机，完成域名解析，此解析具有权威性。
+
+4. 如果要查询的域名，不由本地DNS服务器区域解析，但该服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析，此解析不具有权威性。
+
+5. 如果本地DNS服务器本地区域文件与缓存解析都失效，则根据本地DNS服务器的设置（是否设置转发器）进行查询，如果未用转发模式，本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名(.com)是谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。这台负责.com域的服务器收到请求后，如果自己无法解析，它就会找一个管理.com域的下一级DNS服务器地址([http://qq.com](https://link.zhihu.com/?target=http%3A//qq.com))给本地DNS服务器。当本地DNS服务器收到这个地址后，就会找[http://qq.com](https://link.zhihu.com/?target=http%3A//qq.com)域服务器，重复上面的动作，进行查询，直至找到[http://www.qq.com](https://link.zhihu.com/?target=http%3A//www.qq.com)主机。
+
+6. 如果用的是转发模式，此DNS服务器就会把请求转发至上一级DNS服务器，由上一级服务器进行解析，上一级服务器如果不能解析，或找根DNS或把转请求转至上上级，以此循环。不管是本地DNS服务器用是是转发，还是根提示，最后都是把结果返回给本地DNS服务器，由此DNS服务器再返回给客户机。
+    从客户端到本地DNS服务器是属于递归查询，而DNS服务器之间就是的交互查询就是迭代查询。
+
+    
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190810160457907.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Fpbmlhbjg=,size_16,color_FFFFFF,t_70)
+
+## 3. 应用层生成HTTP请求报文
+
+应用层生成针对目标WEB服务器的HTTP请求报文，HTTP请求报文包括起始行、首部（请求头）和主题（请求正文）部分
+
+```json
+GET/sample.jspHTTP/1.1
+Accept:image/gif.image/jpeg,*/*
+*/
+Accept-Language:zh-cn
+Connection:Keep-Alive
+Host:localhost
+User-Agent:Mozila/4.0(compatible;MSIE5.01;Window NT5.0)
+Accept-Encoding:gzip,deflate
+
+username=jinqiao&password=1234
+```
+
+- 起始行：请求方法URI协议/版本（GET/sample.jsp HTTP/1.1）
+- 首部：包括域名host、keep-alive、User-Agent、Accept-Encoding、Accept-Language、Cookie等信息。请求头(Request Header)请求头包含许多有关的客户端环境和请求正文的有用信息。例如，请求头可以声明浏览器所用的语言，请求正文的长度等。
+- 请求正文：主体内容即要传输的内容。如果是get请求，则主体内容为空
+- 请求头和请求正文之间是一个`空行`，这个行非常重要，它表示请求头已经结束，接下来的是请求正文。请求正文中可以包含客户提交的查询字符串信息
+
+##### HTTPS协议
+
+HTTP报文是包裹在TCP报文中发送的，服务器端收到TCP报文时会解包提取出HTTP报文。但是这个过程中存在一定的风险，HTTP报文是明文，如果中间被截取的话会存在一些信息泄露的风险。那么在进入TCP报文之前对HTTP做一次加密就可以解决这个问题了。
+
+> HTTPS协议的本质就是HTTP + SSL(or TLS)。在HTTP报文进入TCP报文之前，先使用SSL对HTTP报文进行加密。从网络的层级结构看它位于HTTP协议与TCP协议之间。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190810162038235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Fpbmlhbjg=,size_16,color_FFFFFF,t_70)
+
+## 4. 传输层建立TCP连接
+
+由于HTTP协议使用的是TCP协议，为了方便通信，将HTTP请求报文按序号分为多个报文段(segment)，并对每个报文段进行封装。使用本地一个大于1024以上的随机TCP源端口 (这里假设是1030) 建立到目的服务器TCP80号端口 (HTTPS协议对应的端口号是443)的连接，TCP源端口和目的端口被加入到报文段中，学名叫协议数据单元(Protocol Data Unit, PDU)。因TCP是一个可靠的传输控制协议，传输层还会加入序列号、确认号、窗口大小、校验和等参数，共添加20字节的头部信息
+
+![img](https://pic.xiaohuochai.site/blog/HTTP_network15.jpg)
+
+![http](https://pic.xiaohuochai.site/blog/HTTP_network18.jpg)
+
+构建TCP请求会增加大量的网络时延，常用的优化方式如下所示
+
+　　（1）资源打包，合并请求
+
+　　（2）多使用缓存，减少网络传输
+
+　　（3）使用keep-alive建立持久连接
+
+　　（4）使用多个域名，增加浏览器的资源并发加载数，或者使用HTTP2的管道化连接的多路复用技术
+
+## 5. 网络层使用IP协议来选择路线
+
+处理来自传输层的数据段segment，将数据段segment装入数据包packet，填充包头，主要就是添加源和目的IP地址，然后发送数据。在数据传输的过程中，IP协议负责选择传送的路线，称为路由功能
+
+![http](https://pic.xiaohuochai.site/blog/HTTP_network12.jpg)
+
+
+
+## 6. 数据链路实现网络相邻结点间可靠的数据通信
+
+为了保证数据的可靠传输，把数据包packet封装成帧(Frame)，并按顺序传送各帧。由于物理线路的不可靠，发出的数据帧有可能在线路上出错或丢失，于是为每个数据分块计算出CRC(循环冗余检验)，并把CRC添加到帧中，这样接收方就可以通过重新计算CRC来判断数据接收的正确性。一旦出错就重传
+
+将数据包packet封装成帧(Frame)，包括帧头和帧尾。帧尾是添加被称做CRC的循环冗余校验部分。帧头主要是添加数据链路层的地址，即数据链路层的源地址和目的地址，即网络相邻结点间的源MAC地址和目的MAC地址
+
+## 7. 物理层传输数据
+
+数据链路层的帧(Frame)转换成二进制形式的比特(Bit)流，从网卡发送出去，再把比特转换成电子、光学或微波信号在网络中传输
+
+
+
+## 8. 服务器处理反向传输
+
+服务器接收到这个比特流，把其转换成帧格式，上传到数据链路层，服务器发现数据帧中的目的MAC地址与本网卡的MAC地址相同，服务器拆除数据链路层的封装后，把数据包上传到网络层。服务器的网络层比较数据包中的目的IP地址，发现与本机的IP地址相同，再拆除网络层的封装，最后将数据分段上传到传输层。传输层对数据分段进行确认、排序、重组，确保数据传输的可靠性。数据最后会被分发到应用层中的各个进程中
+
+## 9. 服务器响应一个HTTP响应
+
+自然而然这部分对应的就是后端工程师眼中的HTTP。后端从在固定的端口接收到TCP报文开始，这一部分对应于编程语言中的socket。它会对TCP连接进行处理，对HTTP协议进行解析，并按照报文格式进一步封装成HTTP Request对象，供上层使用。这一部分工作一般是由Web服务器去进行，我使用过的Web服务器有Tomcat, Jetty和Netty等等。
+
+HTTP响应报文也是由三部分组成: 状态码, 响应报头和响应报文。
+
+```json
+HTTP/1.1 200 OK
+Date: Sat, 31 Dec 2005 23:59:59 GMT
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 122
+
+＜html＞
+＜head＞
+＜title＞http＜/title＞
+＜/head＞
+＜body＞
+＜!-- body goes here --＞
+＜/body＞
+＜/html＞
+```
+
+**状态行：**
+
+状态行由协议版本、数字形式的状态代码、及相应的状态描述，各元素之间以空格分隔。
+
+- 格式: HTTP-Version Status-Code Reason-Phrase CRLF
+- 例如: HTTP/1.1 200 OK \r\n
+
+- 协议版本：是用http1.0还是其他版本
+
+- 状态代码：状态代码由三位数字组成，第一个数字定义了响应的类别，且有五种可能取值。
+- 状态描述：状态描述给出了关于状态代码的简短的文字描述。比如状态代码为200时的描述为 OK
+
+**响应报头**
+常见的响应报头字段有: Server, Connection…。
+
+**响应报文**
+服务器返回给浏览器的文本信息，通常HTML, CSS, JS, 图片等文件就放在这一部分。
+
+如果HTTP响应报文是301或302重定向，则浏览器会依相应头中的location再次发送请求。
+
+## 10. 浏览器渲染
+
+浏览器在收到HTML,CSS,JS文件后，它是如何把页面呈现到屏幕上的？
+
+主资源到达后，浏览器的Parser模块解析主资源的内容，生成派生资源对应的DOM结构，然后根据需求触发派生资源的加载流程。比如，在解析过程中，如果遇到img的起始标签，会创建相应的image元素HTMLImageElement，接着依据img标签的内容设置HTMLImageElement的属性。在设置src属性时，会触发图片资源加载，发起加载资源请求
+
+### 10.1 使用parse模块解析HTML、CSS、Javascript资源
+
+#### 【解析HTML】
+
+HTML解析分为可以分为解码、分词、解析、建树四个步骤
+
+（1）解码：将网络上接收到的经过编码的字节流，解码成Unicode字符
+
+（2）分词：按照一定的切词规则，将Unicode字符流切成一个个的词语(Tokens)
+
+（3）解析：根据词语的语义，创建相应的节点(Node)
+
+（4）建树：将节点关联到一起，创建DOM树
+
+#### 【解析CSS】
+
+页面中所有的CSS由样式表CSSStyleSheet集合构成，而CSSStyleSheet是一系列CSSRule的集合，每一条CSSRule则由选择器CSSStyleSelector部分和声明CSSStyleDeclaration部分构成，而CSSStyleDeclaration是CSS属性和值的Key-Value集合
+
+CSS解析完毕后会进行CSSRule的匹配过程，即寻找满足每条CSS规则Selector部分的HTML元素，然后将其Declaration声明部分应用于该元素。实际的规则匹配过程会考虑到默认和继承的CSS属性、匹配的效率及规则的优先级等因素
+
+#### 【解析JS】
+
+JavaScript一般由单独的脚本引擎解析执行，它的作用通常是动态地改变DOM树（比如为DOM节点添加事件响应处理函数），即根据时间（timer）或事件（event）映射一棵DOM树到另一棵DOM树
+
+> 简单来说，经过了Parser模块的处理，浏览器把页面文本转换成了一棵节点带CSS Style、会响应自定义事件的Styled DOM树
+
+### 10.2 构建DOM树、Render树和RenderLayer树
+
+### 10.3 布局和渲染
+
+布局就是安排和计算页面中每个元素大小位置等几何信息的过程。HTML采用流式布局模型，基本的原则是页面元素在顺序遍历过程中依次按从左至右、从上至下的排列方式确定各自的位置区域
+
+简单情况下，布局可以顺序遍历一次Render树完成，但也有需要迭代的情况。当祖先元素的大小位置依赖于后代元素或者互相依赖时，一次遍历就无法完成布局，如Table元素的宽高未明确指定而其下某一子元素Tr指定其高度为父Table高度的30%的情况
+
+Paint模块负责将Render树映射成可视的图形，它会遍历Render树调用每个Render节点的绘制方法将其内容显示在一块画布或者位图上，并最终呈现在浏览器应用窗口中成为用户看到的实际页面
+
+主要绘制顺序如下：
+
+（1）背景颜色
+
+（2）背景图片
+
+（3）边框
+
+（4）子呈现树节点
+
+（5）轮廓
+
+### 10.4 硬件加速
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190810172127824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Fpbmlhbjg=,size_16,color_FFFFFF,t_70)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,410 @@
+# 抽奖策略领域模块开发
+
+## 学习目的
+
+1. 独立完成两种算法的代码实现，理解整体概率与单项概率的区别
+2. 设计抽奖策略接口并实现具体代码，初步设计发放接口
+3. 理解架构分成的理解
+
+## 需求引出设计
+
+**需求**：在一场营销抽奖活动玩法中，运营人员通常会配置以转盘、盲盒等展现形式的抽奖玩法。例如在转盘中配置12个奖品，每个奖品配置不同的中奖概率，当1个奖品被抽空了以后，那么再抽奖时，是剩余的奖品总概率均匀分配在11个奖品上，还是保持剩余11个奖品的中奖概率，如果抽到为空的奖品则表示未中奖。其实这两种方式在实际的运营过程中都会有所选取，主要是为了配合不同的玩法。
+
+**设计**：那么我们在做这样的抽奖领域模块设计时，就要考虑到库表中要有对应的字段来区分当前运营选择的是什么样的抽奖策略。那么在开发实现上也会用到对应的`策略模式`的使用，两种抽奖算法可以算是不同的抽奖策略，最终提供统一的接口包装满足不同的抽奖功能调用。
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214170147288.png" alt="image-20211214170147288" style="zoom: 50%;" />
+
+**实现**：
+
+- 在库表设计上我们把抽奖需要的策略配置和策略明细，它们的关系是`1vn`。
+- 另外为了让抽奖策略成为可以独立配置和使用的领域模块，在策略表用不引入活动ID信息的配置。因为在建设领域模块的时候，我们需要把让这部分的领域实现具有可独立运行的特性，不让它被业务逻辑污染，它只是一种无业务逻辑的通用共性的功能领域模块，在业务组合的过程中可以使用此功能领域提供的标准接口。
+- 通过这样的设计实现，就可以满足于不同业务场景的灵活调用，例如：有些业务场景是需要你直接来进行抽奖反馈中奖信息发送给用户，但还有一些因为用户下单支付才满足抽奖条件的场景对应的奖品，这种是需要延时到账的，避免用户在下单后又进行退单，这样造成了刷单的风险。`所以很时候你的设计是与业务场景息息相关的`
+
+## 架构分层理念
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220206112232471.png" alt="image-20220206112232471" style="zoom: 80%;" />
+
+### 传统 MVC 架构
+
+不同人员在开发不同模块的时候，会引用到相同的 domain 对象，一旦 domain 中的对象（这里的 domain 可以泛化理解为 model、dao、dto、vo 等对象定义）涉及变动，极有可能会牵一发而动全身，不同模块之间相互引用不利于业务的解耦和扩展，所以才衍生出了服务领域抽离的概念
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220206114538263.png" alt="image-20220206114538263" style="zoom:50%;" />
+
+### 模块化开发
+
+为了进一步划分功能模块开发的职责，通常会以“模块化开发”为基础，按照业务功能或者其他分类标准划分不同的包结构从而区分开发领域(以项目示例：按照不同功能模块划分包区域、在此基础上还可细化模块功能开发），但还是不可避免模块间的相互引用，以及后续业务迭代升级的联动变更
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220206114558682.png" alt="image-20220206114558682" style="zoom:50%;" />
+
+### DDD 领域驱动
+
+以上场景衍生出了DDD架构，它按照一定的规则划分服务领域概念，将相应的domain、dao、service 对象打包成一个领域服务概念，不同领域服务只专属于某个服务，而不相互引用
+
+可以从两个角度进一步理解概念：
+
+- 隔断方式：物理隔断概念，不同领域服务之间不相互引用，相互之间迭代升级不存在联动变更的情况
+- 领域划分范围：领域划分更为精细，结合相应的业务场景细化领域服务概念（可细化到某个功能概念），其主要目的在于业务解耦、迭代升级
+
+### 领域功能结构
+
+抽奖系统工程采用DDD架构 + Module模块方式搭建，lottery-domain 是专门用于开发领域服务的模块，不限于目前的抽奖策略在此模块下实现还有以后需要实现的活动领域、规则引擎、用户服务等都需要在这个模块实现对应的领域功能。
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220202115902114.png" alt="image-20220202115902114" style="zoom: 50%;" />
+
+strategy 是第1个在 domain 下实现的抽奖策略领域，在领域功能开发的服务下主要含有model、repository、service三块区域，接下来分别介绍下在抽奖领域中这三块区域都做了哪些事情。
+
+- model，用于提供vo、req、res 和 aggregates 聚合对象
+- repository，提供仓储服务，其实也就是对Mysql、Redis等数据的统一包装
+- service，是具体的业务领域逻辑实现层，在这个包下定义了algorithm 抽奖算法实现和具体的抽奖策略包装 draw 层，对外提供抽奖接口 IDrawExec#doDrawExec
+
+## 抽奖算法实现
+
+### 场景描述
+
+两种抽奖算法描述，场景A20%、B30%、C50%
+
+- **总体概率**：如果A奖品抽空后，B和C奖品的概率按照 `3:5` 均分，相当于B奖品中奖概率由 `0.3` 升为 `0.375`
+- **单项概率**：如果A奖品抽空后，B和C保持目前中奖概率，用户抽奖扔有20%中为A，因A库存抽空则结果展示为未中奖。*为了运营成本，通常这种情况的使用的比较多*
+
+### 设计思路
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220203143732080.png" alt="image-20220203143732080" style="zoom:80%;" />
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214191651506.png" alt="image-20211214191651506"  />
+
+#### 1. 定义接口
+
+**cn.dgut.lottery.domain.strategy.service.algorithm.IDrawAlgorithm**
+
+```java
+public interface IDrawAlgorithm {
+
+    /**
+     * 程序启动时初始化概率元祖，在初始化完成后使用过程中不允许修改元祖数据
+     * <p>
+     * 元祖数据作用在于讲百分比内(0.2、0.3、0.5)的数据，转换为一整条数组上分区数据，如下；
+     * 0.2 = 0 ~ 0.2
+     * 0.3 = 0 + 0.2 ~ 0.2 + 0.3 = 0.2 ~ 0.5
+     * 0.5 = 0.5 ~ 1 （计算方式同上）
+     * <p>
+     * 通过数据拆分为整条后，再根据0-100中各个区间的奖品信息，使用斐波那契散列计算出索引位置，把奖品数据存放到元祖中。比如：
+     * <p>
+     * 1. 把 0.2 转换为 20
+     * 2. 20 对应的斐波那契值哈希值：（20 * HASH_INCREMENT + HASH_INCREMENT）= -1549107828 HASH_INCREMENT = 0x61c88647
+     * 3. 再通过哈希值计算索引位置：hashCode & (rateTuple.length - 1) = 12
+     * 4. 那么tup[12] = [0.2这个中奖概率对应的奖品]
+     * 5. 当后续通过随机数获取到1-100的值后，可以直接定位到对应的奖品信息，通过这样的方式把轮训算奖的时间复杂度从O(n) 降低到 0(1)
+     *
+     * @param strategyId        策略ID
+     * @param awardRateInfoList 奖品概率配置集合 「值示例：AwardRateInfo.awardRate = 0.04」
+     */
+    void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList);
+
+    /**
+     * 判断是否已经，做了数据初始化
+     * @param strategyId
+     * @return
+     */
+    boolean isExistRateTuple(Long strategyId);
+
+    /**
+     * SecureRandom 生成随机数，索引到对应的奖品信息返回结果
+     *
+     * @param strategyId 策略ID
+     * @param excludeAwardIds 排除掉已经不能作为抽奖的奖品ID，留给风控和空库存使用
+     * @return 中奖结果
+     */
+    String randomDraw(Long strategyId, List<String> excludeAwardIds);
+
+}
+```
+
+- 无论任何一种抽奖算法的使用，都以这个接口作为标准的抽奖接口进行抽奖。strategyId 是抽奖策略、excludeAwardIds 排除掉已经不能作为抽奖的奖品ID，留给风控和空库存使用
+
+#### 2. 总体概率(算法)
+
+**算法描述**：分别把A、B、C对应的概率值转换成阶梯范围值，A=(0~0.2」、B=(0.2-0.5」、C=(0.5-1.0」，当使用随机数方法生成一个随机数后，与阶梯范围值进行循环比对找到对应的区域，匹配到中奖结果。
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214170541228.png" alt="image-20211214170541228" style="zoom: 50%;" />
+
+**部分代码**
+
+```java
+public class DefaultRateRandomDrawAlgorithm extends BaseAlgorithm {
+
+    @Override
+    public String randomDraw(Long strategyId, List<String> excludeAwardIds) {
+
+        BigDecimal differenceDenominator = BigDecimal.ZERO;
+
+        // 排除掉不在抽奖范围的奖品ID集合
+        List<AwardRateInfo> differenceAwardRateList = new ArrayList<>();
+        List<AwardRateInfo> awardRateIntervalValList = awardRateInfoMap.get(strategyId);
+        for (AwardRateInfo awardRateInfo : awardRateIntervalValList) {
+            String awardId = awardRateInfo.getAwardId();
+            if (excludeAwardIds.contains(awardId)) {
+                continue;
+            }
+            differenceAwardRateList.add(awardRateInfo);
+            differenceDenominator = differenceDenominator.add(awardRateInfo.getAwardRate());
+        }
+
+        // 前置判断
+        if (differenceAwardRateList.size() == 0) return "";
+        if (differenceAwardRateList.size() == 1) return differenceAwardRateList.get(0).getAwardId();
+
+        // 获取随机概率值
+        SecureRandom secureRandom = new SecureRandom();
+        int randomVal = secureRandom.nextInt(100) + 1;
+
+        // 循环获取奖品
+        String awardId = "";
+        int cursorVal = 0;
+        for (AwardRateInfo awardRateInfo : differenceAwardRateList) {
+            int rateVal = awardRateInfo.getAwardRate().divide(differenceDenominator, 2, BigDecimal.ROUND_UP).multiply(new BigDecimal(100)).intValue();
+            if (randomVal <= (cursorVal + rateVal)) {
+                awardId = awardRateInfo.getAwardId();
+                break;
+            }
+            cursorVal += rateVal;
+        }
+
+        // 返回中奖结果
+        return awardId;
+    }
+
+}
+```
+
+- 首先要从总的中奖列表中排除掉那些被排除掉的奖品，这些奖品会涉及到概率的值重新计算。
+- 如果排除后剩下的奖品列表小于等于1，则可以直接返回对应信息
+- 接下来就使用随机数工具生产一个100内的随值与奖品列表中的值进行循环比对，`算法时间复杂度O(n)`
+
+#### 3. 单项概率(算法)
+
+**算法描述**：单项概率算法不涉及奖品概率重新计算的问题，那么也就是说我们分配好的概率结果是可以固定下来的。好，这里就有一个可以优化的算法，不需要在轮训匹配O(n)时间复杂度来处理中奖信息，而是可以根据概率值存放到HashMap或者自定义散列数组进行存放结果，这样就可以根据概率值直接定义中奖结果，`时间复杂度由O(n)降低到O(1)。`这样的设计在一般电商大促并发较高的情况下，达到优化接口响应时间的目的。
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/具体抽奖算法.png" alt="具体抽奖算法" style="zoom: 80%;" />
+
+**部分代码**
+
+```java
+@Override
+public String randomDraw(Long strategyId, List<String> excludeAwardIds) {
+    // 获取策略对应的元祖
+    String[] rateTuple = super.rateTupleMap.get(strategyId);
+    assert rateTuple != null;
+    // 随机索引
+    int randomVal = new SecureRandom().nextInt(100) + 1;
+    int idx = super.hashIdx(randomVal);
+    // 返回结果
+    String awardId = rateTuple[idx];
+    if (excludeAwardIds.contains(awardId)) return "未中奖";
+    return awardId;
+}
+```
+
+## 抽奖策略注册方式改进
+
+在本节抽奖算法的注册方式里，原先是放入 hashmap  直接进行注册，但是这种方法在初期会比较方便，但如果抽奖策略多了，每次新增抽奖策略都需要同步修改抽奖策略注册的处理
+
+```java
+public class DrawConfig {
+
+    @Resource
+    private IDrawAlgorithm defaultRateRandomDrawAlgorithm;
+
+    @Resource
+    private IDrawAlgorithm singleRateRandomDrawAlgorithm;
+
+    protected static Map<Integer, IDrawAlgorithm> drawAlgorithmMap = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void init() {
+        drawAlgorithmMap.put(1, defaultRateRandomDrawAlgorithm);
+        drawAlgorithmMap.put(2, singleRateRandomDrawAlgorithm);
+    }
+
+}
+```
+
+### 改造方案
+
+> 枚举 + 注解 + 扫描 进行注入
+
+#### 1、创建枚举类
+
+```java
+/**
+ * 抽奖策略枚举
+ */
+public enum StrategyModeEnum {
+
+    DEFAULT_RATE_RANDOM_DRAW_ALGORITHM(1,"必中奖策略抽奖，排掉已经中奖的概率，重新计算中奖范围"),
+
+    SINGLE_RATE_RANDOM_DRAW_ALGORITHM(2,"单项随机概率抽奖，抽到一个已经排掉的奖品则未中奖"),
+
+    ;
+    private StrategyModeEnum(Integer id,String description){
+
+    }
+
+    /**
+     * 策略id
+     */
+    private Integer id;
+
+    /**
+     * 策略描述
+     */
+    private String description;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+```
+
+#### 2、自定义注解
+
+```java
+/**
+    * 抽奖策略模型注解
+    */
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface StrategyMode {
+    /**
+     * 抽奖策略模型枚举
+     */
+    StrategyModeEnum strategyMode();
+}
+```
+
+#### 3、给抽奖策略实现增加注解
+
+![image-20220208154257120](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220208154257120.png)
+
+![image-20220208154241715](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220208154241715.png)
+
+#### 4、修改策略注册方法
+
+这一步也就是实现 APT（Annotation Processing Tool)，否则我们的注解就白定义了
+
+```java
+public class DrawConfig implements ApplicationContextAware {
+    private ApplicationContext applicationContext;
+    protected static Map<Integer, IDrawAlgorithm> drawAlgorithmMap = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void init() {
+        Map<String, Object> strategyModeMap = applicationContext.getBeansWithAnnotation(StrategyMode.class);
+        strategyModeMap.entrySet().forEach(r -> {
+            StrategyMode strategyMode = AnnotationUtils.findAnnotation(r.getValue().getClass(), StrategyMode.class);
+            if (r.getValue() instanceof IDrawAlgorithm) {
+                drawAlgorithmMap.put(strategyMode.strategyMode().getId(), (IDrawAlgorithm) r.getValue());
+            }
+        });
+    }
+
+    /**
+         * 注入 ApplicationContext
+         * @param applicationContext
+         * @return void
+         */
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+}
+```
+
+这里需要注意,`applicationContext` 不能从通过其他类获取，必须直接注入到当前类，否则`@PostConstruct`的方法执行时，其他类不一定已经完成了`ApplicationContext`的注入。
+
+例如使用以下类的`getApplicationContext()`方法获取`applicationContext`,获得的是空的对象，因为`ApplicationContextAware `的`setApplicationContext`方法在同一个类里可以保证在`@PostConstruct`之前调用，但在不同的类里，不能保证。
+
+```java
+/**
+ * Spring 工具类
+ */
+@Component
+public class SpringUtils implements ApplicationContextAware {
+    private static ApplicationContext applicationContext;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringUtils.applicationContext = applicationContext;
+    }
+
+    public static ApplicationContext getApplicationContext(){
+        return applicationContext;
+    }
+
+}
+```
+
+## 思考
+
+从上述的单向概率算法来看，是将奖品概率，转化为区间整数，然后通过斐波那契获取相应的索引并落在对应的数组中，随后抽奖随机生成一个概率码，再通过斐波那契散列法获取相应的索引，取得奖品。
+
+这里如果不要斐波那契，而是直接将奖品按照相应的比例直接落在数组不同位置（对应索引即为中奖号码），用户摇号直接根据范围内生成随机数即可实现抽奖。其时间复杂度亦为O(1)
+
+以上两种实现方式，怎么考虑优劣性？
+
+可以从三个角度进行分析
+
+- 技术扩展性
+- 抽奖概率分布问题
+- 是否存在概率相对平等的随机数生成方法
+
+## 遇到的问题
+
+1、项目打包依赖问题，具有依赖的项目，需要先将其依赖的模块进行打包升级发布，也就是更新本地的 Jar 包
+
+2、org.springframework.beans.factory.NoSuchBeanDefinitionException
+
+这个是因为没有配置 @Mapper 导致找不到DAO接口类
+
+3、 java.lang.IllegalArgumentException:  Result Maps collection does not contain value for cn.happy....
+
+返回类型的问题，需要具体去了解一下！
+
+![image-20220203122809139](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220203122809139.png)
+
+4、为什么 DrawConfig 这里用的是 @PostController 注解，而不能是 static 代码块的问题
+
+1. 使用 static 会导致 null 指针异常，因为在加载类后，初始化类时会调用静态块。此时你的component组件的依赖还没有初始化。这就是为什么你的代码块会报空指针异常。（你的依赖都是null）
+2. 使用 static 的话，成员变量也需要 static 修饰，而我们用 @Resources 进行依赖注入，就无法用 static 再次修饰，否则会报 java.lang.IllegalStateException: @Resource annotation is not supported on static fields 的异常 ，为什么呢？ 因为静态变量、类变量不是对象的属性，而是一个类的属性，所以静态方法是属于类（class）的；普通方法才是属于实体对象（也就是New出来的对象）的，spring注入是在容器中实例化对象，所以不能使用静态方法
+
+![image-20220207094415889](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220207094415889.png)
+
+需要搞明白类的加载机制以及static模块被引入的时机。
+
+> Constructor（构造方法）—> @Autowired（依赖注入）—> @PostConstruct（注释的方法）
+
+
+
+5、必中策略抽奖和单项随机抽奖是否可以去除BaseAlgorithm父类？
+
+问题：
+
+因为看代码中必中策略抽奖只使用的awardRateInfoMap； 而在单项随机抽奖中也只使用了rateTupleMap； 两种策略都使用相同的父类初始化方法，都维护了上述两个集合，但却只使用了一个集合，是否造成了空间的浪费，因为初始化了不需要的数据。不使用父类，将初始化等方法直接交由具体实现类自己实现是否会更好点
+
+答案：
+
+- 扩展性：可能以后不只目前两个抽奖策略，还会扩展其他的，那么一个抽奖类的抽象类，可能会提取出N个方法，但子类间只使用到属于自己的，这种情况比较正常。*因为不使用到的那个，自己本身也没有去做初始化数据操作。如果担心空间浪费问题，可以把实例化对象的动作延后*
+- 共用性：如果把初始化数据放到子类实现，会稍微显得有些臃肿，不过也不是说完全不可以，当有第三种抽奖策略也需要类似的初始化操作的时候，在提取出来也可以。
+- 隔离性：去掉共用父类，提供数据服务类，专门给需要初始化数据操作的策略类使用，这样也可以。
+
+结合这三点，可以适当做一些调整优化，后面我也会去思考下，怎么让这块更舒服一些。感谢，提问和思考，一起折腾。
+
+## 总结感想
+
+1. 写代码前，可以先用伪代码写一下整体思路
+2. 把类图设计，核心算法都画出来，能够帮助自己更加深刻理解该流程
+3. 遇到问题，进行收纳总结
+4. 思考 DDD 的架构分层，以及与其他架构的对比，优劣、使用场景等

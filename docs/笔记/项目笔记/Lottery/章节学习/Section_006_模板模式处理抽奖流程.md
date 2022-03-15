@@ -1,0 +1,187 @@
+# 模板模式处理抽奖流程
+
+## 学习目的
+
+1. 学习模板方法设计模式
+2. 将该设计模式应用与抽奖策略流程中，规范化流程
+3. 掌握相关的抽奖业务流程与实现逻辑
+4. 参考该小节，理解 DDD 模式架构的实际应用
+
+## 需求分析
+
+基于模板设计模式，规范化抽奖执行流程。包括：提取抽象类、编排模板流程、定义抽象方法、执行抽奖策略、扣减中奖库存、包装返回结果等，并基于P3C标准完善本次开发涉及到的代码规范化处理。
+
+## 代码规范化
+
+1、下载安装 IDEA P3C 插件 `Alibaba Java Coding Guidelines`，统一标准化编码方式。
+
+2、定义 Preferences | Editor | File and Code Templates -> File Header
+
+```
+/**
+ * @description: 
+ * @author：happy
+ * @date: ${DATE}
+ * @Copyright： 
+ */
+```
+
+## 模板模式应用
+
+本章节最大的目标在于把抽奖流程标准化，需要考虑的一条思路线包括：
+
+1. 根据入参策略ID获取抽奖策略配置
+2. 校验和处理抽奖策略的数据初始化到内存
+3. 获取那些被排除掉的抽奖列表，这些奖品可能是已经奖品库存为空，或者因为风控策略不能给这个用户薅羊毛的奖品
+4. 执行抽奖算法
+5. 包装中奖结果
+
+以上这些步骤就是需要在抽奖执行类的方法中需要处理的内容，如果是在一个类的一个方法中，顺序开发这些内容也是可以实现的。但这样的代码实现过程是不易于维护的，也不太方便在各个流程节点扩展其他功能，也会使一个类的代码越来越庞大，因此对于这种可以制定标准流程的功能逻辑，通常使用模板方法模式是非常合适的。接下来我们就来通过这样的设计模式来开发实现下代码逻辑。
+
+## 类关系结构图
+
+- IDrawExec 接口，提供了同一的 doDrawExec 方法
+- DrawConfig：配置抽奖策略，SingleRateRandomDrawAlgorithm、EntiretyRateRandomDrawAlgorithm
+- DrawStrategySupport：提供抽奖策略数据支持，便于查询策略配置、奖品信息。通过这样的方式隔离职责。
+- DrawStrategySupport 和 DrawConfig，主要就是将一些抽奖需要的配置信息抽离出 AbstractDrawBase，免得该抽象类过于庞大，以后难以修改维护
+- AbstractDrawBase：抽象类定义模板方法流程，在抽象类的 `doDrawExec` 方法中，处理整个抽奖流程，并提供在流程中需要使用到的抽象方法，由 `DrawExecImpl` 服务逻辑中做具体实现。后续需要扩展抽奖业务时，让新的业务类继承该抽象类即可
+
+![image-20211214191438654](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214191438654.png)
+
+
+
+## 设计思路
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220202111803932.png" alt="image-20220202111803932" style="zoom:67%;" />
+
+## 思路总结
+
+<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220202110041885.png" alt="image-20220202110041885" style="zoom: 67%;" />
+
+## 开发说明
+
+1. 抽奖策略数据的封装
+2. 模板模式构建的基础
+3. 业务流程的完善
+4. 抽奖策略动态注册改造
+5. 单元测试
+
+### 模板模式构建的基础
+
+1. 定义抽奖流程标准化的方法
+2. 根据抽奖流程定义相应“节点”的接口（这些节点针对通用的场景可以是方法构建，针对扩展的场景则可以是接口定义）
+
+### 业务流程的完善：
+
+- lottery-common：通用变量的定义，Constant.StrategyMode 和 DrawState 对抽奖流程中涉及到的状态枚举进行定义
+- lottery-infrastructure：dao 层必要修改
+- lottery-domain：service.draw（模板模式改造）、repository（数据仓储，应用了 lottery-infrastructure：dao）
+- lottery-interfaces：接口定义、mapper相关映射文件定义（resources）
+
+### 单元测试
+
+#### 数据准备
+
+库表 lottery.strategy_detail 添加 award_surplus_count 字段后，可以补充下奖品的剩余库存，便于测试。
+
+设置奖品ID：1、3，剩余库存为0，这样在抽奖的过程中，就不会抽到这个奖品了，属于排除的奖品ID
+
+### 2. 单元测试
+
+#### 测试功能代码
+
+```java
+@Test
+public void test_drawExec() {
+    drawExec.doDrawExec(new DrawReq("happy", 10001L));
+    drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
+    drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
+    drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
+}
+```
+
+#### 测试结果
+
+```java
+2022-02-17 16:04:58.135  INFO 6628 --- [           main] c.h.l.d.s.s.draw.impl.DrawExecImpl       : 执行抽奖策略 strategyId：10001，无库存排除奖品列表ID集合 awardIdList：["1"]
+2022-02-17 16:05:34.494  INFO 6628 --- [           main] c.h.l.d.s.service.draw.AbstractDrawBase  : 执行策略抽奖完成【已中奖】，用户：happy 策略ID：10001 奖品ID：2 奖品名称：iphone
+2022-02-17 16:05:40.719  INFO 6628 --- [           main] c.h.l.d.s.s.draw.impl.DrawExecImpl       : 执行抽奖策略 strategyId：10001，无库存排除奖品列表ID集合 awardIdList：["1"]
+2022-02-17 16:05:46.209  INFO 6628 --- [           main] c.h.l.d.s.service.draw.AbstractDrawBase  : 执行策略抽奖完成【已中奖】，用户：小佳佳 策略ID：10001 奖品ID：4 奖品名称：AirPods
+2022-02-17 16:05:48.854  INFO 6628 --- [           main] c.h.l.d.s.s.draw.impl.DrawExecImpl       : 执行抽奖策略 strategyId：10001，无库存排除奖品列表ID集合 awardIdList：["1"]
+2022-02-17 16:07:26.651  INFO 6628 --- [           main] c.h.l.d.s.service.draw.AbstractDrawBase  : 执行策略抽奖完成【已中奖】，用户：小蜗牛 策略ID：10001 奖品ID：2 奖品名称：iphone
+2022-02-17 16:07:32.298  INFO 6628 --- [           main] c.h.l.d.s.s.draw.impl.DrawExecImpl       : 执行抽奖策略 strategyId：10001，无库存排除奖品列表ID集合 awardIdList：["1"]
+2022-02-17 16:07:32.306  INFO 6628 --- [           main] c.h.l.d.s.service.draw.AbstractDrawBase  : 执行策略抽奖完成【已中奖】，用户：八杯水 策略ID：10001 奖品ID：2 奖品名称：iphone
+```
+
+从测试结果可以看到，此时的抽奖已经只限定于奖品ID在2、4上了。
+
+### 遇到的问题
+
+## 遇到的问题
+
+### 1、mybatis 无法查询出属性名和数据库字段名不完全相同的数据
+
+**MyBatis**默认是属性名和数据库字段名一一对应的，即 
+
+> 数据库表列：user_name 
+>
+> 实体类属性：user_name
+
+但是java中一般使用驼峰命名 
+
+> 数据库表列：user_name 
+>
+> 实体类属性：userName
+
+#### 解决方法：
+
+在 SpringBoot 中，可以通过设置 map-underscore-to-camel-case 属性为 true 来开启驼峰功能。 
+
+MyBatis 配置： 
+
+application.properties 中：
+
+```properties
+#开启驼峰命名转换
+mybatis.configuration.map-underscore-to-camel-case=true
+```
+
+application.yml 中： 
+
+```yml
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+```
+
+### 2、mybatis错误之 Property 'configuration' and 'configLocation' can not specified with together
+
+这个问题是因为我本身的配置模式就是用 yml 方式，在里面指定了 config.xml ，但是有进行了 configuration 的配置，导致冲突。
+
+```yml
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+  configuration:
+    map-underscore-to-camel-case: true
+```
+
+#### 解决方法：
+
+在mybatis-config.xml 配置 settings 属性，删除 yml 的 configuration 配置
+
+```xml
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+</configuration>
+```
+
+### 3、空指针错误问题
+
+https://gitcode.net/KnowledgePlanet/Lottery/-/issues/58
+
+这里详细进行了解释
+
+![image-20220217150143102](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220217150143102.png)

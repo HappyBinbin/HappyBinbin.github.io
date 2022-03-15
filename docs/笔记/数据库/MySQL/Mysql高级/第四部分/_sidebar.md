@@ -1,0 +1,6 @@
+- [返回上一级 [Mysql高级]](笔记/数据库/MySQL/Mysql高级/)
+- [第四部分](笔记/数据库/MySQL/Mysql高级/第四部分/)
+  - [MySQL复制](笔记/数据库/MySQL/Mysql高级/第四部分/MySQL复制.md)
+  - [MySQL常用工具](笔记/数据库/MySQL/Mysql高级/第四部分/MySQL常用工具.md)
+  - [MYSQL日志](笔记/数据库/MySQL/Mysql高级/第四部分/MYSQL日志.md)
+  - [案例记录](笔记/数据库/MySQL/Mysql高级/第四部分/案例记录.md)
