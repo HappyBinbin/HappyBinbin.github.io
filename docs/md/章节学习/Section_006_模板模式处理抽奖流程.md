@@ -180,7 +180,7 @@ mybatis:
 
 ### 3、空指针错误问题
 
-https://gitcode.net/KnowledgePlanet/Lottery/-/issues/58
+https://gitcode.net/KnowledgePlanet/md/-/issues/58
 
 这里详细进行了解释
 
