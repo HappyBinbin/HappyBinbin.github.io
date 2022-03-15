@@ -43,6 +43,10 @@
         noData: '😞 No Results! ',
         depth: 6
       },
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      sidebarDisplayLevel: 1, // set sidebar display level
       pagination: {
         previousText: 'PREVIOUS',
         nextText: 'NEXT',
@@ -76,8 +80,10 @@
         }
       ]
     }                                 
-  </script>
-
+</script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<!-- plugins -->
+<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 <script src="/assets/js/md5.js"></script>
 <script src="/assets/js/docsify.min.js"></script>
 <script src="/assets/js/gitalk.min.js"></script>
