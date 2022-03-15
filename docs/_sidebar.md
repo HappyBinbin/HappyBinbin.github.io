@@ -1,5 +1,5 @@
 - [:octocat: 首页](/README.md)
-- [笔记](笔记/)
+- [笔记](/README.md)
     - [drawIO](笔记/drawIO/)
     - [JavaSE](笔记/JavaSE/)
         - [Java多线程](笔记/JavaSE/Java多线程/)
