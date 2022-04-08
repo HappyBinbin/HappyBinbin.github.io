@@ -7,7 +7,7 @@
 
 - 搭建 XXL-JOB 分布式任务调度环境，这里需要在官网：https://github.com/xuxueli/xxl-job/ 下载运行包，按照 Java SpringBoot 修改一些基本配置，项目启动即可。
 - 配置 XXL-JOB 的基础使用环境，导入库表、配置文件、验证官网管理，测试任务启动运行
-- 解决第一个分布式任务场景问题，扫描抽奖活动状态，把审核通过的活动扫描为活动中，把已过期活动中的状态扫描为关闭。后续章节我们还会使用分布式任务调度系统解决其他场景问题。
+- 解决第一个分布式任务场景问题，扫描抽奖活动状态，把审核通过的活动扫描为活动中，把已过期活动中的状态扫描为关闭。后续章节我们还会使用分布式任务调度系统解决其他场景问题
 
 ## 搭建分布式任务调度环境
 
@@ -208,6 +208,15 @@ public class LotteryXxlJob {
 
 ## 测试验证
 
+1. 启动 kafka、zk
+2. 启动 xxl-job-admin#XxlJobAdminApplication
+3. 启动 xxl-job-executor-samples-springboot#XxlJobExecutorApplication
+4. 启动 lottery
+
+如果出现 job handler not found，则重新启动 lottery 或者 xxl 即可
+
+
+
 **准备数据**
 
 - 确保数据库中有可以扫描的活动数据，比如可以把活动数据从活动中扫描为结束，也就是把状态5变更为7
@@ -251,4 +260,4 @@ public class LotteryXxlJob {
 ------
 
 1. 学习 xxl-job 的使用，如果你对这类技术的源码感兴趣，也可以阅读小傅哥关于 [SpringBoot中间件的设计和开发](https://juejin.cn/book/6940996508632219689) 这里就包括了分布式任务调度的设计和实现
-2. 如果你之前还没有接触过类似分布式任务的内容，可以好好使用下，补全这部分内容。
+2. 如果你之前还没有接触过类似分布式任务的内容，可以好好使用下，补全这部分内容
