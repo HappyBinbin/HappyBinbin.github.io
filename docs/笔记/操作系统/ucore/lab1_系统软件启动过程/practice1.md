@@ -1,9 +1,14 @@
-#### 前置学习
+## Practice 1
+
+### 前置学习
 
 - Make 教程 https://www.w3cschool.cn/mexvtg/adisqozt.html
-- 
 
-#### 练习1：理解通过make生成执行文件的过程。（要求在报告中写出对下述问题的回答）
+### Reference
+
+[1] https://www.cnblogs.com/whileskies/p/13199844.html
+
+### 练习1：理解通过make生成执行文件的过程。（要求在报告中写出对下述问题的回答）
 
 列出本实验各练习中对应的OS原理的知识点，并说明本实验中的实现部分如何对应和体现了原理中的基本概念和关键知识点。
 
