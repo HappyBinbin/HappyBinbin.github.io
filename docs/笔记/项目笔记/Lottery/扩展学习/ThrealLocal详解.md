@@ -67,7 +67,7 @@ thread1 name:My name is threadLocal1
 
 - 以例子中的结构分析
 
-![image-20220408210915729](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204082109855.png)
+![image-20220408210915729](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204082109855.png)
 
 线程1和线程2各自持有类型为ThreadLocal.ThreadLocalMap的threadLocals变量，key是ThreadLocal的引用，value为线程各自需要保持的值
 
@@ -77,7 +77,7 @@ thread1 name:My name is threadLocal1
 ThreadLocal.ThreadLocalMap threadLocals = null;
 ```
 
-![image-20220408211021242](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204082110391.png)
+![image-20220408211021242](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204082110391.png)
 
 - 一个 Thread 维护着一个 ThreadLocalMap 的引用
 - ThreadLocalMap 是 ThreadLocal 的内部类，用 Entry 来进行存储，Entry 又是 ThreadLocalMap 的内部类
@@ -197,7 +197,7 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 
 分析到这里，我们可以得到下面这个对象之间的引用结构图（其中，实线为强引用，虚线为弱引用）
 
-![image-20220408210353270](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204082103331.png)
+![image-20220408210353270](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204082103331.png)
 
 我们知道，弱引用对象在Java虚拟机进行垃圾回收时，就会被释放，那我们考虑这样一个问题：
 

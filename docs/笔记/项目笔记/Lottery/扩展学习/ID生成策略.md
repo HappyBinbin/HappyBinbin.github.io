@@ -98,7 +98,7 @@ String s = UUID.randomUUID().toString();
 
 那如果集群后的性能还是扛不住高并发咋办？就要进行MySQL扩容增加节点，这是一个比较麻烦的事。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219191127814.png" alt="image-20220219191127814" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220219191127814.png" alt="image-20220219191127814" style="zoom:80%;" />
 
 从上图可以看出，水平扩展的数据库集群，有利于解决数据库单点压力的问题，同时为了ID生成特性，将自增步长按照机器数量来设置
 
@@ -132,7 +132,7 @@ CREATE TABLE id_generator (
 - step ：代表号段的长度
 - version ：是一个乐观锁，每次都更新version，保证并发时数据的正确性
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219191355189.png" alt="image-20220219191355189" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220219191355189.png" alt="image-20220219191355189" style="zoom:80%;" />
 
 等这批号段ID用完，再次向数据库申请新号段，对`max_id`字段做一次`update`操作，`update max_id= max_id + step`，update成功则说明新号段获取成功，新的号段范围是`(max_id ,max_id +step]`。
 
@@ -192,7 +192,7 @@ E：5,10,15,20,25
 
 雪花算法（Snowflake）是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220219222359136.png" alt="image-20220219222359136" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220219222359136.png" alt="image-20220219222359136" style="zoom:80%;" />
 
 `Snowflake`生成的是Long类型的ID，一个Long类型占8个字节，每个字节占8比特，也就是说一个Long类型占64个比特。
 

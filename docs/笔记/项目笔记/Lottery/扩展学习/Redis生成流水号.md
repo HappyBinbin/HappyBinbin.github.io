@@ -6,7 +6,7 @@ Redis的 incr( ) 方法可以进行自增补零，结合时间、随机数、前
 
 ## 
 
-![image-20220220080430080](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220220080430080.png)
+![image-20220220080430080](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220220080430080.png)
 
 ## 实现步骤
 

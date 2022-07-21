@@ -46,19 +46,19 @@ gnome-terminal -e "gdb -tui -q -x tools/gdbinit"
 
 输入`make my-debug`命令进行调试
 
-![image-20220406231452344](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204062314409.png)可以看到第一条指令的cs内容为0xf000，eip内容为0xfff0，此时cpu处于实模式，物理地址=cs * 16 + ip，即当前指令地址为0xffff0
+![image-20220406231452344](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204062314409.png)可以看到第一条指令的cs内容为0xf000，eip内容为0xfff0，此时cpu处于实模式，物理地址=cs * 16 + ip，即当前指令地址为0xffff0
 
 0xffff0处的指令为`ljmp $0x3630,$0xf000e05b` ，地址0xffff0为BIOS的入口地址，该地址的指令为跳转指令，跳转到0xf000:0xe05b处执行BIOS代码
 
 正常在8086 16位模式下该处的指令为`ljmp $0xf000,$0xe05b` ，图上显示的可能是按照32位模式进行解释的，和预想不太一样
 
-![image-20220406231459191](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204062314243.png)输入`si`后执行下一条指令，可见此时pc地址跳转到0xf000:0xe05b处，即0xfe05b，从此处开始执行BIOS代码，BIOS程序读取首扇区MBR上的bootloader代码放到0x7c00处，进而cpu控制权交给bootloader进行执行
+![image-20220406231459191](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204062314243.png)输入`si`后执行下一条指令，可见此时pc地址跳转到0xf000:0xe05b处，即0xfe05b，从此处开始执行BIOS代码，BIOS程序读取首扇区MBR上的bootloader代码放到0x7c00处，进而cpu控制权交给bootloader进行执行
 
 #### 2. 在初始化位置0x7c00设置实地址断点,测试断点正常
 
 输入`b *0x7c00`在0x7c00处打断点，输入`continue`运行到断点处
 
-![image-20220406231506249](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204062315315.png)
+![image-20220406231506249](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204062315315.png)
 
 
 
@@ -66,9 +66,9 @@ gnome-terminal -e "gdb -tui -q -x tools/gdbinit"
 
 输入`x /5i 0x7c00`显示0x7c00地址开始的连续5条指令，可见于bootasm.S中的前五条指令是一致的
 
-[![image-20220406231514918](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204062315976.png)](https://img2020.cnblogs.com/blog/1159891/202007/1159891-20200716105340625-1642079072.png)
+[![image-20220406231514918](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204062315976.png)](https://img2020.cnblogs.com/blog/1159891/202007/1159891-20200716105340625-1642079072.png)
 
-![image-20220406231520199](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204062315255.png)
+![image-20220406231520199](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204062315255.png)
 
 ### 4. 自己找一个bootloader或内核中的代码位置，设置断点并进行测试
 

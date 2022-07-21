@@ -59,4 +59,4 @@ make gbd
 
 vscode 中，找到 init.c 打上断点，F5，即可调试
 
-![image-20220320160444197](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202203201604301.png)
+![image-20220320160444197](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202203201604301.png)

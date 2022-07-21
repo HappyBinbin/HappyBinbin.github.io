@@ -397,29 +397,29 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 > 注意：线程A、线程B 在运行时是线程隔离的，但是对于此时主存中的HashMap的table 和 newTable而言，只有一份
 
-![image-20220222111139807](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111139807.png)
+![image-20220222111139807](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111139807.png)
 
 正常扩容后的结果是下面这样的：
 
-![image-20220222111206350](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111206350.png)
+![image-20220222111206350](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111206350.png)
 
 但是当线程A执行到上面`transfer`函数的第11行代码 `newTable[i] = e;`时，CPU时间片耗尽，线程A被挂起。此时线程A中：e=3、next=7、e.next=null
 
-![image-20220222111308030](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111308030.png)
+![image-20220222111308030](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111308030.png)
 
 当线程A的时间片耗尽后，CPU开始执行线程B，并在线程B中成功的完成了数据迁移
 
-![image-20220222111321011](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111321011.png)
+![image-20220222111321011](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111321011.png)
 
 > 重点来了，根据Java内存模式可知，线程B执行完数据迁移后，此时主内存中`newTable`和`table`都是最新的，也就是说：7.next=3、3.next=null。
 
 随后线程A获得CPU时间片继续执行`newTable[i] = e`，将3放入新数组对应的位置，执行完此轮循环后线程A的情况如下：
 
-![image-20220222111403254](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111403254.png)
+![image-20220222111403254](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111403254.png)
 
 接着继续执行下一轮循环，此时e=7，从主内存中读取e.next时发现主内存中7.next=3，于是乎next=3，并将7采用头插法的方式放入新数组中，并继续执行完此轮循环，结果如下：
 
-![image-20220222111421037](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220222111421037.png)
+![image-20220222111421037](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220222111421037.png)
 
 上面说了此时e.next=null即next=null，当执行完e=null后，将不会进行下一轮循环。到此线程A、B的扩容操作完成，很明显当线程A执行完后，`HashMap`中出现了环形结构，当在以后对该`HashMap`进行操作时会出现死循环。
 
@@ -512,7 +512,7 @@ if ((p = tab[i = (n - 1) & hash]) == null)
 
 我们来画张图进行进一步的了解：
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220221141549063.png" alt="image-20220221141549063" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220221141549063.png" alt="image-20220221141549063" style="zoom:80%;" />
 
 这里我们也就得知为什么Table数组的长度要一直都为`2的n次方`，只有这样，减一进行相与时候，才能够达到最大的n-1值。
 
@@ -535,7 +535,7 @@ static final int hash(Object key) {
 
 以初始长度16为例，16-1=15；2进制表示是 00000000 00000000 00001111。和某散列值做“与”操作如下，结果就是截取了最低的四位值
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220221131742029.png" alt="image-20220221131742029" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220221131742029.png" alt="image-20220221131742029" style="zoom:80%;" />
 
 这样就算散列值分布再松散，要是只取后四位的话，碰撞也会很严重。如果散列本身做得不好，分布上成等差数列的漏洞，恰好使最后几个低位呈现规律性重复，则碰撞会更严重。
 
@@ -545,7 +545,7 @@ static final int hash(Object key) {
 2. 将变量 h 无符号右移 16 位
 3. 将变量 h 与 右移后的 h 进行异或运算
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220221132030358.png" alt="image-20220221132030358" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220221132030358.png" alt="image-20220221132030358" style="zoom:80%;" />
 
 ### 为什么要将 key.hashCode( ) 右移 16 位？
 

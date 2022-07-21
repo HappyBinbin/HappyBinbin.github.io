@@ -197,7 +197,7 @@ spin:
 
 - 由于段地址向下递减，所以我们设定初始栈顶指针起始位置在bootloader下，然后即可调用函数
 
-![image-20220407102037722](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204071020813.png)
+![image-20220407102037722](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204071020813.png)
 
 
 

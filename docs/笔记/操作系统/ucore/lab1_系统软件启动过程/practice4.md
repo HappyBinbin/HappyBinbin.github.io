@@ -56,7 +56,7 @@ insl(uint32_t port, void *addr, int cnt) {
 
 第一个IDE通道通过IO地址0x1f0-0x1f7访问，通过0x1f6端口可以设置主从盘、访问方式以及扇区号27—24位，如下图所示：
 
-![image-20220407140835265](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204071408374.png)
+![image-20220407140835265](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204071408374.png)
 
 | IO地址 | 功能                                                         |
 | ------ | ------------------------------------------------------------ |
@@ -81,7 +81,7 @@ waitdisk(void) {
 
 - 读取0x1f7端口来获取磁盘控制器状态，若第7位为1，表示磁盘正忙，需要等待，若第7位为0，第6位为1，表示准备就绪
 
-![image-20220407140936913](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204071409985.png)
+![image-20220407140936913](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204071409985.png)
 
 ```c
 /* readsect - read a single sector at @secno into @dst */
@@ -144,7 +144,7 @@ ELF(Executable and linking format)文件格式是Linux系统下一种常用的�
 
 ELF链接文件和可执行文件基本布局如下图所示：
 
-![image-20220407155021325](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202204071550393.png)
+![image-20220407155021325](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202204071550393.png)
 
 此实验编译出的内核文件为ELF格式的可执行文件，主要有ELF文件头、程序头表、以及相应段组成
 

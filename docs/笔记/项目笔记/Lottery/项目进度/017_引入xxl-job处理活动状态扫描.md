@@ -193,7 +193,7 @@ public class LotteryXxlJob {
 
 ### 配置抽奖系统任务调度执行器
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220313144548401.png" alt="image-20220313144548401" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220313144548401.png" alt="image-20220313144548401" style="zoom:67%;" />
 
 - 只有配置了任务执行器，才能执行当前这个实例中的任务
 - 另外在有些业务体量较大的场景中，需要把任务开发为新工程并单独部署
@@ -202,7 +202,7 @@ public class LotteryXxlJob {
 
 这里我们把已经开发了的任务 `LotteryXxlJob#lotteryActivityStateJobHandler` 配置到任务调度中心，如下：
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220313144628233.png" alt="image-20220313144628233" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220313144628233.png" alt="image-20220313144628233" style="zoom:67%;" />
 
 配置完成后，就可以启动任务了
 
@@ -238,7 +238,7 @@ public class LotteryXxlJob {
 12:35:47.008  INFO 23141 --- [      Thread-18] c.i.l.application.worker.LotteryXxlJob   : 扫描活动状态，把审核通过的活动，扫描成活动中
 ```
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220313144705590.png" alt="image-20220313144705590" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220313144705590.png" alt="image-20220313144705590" style="zoom:67%;" />
 
 - 此时就已经把活动状态为5的已过期的活动，扫描为关
 - 下一节我们会继续开发分布式任务调度，完成发奖数据MQ补偿处理
