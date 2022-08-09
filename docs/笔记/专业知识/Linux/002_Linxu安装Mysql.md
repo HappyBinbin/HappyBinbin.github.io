@@ -34,7 +34,7 @@
 
    安装的时候可能会出现缺陷依赖的情况，缺啥补啥，例如：
 
-   ![在这里插入图片描述](../../../photos/20190826115641227.png)
+   ![20190826115641227](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/20190826115641227.png)
 
    ```shell
    yum install -y perl-Module-Install.noarch
@@ -60,13 +60,11 @@
 
    又缺少依赖
 
-   ![image-20210315162803353](../../../photos/image-20210315162803353.png)
+   ![image-20210315162803353](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210315162803353.png)
 
    继续补依赖
 
-   
-
-   ![image-20210315162921969](../../../photos/image-20210315162921969.png)
+   ![image-20210315162921969](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210315162921969.png)
 
    继续安装
 

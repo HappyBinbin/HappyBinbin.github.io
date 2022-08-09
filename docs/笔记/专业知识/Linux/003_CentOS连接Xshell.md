@@ -14,7 +14,7 @@ https://www.cnblogs.com/leezhxing/p/4482659.html
 
 确保关闭虚拟机，启用下图中的网卡2：
 
-![img](../../../photos/20180803221405457)
+![20180803221405457](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/20180803221405457.jpg)
 
 即为虚拟机设置两张网卡：
 
@@ -30,8 +30,4 @@ yum search ifconfig, 搜索ifconfig命令所在的安装包：
 
 ip addr
 
-![image-20210315161017928](../../../photos/image-20210315161017928.png)
-
-
-
-## 
+![image-20210315161017928](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210315161017928.png)
