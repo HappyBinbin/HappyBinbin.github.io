@@ -105,7 +105,7 @@ rpm -ivh firefox
 Yum 是一个 Shell 前端软件包管理器。基于 RPM 包管理，能够从指定的服务器自动下载 RPM 包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包。
 示意图
 
-![image-20210405235631294](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210405235632.png)
+![image-20210405235631294](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210405235632.png)
 
 ### 15.2.2 yum 的基本指令
 

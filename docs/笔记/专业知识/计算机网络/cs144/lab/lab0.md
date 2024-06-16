@@ -100,11 +100,11 @@ void get_URL(const string &host, const string &path) {
 
 #### 单个用例
 
-![image-20210607002440790](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210607002440790.png)
+![image-20210607002440790](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210607002440790.png)
 
 #### 所有测试
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210607002352214.png" alt="image-20210607002352214" style="zoom: 80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210607002352214.png" alt="image-20210607002352214" style="zoom: 80%;" />
 
 
 
@@ -309,7 +309,7 @@ size_t ByteStream::remaining_capacity() const
 }
 ```
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210607163016190.png" alt="image-20210607163016190" style="zoom: 80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210607163016190.png" alt="image-20210607163016190" style="zoom: 80%;" />
 
 
 

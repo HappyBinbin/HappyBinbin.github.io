@@ -25,7 +25,7 @@ Picgo github有时候上不去，我是通过软件园下的，找不到的兄�
 
 上传服务设定打开之后，服务我选的是PicGo，这个支持多平台的，大家下载PicGo的时候尽量别选beta版本，待测试的版本总会出点bug，然后选择PicGo的启动路径，也就是exe文件
 
-![image-20210319225210998](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319225211.png)
+![image-20210319225210998](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319225211.png)
 
 ## 3. 配置PicGo
 
@@ -43,7 +43,7 @@ http://nodejs.cn/download/ 这个是中文网，根据自己的OS来选，Window
 
 双击Picgo.exe 可能不会直接弹出来，要在右下角窗口栏里面双击打开它
 
-![image-20210320001017922](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210320001017.png)
+![image-20210320001017922](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210320001017.png)
 
 然后选择插件设置，搜索 github-plus，点击安装
 
@@ -57,7 +57,7 @@ http://nodejs.cn/download/ 这个是中文网，根据自己的OS来选，Window
 
 有些小伙伴可能在安装完node.js后，还是无法下载github-plus，可以换一个插件，比如 gitee
 
-![image-20210320213335011](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210320213335.png)
+![image-20210320213335011](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210320213335.png)
 
 
 
@@ -73,9 +73,9 @@ token：第四步有讲令牌的问题
 
 这个UserName是下面这个，也就是个人主页头像下的@后面那段名字
 
-![image-20210319233115993](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319233116.png)
+![image-20210319233115993](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319233116.png)
 
-![image-20210320213605803](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210320213605.png)
+![image-20210320213605803](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210320213605.png)
 
 ## 4. 配置好 token 令牌
 
@@ -87,13 +87,13 @@ token：第四步有讲令牌的问题
 
 1）回到picgo，按照如下进行设置
 
-![image-20210319230406702](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319230406.png)
+![image-20210319230406702](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319230406.png)
 
 其中的repo为 **UserName/仓库名称** 格式
 
 这个UserName是下面这个，也就是个人主页头像下的@后面那段名字
 
-![image-20210319233115993](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319233116.png)
+![image-20210319233115993](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319233116.png)
 
 branch填入master
 
@@ -109,8 +109,8 @@ path为仓库下用于存储图片的路径，这个可以自行选择
 
 可能会在Typora + Picgo验证图片时出现问题，可以去查看它的日志文件来康康是什么问题
 
-![image-20210319230637417](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319230637.png)
+![image-20210319230637417](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319230637.png)
 
 例如：
 
-![image-20210319230733736](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210319230733.png)
+![image-20210319230733736](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210319230733.png)

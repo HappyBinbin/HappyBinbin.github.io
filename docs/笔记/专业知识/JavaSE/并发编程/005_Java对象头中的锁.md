@@ -31,7 +31,7 @@
 - Klass Word
 - State
 
-![image-20211213110621076](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211213110621076.png)
+![image-20211213110621076](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20211213110621076.png)
 
 
 

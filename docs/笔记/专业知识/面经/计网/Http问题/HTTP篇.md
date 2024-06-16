@@ -1,3 +1,5 @@
+[toc]
+
 #### 1. HTTP 是什么？详细描述一下？
 
 ​	HTTP 是超文本传输协议，也就是HyperText Transfer Protocol
@@ -8,7 +10,7 @@
 
 #### 2. HTTP 常见的状态码？
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210605190937416.png" alt="image-20210605190937416" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210605190937416.png" alt="image-20210605190937416" style="zoom:50%;" />
 
 - 1** 信息，服务器收到请求，需要请求者继续执行操作
     - 100 Continue，客户端继续其请求
@@ -112,7 +114,7 @@ GET 明显是安全幂等的，而 POST 则不是
     - TLS3 升级为 1.3 版本
     - HTTPS 建立连接的 6次交互，减少为了 3 次
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210605195547731.png" alt="image-20210605195547731" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210605195547731.png" alt="image-20210605195547731" style="zoom:50%;" />
 
 
 

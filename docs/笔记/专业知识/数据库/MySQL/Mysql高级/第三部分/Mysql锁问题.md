@@ -261,7 +261,7 @@ select * from tb_book ;
 
 锁模式的相互兼容性如表中所示：
 
-![image-20210331225905207](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210331225905.png)
+![image-20210331225905207](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210331225905.png)
 
 由上表可见： 
 

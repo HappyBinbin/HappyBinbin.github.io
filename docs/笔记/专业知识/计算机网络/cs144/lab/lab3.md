@@ -18,7 +18,7 @@ lab3 要我们做的事情是什么呢？细读文档（至少也得读它个三
 - payload，有效载荷，从ByteStream中读取的所有字节数据
 - FIN，断开位，最后一个包，可以携带数据，也可以不携带
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613120727703.png" alt="image-20210613120727703" style="zoom:60%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613120727703.png" alt="image-20210613120727703" style="zoom:60%;" />
 
 ## ack_received（）
 

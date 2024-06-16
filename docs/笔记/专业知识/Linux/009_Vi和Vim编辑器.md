@@ -33,7 +33,7 @@ yum -y  install  vim*
 
 输入 esc 再输入：在这个模式当中， 可以提供你相关指令，完成读取、存盘、替换、离开 vim 、显示行号等的动作则是在此模式中达成的！
 
-![image-20210321170359406](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210321170359.png)
+![image-20210321170359406](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210321170359.png)
 
 ## 1.4 快捷键
 

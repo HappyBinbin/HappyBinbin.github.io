@@ -6,7 +6,7 @@ InnoDB讲数据划分为若干页，以页为单位作为磁盘于内存之间�
 
 ## 4.3 行格式
 
-![COMPACT行格式](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210521104809.png)
+![COMPACT行格式](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210521104809.png)
 
 
 

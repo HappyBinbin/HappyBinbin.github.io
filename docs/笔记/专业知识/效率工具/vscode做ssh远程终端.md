@@ -32,7 +32,7 @@ windows
 
 查看虚拟机 IP 地址，centos7 是 ip addr即可查看
 
-![image-20210609200257721](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210609200257721.png)
+![image-20210609200257721](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210609200257721.png)
 
 ### Remote Development
 
@@ -47,7 +47,7 @@ Host centos   # 名称（随便乱写）
 
 然后连接成功后是这样的
 
-![image-20210610202330683](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210610202330683.png)
+![image-20210610202330683](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210610202330683.png)
 
 ### 配置c++
 
@@ -56,7 +56,7 @@ Host centos   # 名称（随便乱写）
 - c/c++中文
 - 简化
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210610205601312.png" alt="image-20210610205601312" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210610205601312.png" alt="image-20210610205601312" style="zoom:50%;" />
 
 ### 编译配置
 
@@ -76,7 +76,7 @@ Host centos   # 名称（随便乱写）
 
 以上会在.vscode文件夹下，生成一个tasks.json的配置文件，和默认配置
 
-![image-20210610205949756](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210610205949756.png)
+![image-20210610205949756](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210610205949756.png)
 
 以下是我修改好的配置，每个人的可能都不太一样，请认真看注释
 
@@ -268,17 +268,17 @@ g++ --version
 
 建议，连接到远程服务器后，会提示打开文件夹，这里建议选择你需要跑的项目文件夹，按 f5 生成 vscode，想下面这样，直接在cs144_lab下生成 .vscode 文件。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613115503730.png" alt="image-20210613115503730" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613115503730.png" alt="image-20210613115503730" style="zoom:50%;" />
 
 f5运行时，请确保你按 f5 时所在的文件，其编译后的可执行文件能够在launch.json所配置的路径下找到，否则无法运行。
 
-![image-20210613115713535](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613115713535.png)
+![image-20210613115713535](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613115713535.png)
 
 ## 问题
 
 ### field ‘ifru_addr’ has incomplete type ‘sockaddr’
 
-![image-20210610193055719](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210610193055719.png)
+![image-20210610193055719](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210610193055719.png)
 
 在sponge/libsponge/util/tun.cc 中插入
 
@@ -346,7 +346,7 @@ LIBPCAP
 
 - launch :  xxxx does not exist，launch 的program 路径配置错误
 
-![image-20210610214326240](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210610214326240.png)
+![image-20210610214326240](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210610214326240.png)
 
 
 

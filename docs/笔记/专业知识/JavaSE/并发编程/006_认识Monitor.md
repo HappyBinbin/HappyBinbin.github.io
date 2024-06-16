@@ -20,7 +20,7 @@
 
 - 就诊结束后，**走出就诊室**，候诊室的**下一位候诊患者**进入就诊室。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214195521637.png" alt="image-20211214195521637" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20211214195521637.png" alt="image-20211214195521637" style="zoom:50%;" />
 
 医院
 
@@ -38,7 +38,7 @@ Monitor
 - **就诊室**：一个每次只能有一个线程进入的**特殊房间（Special Room）**
 - **候诊室**：就诊室繁忙时，进入**等待区（Wait Set）**
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211214195619550.png" alt="image-20211214195619550" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20211214195619550.png" alt="image-20211214195619550" style="zoom:50%;" />
 
 **synchronized正是对Monitor机制的一种实现**。而在Java中，**每一个对象都会关联一个监视器**
 

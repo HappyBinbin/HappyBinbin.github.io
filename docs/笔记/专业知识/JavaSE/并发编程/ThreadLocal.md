@@ -10,5 +10,5 @@
 
 ## 数据结构
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/202111012324841.png" alt="image-20211101232448784" style="zoom: 80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/202111012324841.png" alt="image-20211101232448784" style="zoom: 80%;" />
 

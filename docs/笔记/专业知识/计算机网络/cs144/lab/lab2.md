@@ -10,7 +10,7 @@
 
 TCPReceiver从Internet接收片段(通过segment received()方法)，并将它们转换为对StreamReassembler的调用，后者最终写入传入的 ByteStream。应用程序从这个 ByteStream 读取数据，就像您在lab0中通过从TCPSocket读取数据那样。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613120727703.png" alt="image-20210613120727703"  />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613120727703.png" alt="image-20210613120727703"  />
 
 有几个比较重要的点
 
@@ -42,7 +42,7 @@ TCPReceiver从Internet接收片段(通过segment received()方法)，并将它�
 
 下面的图是引用某个老哥：https://blog.csdn.net/weixin_44520881/article/details/108911578
 
-![image-20210619170234357](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210619170234357.png)
+![image-20210619170234357](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210619170234357.png)
 
 这个表格展示了TCP设计的三种不一样类型的下标：
 
@@ -173,7 +173,7 @@ uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) {
 - Payload
 - 它们被发送端写入，被接收端读取和操作
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210621113618612.png" alt="image-20210621113618612" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210621113618612.png" alt="image-20210621113618612" style="zoom:67%;" />
 
 可以去官方的TCP library查看DataStructure和一些 API，还是很有帮助的，虽然看代码也一样
 
@@ -223,7 +223,7 @@ ByteStream &stream_out(); // implemented for you in .hh file
 
 返回“first unassembled”到 “first unacceptable”下标之间的距离，就是capacity中红色区域的值( lab1 的图)
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613235101348.png" alt="image-20210613235101348" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613235101348.png" alt="image-20210613235101348" style="zoom:67%;" />
 
 ## 3.3 Evolution of the TCPReceiver over the life of the connection
 
@@ -234,7 +234,7 @@ TCPReceiver 在连接过程中的整个生命周期的一系列状态演化（�
 3. to a stream that's finished，流已经完成，意味着ByteStream关闭
 4. 不考虑错误状态
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210621161642727.png" alt="image-20210621161642727" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210621161642727.png" alt="image-20210621161642727" style="zoom:67%;" />
 
 ### 代码实现
 

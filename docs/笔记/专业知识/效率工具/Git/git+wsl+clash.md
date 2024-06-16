@@ -4,7 +4,7 @@
 
 打开 tun 模式，允许局域网链接，打开 TAP 网络适配器，可以看到wsl的网络地址
 
-![image-20220319101729227](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/202203191017289.png)
+![image-20220319101729227](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/202203191017289.png)
 
 ## wsl
 

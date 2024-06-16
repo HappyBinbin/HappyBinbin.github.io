@@ -80,6 +80,6 @@ g.客户端会内置信任 CA 的证书信息(包含公钥)，如果CA不被信�
 
 4.证书=公钥+申请者与颁发者信息+签名；
 
-![image-20210520091431541](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210520091431.png)
+![image-20210520091431541](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210520091431.png)
 
 ![img](https://images2017.cnblogs.com/blog/1260476/201711/1260476-20171116160813812-635766483.png)

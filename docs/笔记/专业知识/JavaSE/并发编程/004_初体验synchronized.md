@@ -22,7 +22,7 @@ synchronized 是 Java 中的一个关键字，能够提供一种预防线程干�
 
 在 Java 中，每个对象都有一把锁，当多个线程都需要访问对象时，那么就需要通过获得锁来获得许可，只有获得锁的线程才能访问对象，并且其他线程将进入等待状态，等待其他线程释放锁。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20211213103351211.png" alt="image-20211213103351211" style="zoom:80%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20211213103351211.png" alt="image-20211213103351211" style="zoom:80%;" />
 
 ## 3、synchronize 的几种用法？
 

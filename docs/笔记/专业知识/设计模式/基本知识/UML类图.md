@@ -1,2 +1,2 @@
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/clipboard.png" alt="img"  />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/clipboard.png" alt="img"  />
 

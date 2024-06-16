@@ -2,7 +2,7 @@
 
 ## 解决了什么问题？
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220103172342789.png" alt="image-20220103172342789" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220103172342789.png" alt="image-20220103172342789" style="zoom:67%;" />
 
 - 大量线程在竞争同一份资源
 - 有读请求，也有写请求
@@ -20,7 +20,7 @@
 - 在读取数据的时候，不可以存在写操作
 - 在写数据的时候，不可以存在读操作
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220103173026000.png" alt="image-20220103173026000" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220103173026000.png" alt="image-20220103173026000" style="zoom:67%;" />
 
 ## 自定义 ReadWriteLock
 
@@ -64,7 +64,7 @@ public class ReadWriteLock{
 
 ReentrantReadWriteLock 中，包含了两个内部类，实现了 ReadWriteLock 接口，而两个内部类又实现了 Lock 接口
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20220103174443055.png" alt="image-20220103174443055" style="zoom: 67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20220103174443055.png" alt="image-20220103174443055" style="zoom: 67%;" />
 
 ### 读写锁的升级与降级
 

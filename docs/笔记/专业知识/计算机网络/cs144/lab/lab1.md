@@ -5,7 +5,7 @@
 
 先看图，IPv4的数据报通过IP层后，提取出TCP报文段，交付给TCP层，数据segment交给TCPReceiver，ack确认信息交给TCPSender。发送也是一样的，TCPSender 发送的 segment + TCPReceiver 发送的接收窗口大小组成TCP报文段，交付给网络层形成IPv4数据报，发送出去。
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613120727703.png" alt="image-20210613120727703"  />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613120727703.png" alt="image-20210613120727703"  />
 
 而 lab1 要我们实现的就是TCPReceiver中的 StreamReassembler部分：
 
@@ -56,7 +56,7 @@ bool empty() const;
 
 我们在红色区域对传递过来的，可能乱序、重复、冗余的数据进行重组排序，然后写入ByteStream，即绿色区域，而后ByteStream把数据交付给应用层，这个是我们在lab0已经实现了的
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210613235101348.png" alt="image-20210613235101348" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210613235101348.png" alt="image-20210613235101348" style="zoom:67%;" />
 
 ### 新来数据段的index
 
@@ -67,7 +67,7 @@ bool empty() const;
 3. 数据报部部分重复，需要丢弃
 4. 数据报完全冗余，重复，全部丢弃
 
-![image-20210614000639826](https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210614000639826.png)
+![image-20210614000639826](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210614000639826.png)
 
 ### 红色区域
 
@@ -88,7 +88,7 @@ bool empty() const;
 
 - 第三个段：index = 5，data.length = 3
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210614002610172.png" alt="image-20210614002610172" style="zoom: 90%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210614002610172.png" alt="image-20210614002610172" style="zoom: 90%;" />
 
 那么，我们怎么对它们进行合并呢？
 
@@ -99,7 +99,7 @@ bool empty() const;
 
 https://blog.csdn.net/weixin_44520881/article/details/108911578
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/image-20210619210000595.png" alt="image-20210619210000595" style="zoom:67%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/image-20210619210000595.png" alt="image-20210619210000595" style="zoom:67%;" />
 
 
 

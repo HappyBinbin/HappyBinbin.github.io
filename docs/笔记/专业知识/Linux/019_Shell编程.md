@@ -12,7 +12,7 @@ Shell 是一个命令行解释器，它为用户提供了一个向 Linux 内核�
 
 看一个示意图
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407232521.png" alt="image-20210407232520399" style="zoom: 50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407232521.png" alt="image-20210407232520399" style="zoom: 50%;" />
 
 ## 17.3 Shell 脚本的执行方式
 
@@ -117,7 +117,7 @@ echo "tomcat_home=$TOMCAT_HOME"
 3. echo $变量名 （功能描述：查询环境变量的值）
 4. 示意
 
-<img src="https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407232809.png" alt="image-20210407232809649" style="zoom:50%;" />
+<img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407232809.png" alt="image-20210407232809649" style="zoom:50%;" />
 
 ### 17.5.2 快速入门
 
@@ -127,7 +127,7 @@ echo "tomcat_home=$TOMCAT_HOME"
     注意：在输出 TOMCAT_HOME 环境变量前，需要让其生效
     source /etc/profile
 
-![image-20210407232840423](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407232840.png)
+![image-20210407232840423](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407232840.png)
 
 ```shell
 shell 脚本的多行注释
@@ -151,7 +151,7 @@ $#（功能描述：这个变量代表命令行中所有参数的个数）
 
 案例：编写一个 shell 脚本 position.sh ， 在脚本中获取到命令行的各个参数信息。
 
-![image-20210407232949128](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407232949.png)
+![image-20210407232949128](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407232949.png)
 
 ## 17.7 预定义变量
 
@@ -266,7 +266,7 @@ echo "sum=$SUM"
 
 - 判断语句： 使用 -f
 
-![image-20210407233250892](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407233251.png)
+![image-20210407233250892](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407233251.png)
 
 ## 17.10流程控制
 
@@ -296,7 +296,7 @@ fi
 
 案例：请编写一个 shell 程序，如果输入的参数，大于等于 60，则输出 "及格了"，如果小于 60,则输出 "不及格"
 
-![image-20210407233407096](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407233407.png)
+![image-20210407233407096](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407233407.png)
 
 ### 17.10.2 case 语句
 
@@ -317,7 +317,7 @@ case $变量名 in
 esac
 ```
 
-![image-20210407233554160](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407233554.png)
+![image-20210407233554160](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407233554.png)
 
 ### 17.10.3 for 循环
 
@@ -346,9 +346,9 @@ done
 
 案例 1 ：从 1 加到 100 的值输出显示
 
-![image-20210407233703917](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407233704.png)
+![image-20210407233703917](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407233704.png)
 
-![](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407233704.png)
+![](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407233704.png)
 
 ### 17.10.4 while 循环
 
@@ -495,7 +495,7 @@ getSum $n1 $n2
 4. 在备份的同时，检查是否有 10 天前备份的数据库文件，如果有就将其删除。
 5.  画一个思路分析图
 
-![image-20210407234335134](https://gitee.com/HappyBinbin/pcigo/raw/master/pic/20210407234335.png)
+![image-20210407234335134](https://happychan.oss-cn-shenzhen.aliyuncs.com/img/pic/20210407234335.png)
 
 ### 17.13.2 代码 /usr/sbin/mysql_db.backup.sh
 
