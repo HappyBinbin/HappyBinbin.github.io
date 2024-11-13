@@ -14,10 +14,6 @@
 $ eval "$(ssh-agent -s)"
 ```
 
-Bash
-
-Copy
-
 如果 SSH 代理未运行，我们可以启动它并添加私钥：
 
 ```shell
@@ -68,18 +64,10 @@ Copy
 $ git remote -v
 ```
 
-Bash
-
-Copy
-
 检查输出中的 URL，确保它们使用了正确的 SSH URL。如果 URL 不正确，我们可以使用以下命令修改远程 URL：
 
 ```shell
 $ git remote set-url origin git@github.com:user/repo.git
 ```
-
-Bash
-
-Copy
 
 将上述命令中的 `user/repo.git` 替换为我们实际的项目所在的 Git 仓库。

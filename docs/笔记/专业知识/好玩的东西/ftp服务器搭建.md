@@ -28,6 +28,8 @@ https://blog.csdn.net/bai_langtao/article/details/126625683
 
 方式2，使用第三方的ftp客户端，这里推荐 transmit，可以支持双向操作，手动刷新；
 
+https://xclient.info/s/transmit.html#versions
+
 <img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/image-20241110190416907.png" alt="image-20241110190416907" style="zoom:50%;" />
 
 ### Q&A
