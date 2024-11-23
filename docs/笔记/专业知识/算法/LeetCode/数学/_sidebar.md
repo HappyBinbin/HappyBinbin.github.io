@@ -1,5 +1,0 @@
-- [返回上一级 [LeetCode]](笔记/算法/LeetCode/)
-- [数学](笔记/算法/LeetCode/数学/)
-  - [3的倍数和5的倍数](笔记/算法/LeetCode/数学/3的倍数和5的倍数.md)
-  - [470_Rand7实现Rand10](笔记/算法/LeetCode/数学/470_Rand7实现Rand10.md)
-  - [781_森林中的兔子](笔记/算法/LeetCode/数学/781_森林中的兔子.md)

@@ -1,8 +1,0 @@
-- [返回上一级 [Mysql高级]](笔记/数据库/MySQL/Mysql高级/)
-- [第三部分](笔记/数据库/MySQL/Mysql高级/第三部分/)
-  - [Mysql锁问题](笔记/数据库/MySQL/Mysql高级/第三部分/Mysql锁问题.md)
-  - [内存管理优化](笔记/数据库/MySQL/Mysql高级/第三部分/内存管理优化.md)
-  - [常用SQL技巧](笔记/数据库/MySQL/Mysql高级/第三部分/常用SQL技巧.md)
-  - [并发参数调整](笔记/数据库/MySQL/Mysql高级/第三部分/并发参数调整.md)
-  - [应用优化](笔记/数据库/MySQL/Mysql高级/第三部分/应用优化.md)
-  - [查询缓存优化](笔记/数据库/MySQL/Mysql高级/第三部分/查询缓存优化.md)

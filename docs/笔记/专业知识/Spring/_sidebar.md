@@ -1,4 +1,0 @@
-- [返回上一级 [笔记]](笔记/)
-- [Spring](笔记/Spring/)
-  - [SpringBoot](笔记/Spring/SpringBoot/)
-    - [入门](笔记/Spring/SpringBoot/入门.md)

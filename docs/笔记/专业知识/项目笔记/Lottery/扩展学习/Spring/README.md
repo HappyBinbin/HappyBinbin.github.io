@@ -1,5 +1,0 @@
-- [返回上一级 [扩展学习]](笔记/项目笔记/Lottery/扩展学习/)
-- [Spring](笔记/项目笔记/Lottery/扩展学习/Spring/)
-  - [SpringBoot编程式事务](笔记/项目笔记/Lottery/扩展学习/Spring/SpringBoot编程式事务.md)
-  - [SpringBoot读取环境变量](笔记/项目笔记/Lottery/扩展学习/Spring/SpringBoot读取环境变量.md)
-  - [Spring一些注解的使用](笔记/项目笔记/Lottery/扩展学习/Spring/Spring一些注解的使用.md)

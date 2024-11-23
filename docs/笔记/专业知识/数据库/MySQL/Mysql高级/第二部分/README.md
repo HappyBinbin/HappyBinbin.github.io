@@ -1,6 +1,0 @@
-- [返回上一级 [Mysql高级]](笔记/数据库/MySQL/Mysql高级/)
-- [第二部分](笔记/数据库/MySQL/Mysql高级/第二部分/)
-  - [Mysql的体系结构概览](笔记/数据库/MySQL/Mysql高级/第二部分/Mysql的体系结构概览.md)
-  - [SQL优化](笔记/数据库/MySQL/Mysql高级/第二部分/SQL优化.md)
-  - [存储引擎](笔记/数据库/MySQL/Mysql高级/第二部分/存储引擎.md)
-  - [索引使用](笔记/数据库/MySQL/Mysql高级/第二部分/索引使用.md)

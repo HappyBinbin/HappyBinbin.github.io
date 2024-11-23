@@ -1,8 +1,0 @@
-- [返回上一级 [效率工具]](笔记/效率工具/)
-- [Git](笔记/效率工具/Git/)
-  - [centos下git--version找不到命令问题](笔记/效率工具/Git/centos下git--version找不到命令问题.md)
-  - [git_OpenSSL报错](笔记/效率工具/Git/git_OpenSSL报错.md)
-  - [git_工作常用](笔记/效率工具/Git/git_工作常用.md)
-  - [git_添加仓库](笔记/效率工具/Git/git_添加仓库.md)
-  - [git无法显示中文](笔记/效率工具/Git/git无法显示中文.md)
-  - [Typora+Picgo+gitee](笔记/效率工具/Git/Typora+Picgo+gitee.md)
