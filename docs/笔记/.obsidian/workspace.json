@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "6acc74f8d4f7658a",
+        "id": "127d2b3cea2f6241",
         "type": "tabs",
         "children": [
           {
-            "id": "10df15777338c0a5",
+            "id": "dd25b43206548005",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/数据库/MySQL/Mysql高级/第一部分/视图.md",
+                "file": "专业知识/算法/LeetCode/滑动窗口/不定长滑动窗口.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "视图"
+              "title": "不定长滑动窗口"
             }
           }
         ]
@@ -43,7 +43,7 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "文件列表"
             }
           },
           {
@@ -150,18 +150,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
     }
   },
-  "active": "10df15777338c0a5",
+  "active": "dd25b43206548005",
   "lastOpenFiles": [
-    "1, 1, 0], [1], [2], [3], [1.md",
+    "专业知识/算法/LeetCode/滑动窗口/定长滑动窗口.md",
+    "专业知识/算法/LeetCode/滑动窗口/不定长滑动窗口.md",
+    "专业知识/算法/LeetCode/滑动窗口/专项习题.md",
+    "专业知识/云原生/prometheus/prometheus 架构.md",
+    "专业知识/云原生/prometheus/源码阅读.md",
+    "专业知识/Go/语言/依赖管理.md",
+    "internal_architecture.md",
+    "().md",
+    "专业知识/云原生/prometheus/canvstest.canvas",
+    "专业知识/云原生/prometheus",
     "专业知识/数据库/MySQL/Mysql高级/第一部分/视图.md",
+    "1, 1, 0], [1], [2], [3], [1.md",
     "专业知识/photos/image-20210308210501581.png",
     "专业知识/photos/1553907849829-1616043373242.png",
     "专业知识/数据库/MySQL/Mysql高级/脑图.md",
