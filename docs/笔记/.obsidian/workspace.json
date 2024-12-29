@@ -8,49 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "73cec7d3bfcaccaa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1209.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ARTS04-1209"
-            }
-          },
-          {
-            "id": "0a526ed18a59eeff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Linux 的最大TCP连接数"
-            }
-          },
-          {
             "id": "95f9387577736ed4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ARTS04-1229"
-            }
-          },
-          {
-            "id": "2f4ef1cc42d50c77",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -88,7 +46,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -226,20 +184,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2f4ef1cc42d50c77",
+  "active": "8a7a1ea2df04b829",
   "lastOpenFiles": [
-    "专业知识/工作问题记录/句柄数泄漏问题.md",
-    "专业知识/工作问题记录/如何安全正确地使用HTTPClient.md",
-    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
-    "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
     "专业知识/ARTS计划/2024/ARTS04-1229.md",
+    "专业知识/ARTS计划/2024/ARTS04-1209.md",
+    "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
+    "专业知识/业务/告警监控/VM.md",
+    "专业知识/工作问题记录/句柄数泄漏问题.md",
+    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
+    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "专业知识/云原生/kubernetes/list-watch机制.md",
     "专业知识/云原生/prometheus/prometheus 架构.md",
     "专业知识/tmp/watch 机制.md",
     "专业知识/tmp",
     "专业知识/Go/源码解读/net-http.md",
     "专业知识/ARTS计划/2024/ARTS04-1221.md",
-    "专业知识/ARTS计划/2024/ARTS04-1209.md",
     "专业知识/ARTS计划/2024/ARTS03-0811.md",
     "专业知识/工作问题记录/如何安全正确地使用 HTTP Client ?.md",
     "专业知识/工作问题记录/ruler 句柄数泄漏问题.pdf",
@@ -257,7 +216,6 @@
     "记录/2022/2022年2月/2.2.md",
     "专业知识/算法/LeetCode/滑动窗口/专项习题.md",
     "专业知识/Go/语言/依赖管理.md",
-    "internal_architecture.md",
     "专业知识/云原生/prometheus/canvstest.canvas",
     "专业知识/云原生/prometheus",
     "专业知识/photos/image-20210308210501581.png",
