@@ -286,7 +286,7 @@ event, ok := <-ch:
 - 客户端超时断开了？但是我们没设置timeout，则默认为0，就是无限制时间，不会主动断开
 - 服务端主动断开了？有可能
 
-在watcher建立后，我们通过 lsof -p 查看对应进程打开的连接，可以看到与 k8s 建立的 https 的连接，就是对应的 watcher 发起的http请求建立的 tcp 长链接；net/http 发起的 http 请求，是使用了 transport 连接池进行管理的，所以会默认维持长链接，感兴趣可以看下这篇文章 [[net-http]]
+在watcher建立后，我们通过 lsof -p 查看对应进程打开的连接，可以看到与 k8s 建立的 https 的连接，就是对应的 watcher 发起的http请求建立的 tcp 长链接；net/http 发起的 http 请求，是使用了 transport 连接池进行管理的，所以会默认维持长链接，感兴趣可以看下这篇文章 [[net-http-transport]]
 
 `xxx-75df5b458c-hj6qr:45006->kubernetes.default.svc.cluster.local:https (ESTABLISHED)`
 
