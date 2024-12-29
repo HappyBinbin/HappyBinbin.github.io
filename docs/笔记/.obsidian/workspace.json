@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "client-go中watch机制的一些陷阱"
+              "title": "ARTS04-1229"
             }
           },
           {
@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/Go/源码解读/net-http.md",
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "net-http"
+              "title": "ARTS04-1229"
             }
           },
           {
@@ -74,7 +74,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -212,24 +212,26 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "95f9387577736ed4",
+  "active": "2f4ef1cc42d50c77",
   "lastOpenFiles": [
-    "专业知识/Go/源码解读/net-http.md",
-    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "专业知识/云原生/kubernetes/list-watch机制.md",
-    "专业知识/工作问题记录/如何安全正确地使用HTTPClient.md",
+    "专业知识/云原生/prometheus/prometheus 架构.md",
+    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
+    "专业知识/tmp/watch 机制.md",
+    "专业知识/tmp",
+    "专业知识/Go/源码解读/net-http.md",
+    "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
+    "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/ARTS计划/2024/ARTS04-1221.md",
-    "专业知识/工作问题记录/如何安全正确地使用 HTTP Client ?.md",
     "专业知识/ARTS计划/2024/ARTS04-1209.md",
     "专业知识/ARTS计划/2024/ARTS03-0811.md",
+    "专业知识/工作问题记录/如何安全正确地使用HTTPClient.md",
+    "专业知识/工作问题记录/如何安全正确地使用 HTTP Client ?.md",
     "专业知识/工作问题记录/句柄数泄漏问题.md",
-    "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
     "专业知识/工作问题记录/ruler 句柄数泄漏问题.pdf",
     "().md",
-    "专业知识/云原生/prometheus/prometheus 架构.md",
     "专业知识/工作问题记录",
     "专业知识/Go/源码解读",
-    "专业知识/未命名",
     "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
     "专业知识/算法/LeetCode/双指针/15_三数之和.md",
     "专业知识/云原生/prometheus/源码阅读.md",
@@ -244,8 +246,6 @@
     "internal_architecture.md",
     "专业知识/云原生/prometheus/canvstest.canvas",
     "专业知识/云原生/prometheus",
-    "专业知识/数据库/MySQL/Mysql高级/第一部分/视图.md",
-    "1, 1, 0], [1], [2], [3], [1.md",
     "专业知识/photos/image-20210308210501581.png",
     "专业知识/photos/1553907849829-1616043373242.png"
   ]

@@ -488,6 +488,7 @@ func runLoop(ctx context.Context, namespace string, options metav1.ListOptions, 
 ## 其他疑问
 
 1、为什么发起一个 http 请求，apiserver 就能与这个请求建立连接，进行 watch 并增量通知，apiserver 是怎么实现的？
+- 推荐阅读：[etcd教程(五)---watch机制原理分析](https://www.lixueduan.com/posts/etcd/05-watch/)
 
 2、为什么 list-watch 机制不会每隔一段时间就关闭连接？（貌似有探活？）
 
