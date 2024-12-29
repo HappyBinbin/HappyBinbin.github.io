@@ -17,7 +17,7 @@
 func WatchDeployment(ctx context.Context, namespace string, options metav1.ListOptions, handler EventHandler) error {
 	watcher, err := KubeCli.AppsV1().Deployments(namespace).Watch(ctx, options)
 	if err != nil {
-		slogger.WithContext(ctx).Errorf("watching deployments err: %+v", err)
+		log.Errorf("watching deployments err: %+v", err)
 		return err
 	}
 
@@ -28,13 +28,13 @@ func WatchDeployment(ctx context.Context, namespace string, options metav1.ListO
 		select {
 		case event, ok := <-watcher.ResultChan():
 			if !ok {
-				slogger.WithContext(ctx).Errorf("Watcher channel closed")
+				log.Errorf("Watcher channel closed")
 				return nil
 			}
 
 			deployment, ok := event.Object.(*appsv1.Deployment)
 			if !ok {
-				slogger.WithContext(ctx).Errorf("Error casting to Deployment")
+				log.Errorf("Error casting to Deployment")
 				continue
 			}
 
@@ -63,7 +63,7 @@ func WatchDeployment(ctx context.Context, namespace string, options metav1.ListO
 
 ```go
 if !ok {
-    slogger.WithContext(ctx).Errorf("Watcher channel closed")
+    log.Errorf("Watcher channel closed")
     continue
 }
 ```
@@ -488,7 +488,9 @@ func runLoop(ctx context.Context, namespace string, options metav1.ListOptions, 
 ## 其他疑问
 
 1、为什么发起一个 http 请求，apiserver 就能与这个请求建立连接，进行 watch 并增量通知，apiserver 是怎么实现的？
-- 推荐阅读：[etcd教程(五)---watch机制原理分析](https://www.lixueduan.com/posts/etcd/05-watch/)
+- 推荐阅读：
+	- https://cloud.tencent.com/developer/article/1991054
+	- [etcd教程(五)---watch机制原理分析](https://www.lixueduan.com/posts/etcd/05-watch/)
 
 2、为什么 list-watch 机制不会每隔一段时间就关闭连接？（貌似有探活？）
 

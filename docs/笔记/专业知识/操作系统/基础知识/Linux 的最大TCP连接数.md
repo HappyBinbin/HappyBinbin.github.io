@@ -37,4 +37,4 @@ hard nofile 1000000  # 要大于 soft
 
 1、一个网关服务，负责接受底下众多代理的心跳上报，每一个心跳请求，就是一个不同的客户端，需要与网关服务建立TCP连接，一开始发现是网关服务处理不过来，然后不断增加pod数来缓解接口压力，但这并不是一个线性增长的过程，后续接口开始报拒绝连接，too many open file了， 线上就先通过调整部署 deployment 的yaml ，修改 sysctl.net.maxconn 为 1024 来提升每个pod能建立的连接个数 
 ![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20241221101922.png)
-2、可以参考 [[句柄数泄漏问题]]
+2、可以参考 [[]]
