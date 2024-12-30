@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
+                "file": "专业知识/云原生/GoodThing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "启动流程"
+              "title": "GoodThing"
             }
           }
         ],
@@ -190,6 +190,12 @@
   },
   "active": "158e2cd1e94c77b3",
   "lastOpenFiles": [
+    "专业知识/tmp/net-http-transport.md",
+    "专业知识/云原生/GoodThing.md",
+    "专业知识/ARTS计划/2024/ARTS04-1229.md",
+    "成长/有感.md",
+    "专业知识/云原生/kubernetes/源码解读/前期准备.md",
+    "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/001_scheme.md",
     "专业知识/云原生/kubernetes/环境搭建/使用kubeadm快速部署一个K8s集群.md",
     "专业知识/云原生/kubernetes/环境搭建/mac 搭建k8s.md",
@@ -197,9 +203,7 @@
     "专业知识/工作问题记录/句柄数泄漏问题.md",
     "专业知识/tmp/list-watch机制.md",
     "专业知识/tmp/net-dial.md",
-    "专业知识/tmp/net-http-transport.md",
     "专业知识/tmp/watch 机制.md",
-    "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/分组循环.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
     "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
@@ -216,10 +220,6 @@
     "专业知识/工作问题记录",
     "专业知识/Go/源码解读",
     "专业知识/算法/LeetCode/双指针/15_三数之和.md",
-    "专业知识/云原生/prometheus/源码阅读.md",
-    "专业知识/ARTS计划/2024/ARTS 计划.md",
-    "专业知识/算法/LeetCode/滑动窗口与双指针/定长滑动窗口.md",
-    "专业知识/算法/LeetCode/滑动窗口与双指针/双指针.md",
     "专业知识/云原生/prometheus/canvstest.canvas",
     "专业知识/云原生/prometheus",
     "专业知识/photos/image-20210308210501581.png",
