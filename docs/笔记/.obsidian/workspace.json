@@ -39,10 +39,14 @@
             "id": "158e2cd1e94c77b3",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "专业知识/tmp/list-watch机制.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "list-watch机制"
             }
           }
         ],
@@ -186,20 +190,20 @@
   },
   "active": "158e2cd1e94c77b3",
   "lastOpenFiles": [
+    "专业知识/tmp/net-dial.md",
     "专业知识/tmp/net-http-transport.md",
+    "专业知识/tmp/watch 机制.md",
+    "专业知识/tmp/list-watch机制.md",
     "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/分组循环.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
-    "专业知识/tmp/net-dial.md",
     "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
     "专业知识/ARTS计划/2024/ARTS04-1209.md",
     "专业知识/业务/告警监控/VM.md",
     "专业知识/工作问题记录/句柄数泄漏问题.md",
     "专业知识/tmp/如何安全正确地使用HTTPClient.md",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
-    "专业知识/tmp/list-watch机制.md",
     "专业知识/云原生/prometheus/prometheus 架构.md",
-    "专业知识/tmp/watch 机制.md",
     "专业知识/tmp",
     "专业知识/ARTS计划/2024/ARTS04-1221.md",
     "专业知识/ARTS计划/2024/ARTS03-0811.md",
