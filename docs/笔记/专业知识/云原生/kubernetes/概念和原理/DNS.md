@@ -1,5 +1,3 @@
-
-
 ## Reference
 
 1、[了解 DNS 解析 和 resolv.conf](https://medium.com/@hsahu24/understanding-dns-resolution-and-resolv-conf-d17d1d64471c)
@@ -30,13 +28,12 @@ nameserver 202.102.192.69
 作用解析：
 
 - nameserver 顾名思义，去这个ip地址查询对应的DNS
-
 - search，简单来说就是帮你省略了查询域名的后缀，当你没有使用FQDN时，可以自动帮你填充；例如：你在/etc/hosts 配置了 192.168.1.1 happy.example.com，那么当你 ping happy.example.com 时，就能成功；但当你直接 ping happy 时，就会失败；所以，在 配置 search example.com 后，再 ping happy ，就能成功了，当然也开可以再 /etc/hosts 中再添加一条 192.168.1.1 happy 的记录。
 - domain：在没有配置search的情况下，search默认为domain的值
 
 ## Linux  Network
 
-这里不得不提一下，Linux 的 Network 或者 NetworkManager 服务，会自动去更新  /etc/resolv.conf 的配置，如果ifcfg-eth* 中包含了DNS的配置，则需要注意的时，重启网络服务后，DNS配置会更新到 /etc/resolv.conf 下
+这里不得不提一下，Linux 的 Network 或者 NetworkManager 服务，会自动去更新  /etc/resolv.conf 的配置，如果ifcfg-eth* 中包含了DNS的配置，则需要注意，重启网络服务后，DNS配置会更新到 /etc/resolv.conf 下
 
 ## K8s NDS
 
