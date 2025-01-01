@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/云原生/GoodThing.md",
+                "file": "专业知识/云原生/kubernetes/概念和原理/DNS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GoodThing"
+              "title": "DNS"
             }
           },
           {
@@ -209,10 +209,12 @@
   },
   "active": "1828981957affbae",
   "lastOpenFiles": [
+    "专业知识/云原生/kubernetes/概念和原理/整体架构和关键组件.md",
+    "专业知识/云原生/kubernetes/概念和原理/DNS.md",
+    "专业知识/云原生/GoodThing.md",
     "专业知识/tmp/net-http-transport.md",
     "专业知识/tmp/list-watch机制.md",
     "专业知识/ARTS计划/2025/ARTS04-0105.md",
-    "专业知识/云原生/kubernetes/概念和原理/整体架构和关键组件.md",
     "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/001_scheme.md",
@@ -220,13 +222,11 @@
     "专业知识/Go/语言/依赖管理.md",
     "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
-    "专业知识/云原生/GoodThing.md",
     "专业知识/ARTS计划/2025",
     "专业知识/ARTS计划/2024/ARTS04-.md",
     "专业知识/云原生/kubernetes/资源收集.md",
     "专业知识/云原生/prometheus/源码阅读.md",
     "专业知识/云原生/kubernetes/源码解读/前期准备.md",
-    "专业知识/云原生/kubernetes/概念和原理/DNS.md",
     "成长/有感.md",
     "专业知识/云原生/kubernetes/环境搭建/使用kubeadm快速部署一个K8s集群.md",
     "专业知识/云原生/kubernetes/环境搭建/mac 搭建k8s.md",
