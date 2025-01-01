@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/前期准备.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ARTS04-1229"
+              "title": "前期准备"
             }
           }
         ],
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/前期准备.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "ARTS04-1229 的反向链接列表"
+              "title": "前期准备 的反向链接列表"
             }
           },
           {
@@ -127,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/前期准备.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "ARTS04-1229 的出链列表"
+              "title": "前期准备 的出链列表"
             }
           },
           {
@@ -154,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md"
+                "file": "专业知识/云原生/kubernetes/源码解读/前期准备.md"
               },
               "icon": "lucide-list",
-              "title": "ARTS04-1229 的大纲"
+              "title": "前期准备 的大纲"
             }
           }
         ],
@@ -181,10 +181,10 @@
   },
   "active": "a3ade7a85808e6ee",
   "lastOpenFiles": [
+    "专业知识/云原生/GoodThing.md",
+    "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/tmp/net-http-transport.md",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
-    "专业知识/ARTS计划/2024/ARTS04-1229.md",
-    "专业知识/云原生/GoodThing.md",
     "成长/有感.md",
     "专业知识/云原生/kubernetes/源码解读/前期准备.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
