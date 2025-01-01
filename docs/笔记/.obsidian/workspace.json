@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/云原生/kubernetes/资源收集.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "资源收集"
+              "title": "k8s 的代码结构"
             }
           }
         ],
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "专业知识/云原生/kubernetes/资源收集.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "资源收集 的反向链接列表"
+              "title": "k8s 的代码结构 的反向链接列表"
             }
           },
           {
@@ -127,12 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "专业知识/云原生/kubernetes/资源收集.md",
+                "file": "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "资源收集 的出链列表"
+              "title": "k8s 的代码结构 的出链列表"
             }
           },
           {
@@ -154,10 +154,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/云原生/kubernetes/资源收集.md"
+                "file": "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md"
               },
               "icon": "lucide-list",
-              "title": "资源收集 的大纲"
+              "title": "k8s 的代码结构 的大纲"
             }
           }
         ],
@@ -181,16 +181,19 @@
   },
   "active": "a3ade7a85808e6ee",
   "lastOpenFiles": [
+    "专业知识/ARTS计划/2025/ARTS04-0105.md",
+    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
+    "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/云原生/GoodThing.md",
+    "专业知识/ARTS计划/2025",
+    "专业知识/ARTS计划/2024/ARTS04-.md",
     "专业知识/云原生/kubernetes/资源收集.md",
     "专业知识/云原生/prometheus/源码阅读.md",
     "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
     "专业知识/云原生/kubernetes/源码解读/前期准备.md",
     "专业知识/云原生/kubernetes/概念和原理/整体架构和关键组件.md",
     "专业知识/云原生/kubernetes/概念和原理/DNS.md",
-    "专业知识/ARTS计划/2024/ARTS04-1229.md",
     "专业知识/tmp/net-http-transport.md",
-    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "成长/有感.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/001_scheme.md",
@@ -205,8 +208,6 @@
     "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
     "专业知识/ARTS计划/2024/ARTS04-1209.md",
     "专业知识/业务/告警监控/VM.md",
-    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
-    "专业知识/云原生/prometheus/prometheus 架构.md",
     "专业知识/tmp",
     "专业知识/工作问题记录/ruler 句柄数泄漏问题.pdf",
     "专业知识/工作问题记录",
