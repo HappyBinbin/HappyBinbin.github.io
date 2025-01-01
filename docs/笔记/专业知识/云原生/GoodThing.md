@@ -16,3 +16,6 @@ etcd 解析
 
 kubernetes Tutorial
 - https://devopscube.com/kubernetes-tutorials-beginners/ 综合指南，里面给出了很多的文章介绍k8s的原理和设计理念等
+
+书籍：
+- https://draveness.me/golang/
