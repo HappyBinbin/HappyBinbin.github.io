@@ -53,7 +53,7 @@ staging 目录中的子目录对应 Kubernetes 的官方 Go 模块，例如：
 #### 3.2 管理跨模块依赖
 
 - staging 目录中的代码被 Kubernetes 主项目和其他组件复用
-- 构建时，这些模块会被同步到 vendor 目录，使 Go 编译器将其视为外部依赖 [[依赖管理#依赖查找顺序]]
+- 构建时，这些模块会被以软链接的方式同步到 vendor 目录，使 Go 编译器将其视为外部依赖 [[依赖管理#依赖查找顺序]]
 
 任意找一个目录，查看其 import 的内容，可以发现，对于 k8s 主项目的引用，都是以 k8s.io 开头的，而不是我们常见的 github.xxx，k8s.io/kubernetes 就是 k8s 项目的 module 名
 
@@ -80,11 +80,13 @@ import (
    internalqueue "k8s.io/kubernetes/pkg/scheduler/internal/queue"  
    "k8s.io/kubernetes/pkg/scheduler/metrics"   "k8s.io/kubernetes/pkg/scheduler/volumebinder")
 
-// go.mod 
+// 主项目的 go.mod 
 
 module k8s.io/kubernetes  
   
-go 1.12
+// scheduler 的 go.mod
+
+module k8s.io/kube-scheduler
 ```
 
 
