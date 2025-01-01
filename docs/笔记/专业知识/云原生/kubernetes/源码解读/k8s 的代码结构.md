@@ -1,3 +1,7 @@
+## Reference
+- https://blog.csdn.net/m0_45406092/article/details/144408906
+- https://zhuanlan.zhihu.com/p/645269730
+
 | 目录名称          | 说明                                                                                                                                                                            |
 | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | api/          | 存放 OpenAPI/Swagger 的 spec 文件，包括 JSON、Protocol 的定义等。          包含 Kubernetes 的 API 定义文件，如 Pod、Service、ReplicationController 等，但是现在 K8s 的 api 基本都移到 k8s.io/api 和 k8s.io/apis 项目下 |
@@ -7,50 +11,85 @@
 | hack/         | 存放与构建、测试相关的脚本                                                                                                                                                                 |
 | **pkg/**      | 存放核心库代码，可被项目内部或外部，直接引用                                                                                                                                                        |
 | plugin/       | 存放 kubernetes 的插件，例如认证插件、授权插件等                                                                                                                                                |
-| staging/      |                                                                                                                                                                               |
+| staging/      | 比较特殊，单独讲解，目前存放的是即将要独立发布的仓库代码                                                                                                                                                  |
 | **test/**     | 存放测试工具，以及测试数据                                                                                                                                                                 |
 | third_party/  | 存放第三方工具、代码或其他组件                                                                                                                                                               |
 | translations/ | 存放 i18n(国际化)语言包的相关文件，可以在不修改内部代码的情况下支持不同语言及地区                                                                                                                                  |
 | **vendor/**   | 存放项目**依赖的库代码**，一般为第三方库代码                                                                                                                                                      |
+## Staging
 
-### **api**
+### 1. 什么是 `staging` 目录？
 
-包含 Kubernetes 的 API 定义文件，如 Pod、Service、ReplicationController 等。但是现在 K8s 的 api 基本都移到 k8s.io/api 和 k8s.io/apis 项目下。
-### **build**
+staging 目录位于 Kubernetes 源代码的根目录下（例如 kubernetes-1.22.3/staging）。
+它的主要作用是存放 Kubernetes 项目自身的模块化代码，用于逐步拆分、独立开发和发布成单独的 Go 模块。
 
-包含 Kubernetes 内部组件编译的脚本以及制作 Docker 镜像的 Dockerfile 等。
+### 2. 为什么需要 `staging` 目录？
 
-### **CHANGELOG**
+在 Kubernetes 中，有许多代码需要被多个组件（如 kubelet、kube-proxy）复用，例如：
+- API 定义
+- 客户端工具
+- 通用库
+为了实现这些代码的模块化开发和独立发布，staging 目录被设计为一个过渡阶段，解决模块拆分和跨依赖管理问题。
 
-本次版本更新的 Future 以及修复的 Bug 记录
+背景问题
+- Kubernetes 项目依赖自身的模块（如 k8s.io/apimachinery
+- 直接分离模块可能会导致循环依赖问题。
+- 独立模块需要逐步开发和测试，而不是一次性完成。
 
-### **cmd**
+解决方法
+- 将即将独立的模块代码暂时放入 staging 目录。
+- 构建时，通过 vendor 机制 伪装成外部依赖，避免循环依赖问题。
+- 在模块稳定后，正式发布到独立的仓库和 Go 模块仓库。
 
-包含 Kubernetes 组件启动命令，如 kube-apiserver，kube-controller-manager 等
+### 3. `staging` 目录的作用
+#### 3.1  模块化开发
+staging 目录中的子目录对应 Kubernetes 的官方 Go 模块，例如：
 
-### **docs**
+- k8s.io/apimachinery
+- k8s.io/client-go
+- k8s.io/api
+- k8s.io/apiserver
 
-包含 Kubernetes 的文档，如开发者指南、API 文档等。这些文档是用 MkDocs 工具编写的，可以生成静态网站供用户参考。Kubernetes 的文档非常丰富，包括了从安装到使用到开发的所有内容。对于初学者来说，阅读 Kubernetes 的官方文档是非常必要的。
+#### 3.2 管理跨模块依赖
 
-### **hack**
+- staging 目录中的代码被 Kubernetes 主项目和其他组件复用
+- 构建时，这些模块会被同步到 vendor 目录，使 Go 编译器将其视为外部依赖 [[依赖管理#依赖查找顺序]]
 
-包含 Kubernetes 的构建和测试脚本。这些脚本用于自动化构建、测试和发布 Kubernetes。在这些脚本中，包含了大量的构建细节和测试用例。这些脚本可以大大提高我们的工作效率，同时也可以确保 Kubernetes 的代码质量和稳定性。
+任意找一个目录，查看其 import 的内容，可以发现，对于 k8s 主项目的引用，都是以 k8s.io 开头的，而不是我们常见的 github.xxx，k8s.io/kubernetes 就是 k8s 项目的 module 名
 
-### **pkg**
+``` go
+package scheduler  
+  
+import (  
+   "fmt"  
+   "io/ioutil"   "os"   "time"  
+   "k8s.io/klog"  
+   v1 "k8s.io/api/core/v1"  
+   metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"  
+   "k8s.io/apimachinery/pkg/runtime"   "k8s.io/apimachinery/pkg/util/wait"   appsinformers "k8s.io/client-go/informers/apps/v1"  
+   coreinformers "k8s.io/client-go/informers/core/v1"  
+   policyinformers "k8s.io/client-go/informers/policy/v1beta1"  
+   storageinformersv1 "k8s.io/client-go/informers/storage/v1"  
+   storageinformersv1beta1 "k8s.io/client-go/informers/storage/v1beta1"  
+   clientset "k8s.io/client-go/kubernetes"  
+   "k8s.io/client-go/tools/events"   schedulerapi "k8s.io/kubernetes/pkg/scheduler/api"  
+   latestschedulerapi "k8s.io/kubernetes/pkg/scheduler/api/latest"  
+   kubeschedulerconfig "k8s.io/kubernetes/pkg/scheduler/apis/config"  
+   "k8s.io/kubernetes/pkg/scheduler/core"   "k8s.io/kubernetes/pkg/scheduler/factory"   framework "k8s.io/kubernetes/pkg/scheduler/framework/v1alpha1"  
+   internalcache "k8s.io/kubernetes/pkg/scheduler/internal/cache"  
+   internalqueue "k8s.io/kubernetes/pkg/scheduler/internal/queue"  
+   "k8s.io/kubernetes/pkg/scheduler/metrics"   "k8s.io/kubernetes/pkg/scheduler/volumebinder")
 
-包含 Kubernetes 的核心代码，如 API Server、Controller Manager、Scheduler 等。
+// go.mod 
 
-### **plugin**
+module k8s.io/kubernetes  
+  
+go 1.12
+```
 
-包含 Kubernetes 的插件，例如存储插件、认证插件等，它们都可以让 Kubernetes 更加灵活和强大。
 
-### **test**
+#### 3.3 发布和版本化
 
-包含 Kubernetes 的测试用例。这些测试用例用于测试 Kubernetes 的功能是否正常。在 Kubernetes 的开发过程中，测试是非常重要的环节。通过测试，我们可以发现和解决各种问题，确保 Kubernetes 的功能正确性和稳定性。
-
-### **vendor**
-
-用于存放 Kubernetes 所有依赖的第三方库的代码。在编译 Kubernetes 源码时，需要使用大量的第三方库，例如 `etcd`、`docker`、`glog` 等。这些库的源码会被存放在 `vendor` 目录下，它们会被自动下载和编译，最终被打包到 Kubernetes 的二进制文件中。
-
-### **Staging** 
-
+- 每次 Kubernetes 发布新版本时，staging 中的模块会同步发布到独立的 GitHub 仓库，例如：
+	- kubernetes/client-go
+	- kubernetes/apimachinery
