@@ -27,30 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/tmp/net-http-transport.md",
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "net-http-transport"
-            }
-          },
-          {
-            "id": "158e2cd1e94c77b3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/云原生/GoodThing.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "GoodThing"
+              "title": "ARTS04-1229"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -122,6 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "ARTS04-1229 的反向链接列表"
             }
           },
           {
@@ -140,11 +127,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "ARTS04-1229 的出链列表"
             }
           },
           {
@@ -157,7 +145,7 @@
                 "useHierarchy": true
               },
               "icon": "lucide-tags",
-              "title": "Tags"
+              "title": "标签"
             }
           },
           {
@@ -165,12 +153,15 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "专业知识/ARTS计划/2024/ARTS04-1229.md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "ARTS04-1229 的大纲"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -188,18 +179,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "158e2cd1e94c77b3",
+  "active": "a3ade7a85808e6ee",
   "lastOpenFiles": [
     "专业知识/tmp/net-http-transport.md",
-    "专业知识/云原生/GoodThing.md",
+    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "专业知识/ARTS计划/2024/ARTS04-1229.md",
+    "专业知识/云原生/GoodThing.md",
     "成长/有感.md",
     "专业知识/云原生/kubernetes/源码解读/前期准备.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
     "专业知识/云原生/kubernetes/源码解读/kube-apiserver/001_scheme.md",
     "专业知识/云原生/kubernetes/环境搭建/使用kubeadm快速部署一个K8s集群.md",
     "专业知识/云原生/kubernetes/环境搭建/mac 搭建k8s.md",
-    "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "专业知识/工作问题记录/句柄数泄漏问题.md",
     "专业知识/tmp/list-watch机制.md",
     "专业知识/tmp/net-dial.md",
