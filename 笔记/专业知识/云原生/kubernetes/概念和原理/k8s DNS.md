@@ -3,8 +3,7 @@
 1. [了解 DNS 解析 和 resolv.conf](https://medium.com/@hsahu24/understanding-dns-resolution-and-resolv-conf-d17d1d64471c)
 2. [Linux Networking：DNS](https://yuminlee2.medium.com/linux-networking-dns-7ff534113f7d)
 3. [Kubenetes：DNS](https://yuminlee2.medium.com/kubernetes-dns-bdca7b7cb868)
-4. [从 Service DNS 记录到 IP 地址，KubeDNS 工作原理](https://www.lixueduan.com/posts/kubernetes/16-kubedns-workflow/)
-
+4. [从 Service DNS 记录到 IP 地址，KubeDNS 工作原理（重点推荐阅读）](https://www.lixueduan.com/posts/kubernetes/16-kubedns-workflow/) 这篇文章写的确实太好了，解决困扰我很久的"dns是怎么解析的问题？"
 
 ## Linux  DNS 
 
@@ -40,7 +39,7 @@ nameserver 202.102.192.69
 ## K8s NDS
 
 前置知识：
-
+- Kubernetes Service 通过虚拟 IP 地址或者节点端口为用户应用提供访问入口，然而这些 IP 地址和端口是动态分配的，实际项目中无法把一个可变的入口发布出去供用户访问。为了解决这个问题，Kubernetes 提供了内置的域名服务，用户定义的服务会自动获取域名，通过域名解析，可以对外向用户提供一个固定的服务访问地址
 
 在日常工作中，我们在podA中要访问另外一个podB服务，都是直接以 `[podB名称：port]` 的形式访问的，k8s 自动帮我们解析`podB`这个域名为对应的ip的
 
@@ -48,9 +47,6 @@ nameserver 202.102.192.69
 - service 的 dns 记录是怎么解析为 ip 地址的？
 - 哪个服务负责解析？是怎么解析的？
 - pod 怎么知道要把请求发给谁进行解析？
-
-
-
 
 Pod 的 DNS 的配置，由dnspolicy决定，以下为官方的说明：
 
@@ -113,13 +109,13 @@ cluster.local:53 {
 
 3、内部处理
 
-- 如果访问的域是内部集群的，则使用内部的DNS记录进行解析；即 kubenetes 插件处理的域。
+- 如果访问的域是内部集群的，则使用内部的DNS记录进行解析；即 kubenetes 插件处理的域
     - cluster.local 默认域、in-addr.arpa  IPv4 地址的反向DNS查询域；ip6-arpa 同理；
     - pods verified 允许用 pod 的 ip 进行 DNS 查询
-    - 
 
 4、外部处理
 
 - 如果访问域是非内部集群的，例如：example.com，则会转发到Corefile中指定的上游 DNS 服务器，这里会转发到 8.8.8.8 
+
 
 ![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250103185205.png)
