@@ -1,10 +1,10 @@
 ## Reference
 
-1、[了解 DNS 解析 和 resolv.conf](https://medium.com/@hsahu24/understanding-dns-resolution-and-resolv-conf-d17d1d64471c)
+1. [了解 DNS 解析 和 resolv.conf](https://medium.com/@hsahu24/understanding-dns-resolution-and-resolv-conf-d17d1d64471c)
+2. [Linux Networking：DNS](https://yuminlee2.medium.com/linux-networking-dns-7ff534113f7d)
+3. [Kubenetes：DNS](https://yuminlee2.medium.com/kubernetes-dns-bdca7b7cb868)
+4. [从 Service DNS 记录到 IP 地址，KubeDNS 工作原理](https://www.lixueduan.com/posts/kubernetes/16-kubedns-workflow/)
 
-2、[Linux Networking：DNS](https://yuminlee2.medium.com/linux-networking-dns-7ff534113f7d)
-
-3、[Kubenetes：DNS](https://yuminlee2.medium.com/kubernetes-dns-bdca7b7cb868)
 
 ## Linux  DNS 
 
@@ -33,9 +33,24 @@ nameserver 202.102.192.69
 
 ## Linux  Network
 
-这里不得不提一下，Linux 的 Network 或者 NetworkManager 服务，会自动去更新  /etc/resolv.conf 的配置，如果ifcfg-eth* 中包含了DNS的配置，则需要注意，重启网络服务后，DNS配置会更新到 /etc/resolv.conf 下
+这里不得不提一下，Linux 的 Network 或者 NetworkManager 服务，会更新  /etc/resolv.conf 的配置，如果ifcfg-eth* 中包含了DNS的配置，则需要注意，重启网络服务后，DNS配置会更新到 /etc/resolv.conf 下
+
+> 曾经就在工作中遇到这个坑，一直排查不到是哪里修改了 /etc/resolve.conf 文件的 dns 服务器地址
 
 ## K8s NDS
+
+前置知识：
+
+
+在日常工作中，我们在podA中要访问另外一个podB服务，都是直接以 `[podB名称：port]` 的形式访问的，k8s 自动帮我们解析`podB`这个域名为对应的ip的
+
+几个核心问题：
+- service 的 dns 记录是怎么解析为 ip 地址的？
+- 哪个服务负责解析？是怎么解析的？
+- pod 怎么知道要把请求发给谁进行解析？
+
+
+
 
 Pod 的 DNS 的配置，由dnspolicy决定，以下为官方的说明：
 
@@ -44,7 +59,7 @@ Pod 的 DNS 的配置，由dnspolicy决定，以下为官方的说明：
 - "ClusterFirstWithHostNet": 对于以 hostNetwork 方式运行的 Pod，应将其 DNS 策略显式设置为 "ClusterFirstWithHostNet"。否则，以 hostNetwork 方式和 "ClusterFirst" 策略运行的 Pod 将会做出回退至 "Default" 策略的行为。注意：这在 Windows 上不支持。
 - "None": 此设置允许 Pod 忽略 Kubernetes 环境中的 DNS 设置。Pod 会使用其 dnsConfig 字段所提供的 DNS 设置。 
 
-在容器 Pod 中，使用 curl 或者 wget 等，发起一个请求时，dns 的解析过程如下：
+在容器 Pod 中，发起一个请求时，dns 的解析过程如下：
 
 <img src="https://happychan.oss-cn-shenzhen.aliyuncs.com/img/202407312057356.jpg" alt="1722430603862" style="zoom: 40%;" />
 
@@ -106,3 +121,5 @@ cluster.local:53 {
 4、外部处理
 
 - 如果访问域是非内部集群的，例如：example.com，则会转发到Corefile中指定的上游 DNS 服务器，这里会转发到 8.8.8.8 
+
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250103185205.png)

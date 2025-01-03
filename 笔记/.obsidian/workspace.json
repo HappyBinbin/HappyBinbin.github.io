@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/云原生/kubernetes/概念和原理/集群网络.md",
+                "file": "专业知识/tmp/k8s DNS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "集群网络"
+              "title": "k8s DNS"
             }
           }
         ],
@@ -181,9 +181,10 @@
   },
   "active": "a3ade7a85808e6ee",
   "lastOpenFiles": [
+    "专业知识/tmp/集群网络.md",
+    "专业知识/tmp/未命名.md",
     "专业知识/ARTS计划/2025/ARTS04-0105.md",
-    "专业知识/云原生/kubernetes/概念和原理/集群网络.md",
-    "专业知识/云原生/kubernetes/概念和原理/DNS.md",
+    "专业知识/tmp/k8s DNS.md",
     "专业知识/云原生/kubernetes/概念和原理/整体架构和关键组件.md",
     "专业知识/云原生/GoodThing.md",
     "专业知识/tmp/net-http-transport.md",
@@ -207,7 +208,6 @@
     "专业知识/tmp/net-dial.md",
     "专业知识/tmp/watch 机制.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/分组循环.md",
-    "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
     "专业知识/tmp",
     "专业知识/工作问题记录/ruler 句柄数泄漏问题.pdf",
     "专业知识/工作问题记录",
