@@ -16,7 +16,6 @@
 ## 从一个HTTP请求讲起
 编写一个简单的HTTP请求：
 ```go
-  
 func requestHTTP(ctx context.Context, url string, method string) {  
    _, err := http.NewRequest(method, url, bytes.NewBuffer([]byte{}))  
    if err != nil {  
@@ -37,6 +36,10 @@ func requestHTTP(ctx context.Context, url string, method string) {
   
    fmt.Printf("request success ... ")  
 }
-
-
 ```
+
+
+
+
+
+
