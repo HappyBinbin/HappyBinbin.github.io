@@ -13,6 +13,15 @@
 - 发起一个 http 请求需要建立几个 socket 或者打开几个 fd？
 - 发起一个 http 请求，会启动几个协程？
 
+## 流程图
+下图展示了http发起请求，并读取响应的大致流程
+![net-http.drawio.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/net-http.drawio.png)
+
+## 关键数据结构
+http.Transport
+- 
+
+
 ## 从一个HTTP请求讲起
 编写一个简单的HTTP请求：
 ```go
@@ -37,6 +46,8 @@ func requestHTTP(ctx context.Context, url string, method string) {
    fmt.Printf("request success ... ")  
 }
 ```
+
+
 
 
 
