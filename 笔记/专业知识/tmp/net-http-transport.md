@@ -19,13 +19,24 @@
 
 ## 关键数据结构和接口
 
+ **RoundTripper**
+
 ```go
 type RoundTripper interface {
     RoundTrip(*Request) (*Response, error)
 }
 ```
 
-![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250105181950.png)
+RoundTripper 是 http 包提供的客户端的执行HTTP请求的接口，官方介绍是：
+
+> RoundTripper is an interface representing the ability to execute a single HTTP transaction, obtaining the `[Response]` for a given `[Request]`
+
+也就是能够保证 HTTP 请求和响应是事务性的，标准库中提供了多种实现方式，我们主要介绍最常用的 Transport 
+
+![image.png | 500](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250105181950.png )
+
+**Transport**
+RoundTripper 的实现，主要作用就是支持HTTP/HTTPs请求以及HTTP代理
 
 
 
