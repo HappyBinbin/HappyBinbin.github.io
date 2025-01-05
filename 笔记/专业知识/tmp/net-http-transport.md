@@ -17,9 +17,16 @@
 下图展示了http发起请求，并读取响应的大致流程
 ![net-http.drawio.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/net-http.drawio.png)
 
-## 关键数据结构
-http.Transport
-- 
+## 关键数据结构和接口
+
+```go
+type RoundTripper interface {
+    RoundTrip(*Request) (*Response, error)
+}
+```
+
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250105181950.png)
+
 
 
 ## 从一个HTTP请求讲起
