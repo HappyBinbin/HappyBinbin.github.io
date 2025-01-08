@@ -17,8 +17,9 @@
 进程数：
 分析来看，vmalert 在频繁地与 某个服务 建立 TCP 连接，并且频繁地打开和关闭 socket 套接字，由于建立连接的操作与关闭连接的操作频率不 一致，从而使得连接数持续增加，最后超过 ulimit -Sn 和 ulimit -Hn 65535 的限制 [[Linux 的最大TCP连接数]]；大胆猜测可能是任意一个HTTP请求的问题
 
-![image-20250107143542471](句柄数泄漏问题.assets/image-20250107143542471.png)
-![image-20250107144524753](句柄数泄漏问题.assets/image-20250107144524753.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108204122.png)
+
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108204146.png)
 
 ## 排查过程
 从现象看本质，HTTP 请求本质上是建立一个TCP连接，每建立一个TCP连接，则需要打开对应的文件，而 fd 则是控制这些文件的一个数据结构，fd 泄漏了，则说明几个可能性：
@@ -31,21 +32,25 @@
 
 在 vmalert 运行了一段时间后，通过 lsof -p [进程号] 查看其打开的文件连接，发现 vmselect 的TCP连接数较为稳定，连接数与 vmalert 的在执行的 组数基本是相同的 检查发现存在大量的 sock 连接，HTTP请求会建立TCP连接，从而打开socket进行读写，从这个角度去排查；
 
-![image-20250107143542471](句柄数泄漏问题.assets/image-20250107143542471.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108203757.png)
+
 
 检视 心跳相关的代码，每30s执行一次，使用timer.ticker 进行定时调用，错误也处理了，一个简单的post心跳上报请求； resp 也不读取，直接 _ 进行忽略即可，也不用close调，看起来没啥问题
 ![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20241218180332.png)
 
 在 lsof -p [进程号] 中偶然发现与一个后端服务Backend存在 CLOSE_WAIT 的连接，并且 src port 也不一样，也就是意味着心跳接口的 TCP 连接在重建？
-![image-20250107145203476](句柄数泄漏问题.assets/image-20250107145203476.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108203820.png)
+
 
 大胆猜测，http.Post 这个调用没有使用到长连接？ 减少interval时间为1s，执行10m，再次 lsof 看下，发现存在大量的 sock 连接，整体打开的fd数上涨到了 711 
 
-![image-20250107144711817](句柄数泄漏问题.assets/image-20250107144711817.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108203827.png)
+
 
 并且出现了大量的 close_wait 连接
 
-![image-20250107144846361](句柄数泄漏问题.assets/image-20250107144846361.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108203835.png)
+
 
 基本就能定位到是这个段代码的问题了，线上增长缓慢是因为interval为30s，fd会慢增加； 查看容器配置的最大可打开文件数为 65535，超过就会进行报错；
 
@@ -153,13 +158,12 @@ https://manishrjain.com/must-close-golang-http-response
   - 如果你只进行 defer close，而不读取 resp，则tcp连接也不会复用
   - 如果你只进行读取 resp，而不 close 连接，则 tcp 连接可以复用（具体原因，可以看后续根因分析）
 
-找到原因后，修改代码进行测试，发现 src port 一直是 40796，说明复用的是同一个tcp连接
-
-![image-20250107144950437](句柄数泄漏问题.assets/image-20250107144950437.png)
+找到原因后，修改代码进行测试，发现 src port一直不变，说明复用的是同一个tcp连接
 
 按照实际场景测试，30s触发一次心跳，发现tcp连接又不复用了，调整为5s又复用了，再次调整为 10s，发现有时候复用有时候不复用？ 猜测是跟客户端的连接时间有关，检查一下客户端的初始化代码。检查了 transport 的idleconnTime 为 90s，也没啥问题，只能抓包看是哪边把连接关了，发现服务端 Backend 给 vmalert 发送了一个 FIN 关闭连接的报文，证明：是服务端主动关闭的连接
 
-![image-20250107145021146](句柄数泄漏问题.assets/image-20250107145021146.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108203859.png)
+
 
 检查服务端的代码，发现设置了http的read和write的timeout为 10s， 破案
 
@@ -276,7 +280,8 @@ Total: 5479
   - persistConn 发送 request 信号，writeLoop 监听 writech 读取 request 并通过 bufio.Writer 写入 bw，也就是真正发送请求，服务端处理完，会把结果写回到 br
   - persistConn 与 readLoop 是通过 reqch 传递 request，readLoop 不断从br.Peek 检查是否有数据，有则读取然后写入到 respAndErr.ch ，persistConn 则进行最后的返回 resp
 
-![net-http.drawio.png](句柄数泄漏问题.assets/net-http.drawio.png)
+![net-http.drawio.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/net-http.drawio.png)
+
 
 按照我们上面的 list 分析，我们可以知道具体是哪行代码阻塞了
 
@@ -286,7 +291,11 @@ Total: 5479
 
 > go的select用法，在没有default的case情况下，会一直阻塞，直到满足某个case；
 
-通过其注释我们能知道，这里会等待caller协程读取完body或者 ctx 被取消或生命周期结束；
+通过其注释我们能知道，readLoop退出的几个条件：
+- body 读取完毕
+- request 主动 cancel
+- request context Done 状态 true
+- 当前的 persistConn 关闭
 
 ```go
 // Before looping back to the top of this function and peeking on
@@ -415,13 +424,49 @@ func (c *conn) Close() error {
 
 > 如果不主动调用 resp.body.Close() 则 readLoop 会阻塞在 waitForBodyRead
 
+总结：
+- 我们通过分析 readLoop 的各个退出条件，分析出 resp.body.Close 会回调 earlyCloseFn 函数，从而发送 false 给 waitForBodyRead channel，使得 alive 为 false 退出循环，结束协程
+
 OK，这样我们解决一个协程泄漏的问题了，接下来看第二个 writeLoop 
 
 #### writeLoop  阻塞根因
 
+其实很简单，看下代码，会发现writeLoop的退出条件基本都满足，要么写错误退出，要么等待pconn连接关闭，所以大量的pconn就存在大量的协程泄漏
+```go
+func (pc *persistConn) writeLoop() {  
+   defer close(pc.writeLoopDone)  
+   for {  
+      select {  
+      case wr := <-pc.writech:  
+         startBytesWritten := pc.nwrite  
+         err := wr.req.Request.write(pc.bw, pc.isProxy, wr.req.extra, pc.waitForContinue(wr.continueCh))  
+         if bre, ok := err.(requestBodyReadError); ok {  
+            err = bre.error  
+            // Errors reading from the user's  
+            // Request.Body are high priority.            // Set it here before sending on the            // channels below or calling            // pc.close() which tears down            // connections and causes other            // errors.            wr.req.setError(err)  
+         }  
+         if err == nil {  
+            err = pc.bw.Flush()  
+         }  
+         if err != nil {  
+            if pc.nwrite == startBytesWritten {  
+               err = nothingWrittenError{err}  
+            }  
+         }  
+         pc.writeErrCh <- err // to the body reader, which might recycle us  
+         wr.ch <- err         // to the roundTrip function  
+         if err != nil {  
+            pc.close(err)  
+            return  
+         }  
+      case <-pc.closech:  
+         return  
+      }  
+   }  
+}
+```
 
-
-### 连接为什么无法复用呢?
+### 连接为什么无法复用?
 
 前面我们有提到过，为什么我们不读取 body，连接就无法复用？我们看下 io.copy 干了啥，通过debug 调用下去，看下调用链路；
 
@@ -434,7 +479,8 @@ _, _ = io.Copy(ioutil.Discard, resp.Body)
 
 发现就是把 resp.body 读取到某个地方；过程汇总调用到了 net.http.body 这个结构体的 readLocked
 
-![image-20250107193216910](句柄数泄漏问题.assets/image-20250107193216910.png)
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250108205152.png)
+
 
 ```go
 // Must hold b.mu.
