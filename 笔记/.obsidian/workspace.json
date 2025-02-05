@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "记录/年度总结/2024.md",
+                "file": "专业知识/tmp/list-watch机制.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2024 的大纲"
+              "title": "list-watch机制 的大纲"
             }
           },
           {
@@ -183,8 +183,14 @@
   },
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
-    "记录/2022/2022年7月/7.24.md",
+    "未命名思维导图.md",
     "记录/年度总结/2024.md",
+    "入职前学习.md",
+    "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
+    "专业知识/tmp/net-http-transport.md",
+    "专业知识/ARTS计划/2025/ARTS04-0105.md",
+    "专业知识/tmp/list-watch机制.md",
+    "记录/2022/2022年7月/7.24.md",
     "记录/年度总结",
     "工作/做事准则.md",
     "工作/2022/7月/7.20.md",
@@ -194,7 +200,6 @@
     "记录/2022/2022年5月/5.08.md",
     "记录/2022/2022年5月/5.07.md",
     "记录/2022/2022年7月/7.04.md",
-    "入职前学习.md",
     "个人规划.md",
     "成长/有感.md",
     "专业知识/云原生/GoodThing.md",
@@ -202,14 +207,9 @@
     "专业知识/数据库/Redis设计与实现/第2部分_单机数据库的实现/第12章_事件.md",
     "专业知识/操作系统/基础知识/IO多路复用.md",
     "专业知识/操作系统/基础知识/进程&线程间的通信方式.md",
-    "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
-    "专业知识/tmp/net-http-transport.md",
     "专业知识/tmp/如何安全正确地使用HTTPClient.md",
-    "专业知识/tmp/list-watch机制.md",
-    "专业知识/ARTS计划/2025/ARTS04-0105.md",
     "专业知识/ARTS计划/2025/ARTS04-0112.md",
-    "专业知识/tmp/net-dial.md",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut-1736249390775.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/net-http.drawio.png",
