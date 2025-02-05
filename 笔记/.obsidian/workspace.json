@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/ARTS计划/2025/ARTS04-0105.md",
+                "file": "专业知识/tmp/net-http-transport.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ARTS04-0105"
+              "title": "net-http-transport"
             }
           }
         ]
@@ -112,12 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
+                "file": "专业知识/tmp/net-http-transport.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "k8s 的代码结构 的出链列表"
+              "title": "net-http-transport 的出链列表"
             }
           },
           {
@@ -144,14 +144,23 @@
               "icon": "lucide-list",
               "title": "k8s 的代码结构 的大纲"
             }
+          },
+          {
+            "id": "6f46896546f92dd6",
+            "type": "leaf",
+            "state": {
+              "type": "copilot-chat-view",
+              "state": {},
+              "icon": "message-square",
+              "title": "Copilot"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -161,18 +170,19 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "copilot:Open Copilot Chat": false
     }
   },
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
-    "专业知识/ARTS计划/2025/ARTS04-0112.md",
+    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
+    "专业知识/tmp/list-watch机制.md",
     "专业知识/ARTS计划/2025/ARTS04-0105.md",
+    "专业知识/ARTS计划/2025/ARTS04-0112.md",
     "专业知识/tmp/集群网络.md",
     "专业知识/tmp/net-dial.md",
-    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
     "专业知识/tmp/net-http-transport.md",
-    "专业知识/tmp/list-watch机制.md",
     "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "专业知识/ARTS计划/2024/ARTS04-1229.md",
