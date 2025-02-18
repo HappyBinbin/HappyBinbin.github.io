@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
+                "file": "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "net-http-transport 引发的句柄数泄漏问题"
+              "title": "链表"
             }
           }
         ]
@@ -184,14 +184,20 @@
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
     "专业知识/算法/LeetCode/滑动窗口与双指针/分组循环.md",
-    "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
+    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/双指针.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/定长滑动窗口.md",
+    "专业知识/算法/LeetCode/设计/1603_设计停车系统.md",
+    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/_61_旋转链表.md",
+    "专业知识/算法/LeetCode/设计/146_LRU缓存机制.md",
+    "专业知识/算法/LeetCode/滑动窗口与双指针/不定长滑动窗口.md",
+    "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
+    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表/未命名.md",
+    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表",
     "专业知识/工作问题记录/client-go中watch机制的一些陷阱.md",
     "记录/年度总结/2024.md",
     "未命名思维导图.md",
     "入职前学习.md",
-    "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
     "专业知识/tmp/net-http-transport.md",
     "专业知识/ARTS计划/2025/ARTS04-0105.md",
     "专业知识/tmp/list-watch机制.md",
@@ -205,11 +211,6 @@
     "记录/2022/2022年5月/5.08.md",
     "记录/2022/2022年5月/5.07.md",
     "记录/2022/2022年7月/7.04.md",
-    "个人规划.md",
-    "成长/有感.md",
-    "专业知识/云原生/GoodThing.md",
-    "专业知识/tmp/集群网络.md",
-    "专业知识/数据库/Redis设计与实现/第2部分_单机数据库的实现/第12章_事件.md",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut-1736249390775.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/net-http.drawio.png",
@@ -228,7 +229,6 @@
     "专业知识/tmp",
     "专业知识/工作问题记录/ruler 句柄数泄漏问题.pdf",
     "专业知识/工作问题记录",
-    "专业知识/Go/源码解读",
     "专业知识/云原生/prometheus/canvstest.canvas"
   ]
 }
