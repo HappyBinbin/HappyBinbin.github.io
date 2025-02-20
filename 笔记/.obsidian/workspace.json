@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "二叉树"
             }
+          },
+          {
+            "id": "62e619cd4124686a",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -181,7 +194,7 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "c5992f5fd861636a",
+  "active": "62e619cd4124686a",
   "lastOpenFiles": [
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/二叉树.md",
