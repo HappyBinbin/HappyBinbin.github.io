@@ -20,21 +20,8 @@
               "icon": "lucide-file",
               "title": "二叉树"
             }
-          },
-          {
-            "id": "62e619cd4124686a",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.7"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.7"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -194,8 +181,9 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "62e619cd4124686a",
+  "active": "c5992f5fd861636a",
   "lastOpenFiles": [
+    "专业知识/tmp/net-dial.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/二叉树.md",
     "专业知识/算法/LeetCode/滑动窗口与双指针/分组循环.md",
@@ -223,7 +211,6 @@
     "记录/2022/2022年5月/5.23.md",
     "家庭/2022.md",
     "记录/2022/2022年5月/5.08.md",
-    "记录/2022/2022年5月/5.07.md",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/shortcut-1736249390775.html",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/net-http.drawio.png",
