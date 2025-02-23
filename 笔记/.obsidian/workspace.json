@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/Go/语言/依赖管理.md",
+                "file": "专业知识/tmp/GMP模型.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "依赖管理"
+              "title": "GMP模型"
             }
           }
         ]
@@ -183,9 +183,9 @@
   },
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
+    "专业知识/Go/语言/依赖管理.md",
     "专业知识/Go/语言/泛型.md",
     "专业知识/tmp/泛型.md",
-    "专业知识/Go/语言/依赖管理.md",
     "专业知识/Go/语言/note1.md",
     "专业知识/tmp/GMP模型.md",
     "DevPlan/2025 饮食计划.md",
