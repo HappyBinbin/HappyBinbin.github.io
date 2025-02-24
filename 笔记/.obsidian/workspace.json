@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/tmp/list-watch机制.md",
+                "file": "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "list-watch机制 的大纲"
+              "title": "回溯 的大纲"
             }
           },
           {
