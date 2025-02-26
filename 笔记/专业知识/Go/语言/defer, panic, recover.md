@@ -11,6 +11,17 @@ func a() {
 }
 
 // output: 0
+
+func test2() (v int) {  
+   defer func() {  
+      fmt.Println(v)  
+   }()  
+   return 3  
+}
+
+// output : 3
+// `return 3` 的底层操作是：`v = 3` → 执行 `defer` 函数 → 返回 `v` 的值
+
 ```
 
 2. *Deferred function calls are executed in Last In First Out order after the surrounding function returns.*
