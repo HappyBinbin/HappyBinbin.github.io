@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/Go/语言/关键的数据结构.md",
+                "file": "专业知识/Go/设计与实现/逃逸分析.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "关键的数据结构"
+              "title": "逃逸分析"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/Go/语言/关键的数据结构.md",
-                "followCursor": false,
+                "file": "专业知识/Go/设计与实现/逃逸分析.md",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "关键的数据结构 的大纲"
+              "title": "逃逸分析 的大纲"
             }
           },
           {
@@ -182,19 +182,20 @@
   },
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
-    "专业知识/Go/语言/GMP模型.md",
-    "专业知识/Go/语言/关键的数据结构.md",
-    "专业知识/Go/语言/逃逸分析.md",
-    "专业知识/Go/语言/note1.md",
-    "专业知识/Go/语言/defer, panic, recover.md",
-    "专业知识/Go/语言/make 和 new.md",
+    "专业知识/Go/语言特性/make 和 new.md",
+    "专业知识/Go/设计与实现/逃逸分析.md",
+    "专业知识/Go/设计与实现/数据结构.md",
+    "专业知识/Go/设计与实现",
+    "专业知识/Go/语言特性/GMP模型.md",
+    "专业知识/Go/语言特性/note1.md",
+    "专业知识/Go/语言特性/defer, panic, recover.md",
     "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
     "专业知识/tmp/kakfa生产者消费者实践.md",
-    "专业知识/Go/语言/闭包和并发.md",
+    "专业知识/Go/语言特性/闭包和并发.md",
     "专业知识/tmp/list-watch机制.md",
-    "专业知识/Go/语言/依赖管理.md",
-    "专业知识/Go/语言/泛型.md",
+    "专业知识/Go/语言特性/依赖管理.md",
+    "专业知识/Go/语言特性/泛型.md",
     "专业知识/tmp/泛型.md",
     "DevPlan/2025 饮食计划.md",
     "DevPlan/2025 运动计划.md",
@@ -207,7 +208,6 @@
     "DevPlan/NotClassified/2025 发展规划完成度检视表.md",
     "DevPlan/NotClassified/2025 发展规划完成度检视.md",
     "DevPlan/Appendix/马斯洛层次需求理论.md",
-    "DevPlan/Appendix/中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要.md",
     "DevPlan/SummInTime",
     "DevPlan/Appendix",
     "DevPlan/AhaMoment",
@@ -227,7 +227,6 @@
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107144950437.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107144846361.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets",
-    "专业知识/tmp/net-http-transport.assets",
     "专业知识/云原生/prometheus/canvstest.canvas"
   ]
 }
