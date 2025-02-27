@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/Go/设计与实现/逃逸分析.md",
+                "file": "专业知识/Go/设计与实现/常用关键字.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "逃逸分析"
+              "title": "常用关键字"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/Go/设计与实现/逃逸分析.md",
+                "file": "专业知识/Go/设计与实现/常用关键字.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "逃逸分析 的大纲"
+              "title": "常用关键字 的大纲"
             }
           },
           {
@@ -182,8 +182,10 @@
   },
   "active": "c5992f5fd861636a",
   "lastOpenFiles": [
-    "专业知识/Go/语言特性/make 和 new.md",
+    "专业知识/Go/设计与实现/语言基础.md",
+    "专业知识/Go/设计与实现/常用关键字.md",
     "专业知识/Go/设计与实现/逃逸分析.md",
+    "专业知识/Go/语言特性/make 和 new.md",
     "专业知识/Go/设计与实现/数据结构.md",
     "专业知识/Go/设计与实现",
     "专业知识/Go/语言特性/GMP模型.md",
@@ -207,7 +209,6 @@
     "DevPlan/PlanItem/2025 关键日期.md",
     "DevPlan/NotClassified/2025 发展规划完成度检视表.md",
     "DevPlan/NotClassified/2025 发展规划完成度检视.md",
-    "DevPlan/Appendix/马斯洛层次需求理论.md",
     "DevPlan/SummInTime",
     "DevPlan/Appendix",
     "DevPlan/AhaMoment",
