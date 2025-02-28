@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "5e7fd89f62fd6e50",
+        "id": "dc0cfa761c54f5ec",
         "type": "tabs",
         "children": [
           {
-            "id": "c5992f5fd861636a",
+            "id": "f6d6bf42a57f978e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "回溯"
+              "title": "新标签页"
             }
           }
         ]
@@ -71,7 +67,7 @@
               "type": "bookmarks",
               "state": {},
               "icon": "lucide-bookmark",
-              "title": "Bookmarks"
+              "title": "书签"
             }
           }
         ]
@@ -142,13 +138,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "回溯 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -162,7 +157,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -180,12 +175,14 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "c5992f5fd861636a",
+  "active": "8a7a1ea2df04b829",
   "lastOpenFiles": [
+    "身体/锻炼.md",
+    "@ref.md",
+    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
     "专业知识/算法/LeetCode/递归与回溯/基础理论/回溯算法基础理论.md",
     "专业知识/算法/LeetCode/递归与回溯/90_子集_II.md",
     "专业知识/算法/LeetCode/递归与回溯/77_组合.md",
-    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
     "专业知识/算法/LeetCode/递归与回溯/200_岛屿数量.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
     "专业知识/Go/语言特性/闭包和并发.md",
@@ -207,8 +204,6 @@
     "专业知识/tmp/泛型.md",
     "DevPlan/2025 饮食计划.md",
     "DevPlan/2025 运动计划.md",
-    "DevPlan/2025 每日作息表.md",
-    "DevPlan/2025 发展规划.md",
     "DevPlan/SummInTime",
     "DevPlan/Appendix",
     "DevPlan/AhaMoment",
