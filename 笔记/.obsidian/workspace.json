@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DevPlan/2025 每日作息表.md",
+                "file": "DevPlan/2025 运动计划.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025 每日作息表"
+              "title": "2025 运动计划"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DevPlan/2025 每日作息表.md",
+                "file": "DevPlan/2025 运动计划.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2025 每日作息表 的大纲"
+              "title": "2025 运动计划 的大纲"
             }
           }
         ],
@@ -172,6 +172,9 @@
   },
   "active": "7a596745d94773b9",
   "lastOpenFiles": [
+    "DevPlan/2025 饮食计划.md",
+    "DevPlan/2025 运动计划.md",
+    "DevPlan/2025 每日作息表.md",
     "DevPlan/2025 发展规划.md",
     "DevPlan/Tips/2025 保持活力技巧.md",
     "DevPlan/PlanItem/2025 滚动计划.md",
@@ -196,9 +199,6 @@
     "专业知识/算法/LeetCode/递归与回溯/200_岛屿数量.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表.md",
     "专业知识/Go/语言特性/闭包和并发.md",
-    "专业知识/Go/语言特性/checklist.md",
-    "专业知识/Go/设计与实现/语言基础.md",
-    "专业知识/Go/语言特性/make 和 new.md",
     "专业知识/Go/设计与实现",
     "DevPlan/SummInTime",
     "DevPlan/Appendix",
