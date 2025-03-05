@@ -108,5 +108,14 @@
       ],
       "key": "K"
     }
+  ],
+  "text2anki-openai:generate-flashcards": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "G"
+    }
   ]
 }
