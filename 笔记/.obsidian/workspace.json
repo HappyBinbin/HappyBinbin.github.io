@@ -22,21 +22,34 @@
             }
           },
           {
-            "id": "9063d7398b39fec1",
+            "id": "121d5e66484cd4ad",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/Go/设计与实现/并发编程/定时器.md",
+                "file": "专业知识/操作系统/基础知识/同步异步阻塞非阻塞.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "定时器"
+              "title": "同步异步阻塞非阻塞"
+            }
+          },
+          {
+            "id": "9d42acb2d8429f45",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "专业知识/计算机网络/IO模型.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "IO模型"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -56,7 +69,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -157,13 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/Go/设计与实现/并发编程/定时器.md",
+                "file": "专业知识/tmp/kakfa生产者消费者实践.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "定时器 的大纲"
+              "title": "kakfa生产者消费者实践 的大纲"
             }
           },
           {
@@ -195,35 +208,35 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "9063d7398b39fec1",
+  "active": "19d573c49940e7dd",
   "lastOpenFiles": [
-    "专业知识/Go/设计与实现/并发编程/同步原语和锁.md",
-    "专业知识/Go/设计与实现/并发编程/定时器.md",
-    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
-    "专业知识/好玩的东西/英语介词.md",
-    "conflict-files-obsidian-git.md",
-    "专业知识/tmp/kakfa生产者消费者实践.md",
-    "专业知识/tmp/list-watch机制.md",
-    "专业知识/tmp/net-http-transport.md",
-    "专业知识/tmp/集群网络.md",
-    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
-    "专业知识/tmp/net-dial.md",
-    "专业知识/tmp/bilibili 评论系统.md",
-    "专业知识/Go/设计与实现/语言基础.md",
-    "专业知识/Go/设计与实现/逃逸分析.md",
-    "专业知识/Go/设计与实现/数据结构.md",
-    "专业知识/Go/设计与实现/常用关键字.md",
+    "专业知识/Go/设计与实现/并发编程/网络轮询器.md",
+    "专业知识/操作系统/基础知识/同步异步阻塞非阻塞.md",
     "专业知识/工作问题记录/net-http-transport 引发的句柄数泄漏问题.md",
-    "专业知识/设计模式/行为型/备忘录模式.md",
+    "专业知识/好玩的东西/ftp服务器搭建.md",
+    "专业知识/tmp/list-watch机制.md",
+    "专业知识/tmp/kakfa生产者消费者实践.md",
+    "专业知识/tmp/net-http-transport.md",
+    "专业知识/操作系统/基础知识/IO多路复用.md",
+    "专业知识/计算机网络/IO模型.md",
+    "专业知识/Go/设计与实现/并发编程/调度器-GMP模型.md",
+    "专业知识/操作系统/图解系统/硬件结构.md",
+    "专业知识/操作系统/x86汇编/000_前置知识.md",
+    "专业知识/操作系统/ucore/扩展学习/Makefile/02_文件格式.md",
+    "专业知识/操作系统/ucore/扩展学习/Makefile/01_概念.md",
+    "专业知识/操作系统/ucore/扩展学习/C&Assembly/inline用法.md",
+    "专业知识/操作系统/ucore/扩展学习/C&Assembly/AT&T语法.md",
+    "专业知识/操作系统/ucore/lab0_环境准备/环境准备.md",
+    "专业知识/操作系统/ucore/lab0_环境准备/lab0_实验环境搭建.md",
+    "专业知识/操作系统/ucore/chapter/中断、异常、系统调用.md",
+    "专业知识/操作系统/ucore/lab1_系统软件启动过程/practice2.md",
+    "专业知识/操作系统/ucore/lab1_系统软件启动过程/practice1.md",
+    "专业知识/操作系统/基础知识/进程&线程间的通信方式.md",
+    "专业知识/操作系统/基础知识/协程.md",
+    "专业知识/操作系统/基础知识/Linux 的最大TCP连接数.md",
+    "专业知识/操作系统/基础知识/Linux五种IO模型.md",
+    "专业知识/Go/设计与实现/并发编程/定时器.md",
     "未命名.canvas",
-    "DevPlan/2025 运动计划.md",
-    "DevPlan/2025 饮食计划.md",
-    "DevPlan/2025 每日作息表.md",
-    "DevPlan/2025 发展规划.md",
-    "DevPlan/Tips/2025 保持活力技巧.md",
-    "DevPlan/PlanItem/2025 滚动计划.md",
-    "DevPlan/PlanItem/2025 年度计划项.md",
-    "DevPlan/PlanItem/2025 关键日期.md",
     "专业知识/Go/设计与实现/并发编程",
     "专业知识/Go/设计与实现",
     "DevPlan/SummInTime",
