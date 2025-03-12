@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "aad9ebee632180b7",
+        "id": "907aa5f706af76ab",
         "type": "tabs",
         "children": [
           {
-            "id": "1ee7c91ff301900b",
+            "id": "d2271d3589027c5d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/tmp/Prometheus查询和存储.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Prometheus查询和存储"
+              "title": "新标签页"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "专业知识/tmp/Prometheus查询和存储.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Prometheus查询和存储 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
@@ -113,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "专业知识/tmp/Prometheus查询和存储.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Prometheus查询和存储 的出链列表"
+              "title": "出链"
             }
           },
           {
@@ -142,13 +136,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/tmp/Prometheus查询和存储.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Prometheus查询和存储 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -180,12 +173,13 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "1ee7c91ff301900b",
+  "active": "8a7a1ea2df04b829",
   "lastOpenFiles": [
+    "conflict-files-obsidian-git.md",
+    "专业知识/tmp/Prometheus查询和存储.md",
     "专业知识/tmp/时序数据无法落库.md",
     "专业知识/tmp/net-http-transport.md",
     "专业知识/云原生/prometheus/prometheus 架构.md",
-    "专业知识/tmp/Prometheus查询和存储.md",
     "专业知识/tmp/集群网络.md",
     "专业知识/云原生/GoodThing.md",
     "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/回溯.md",
@@ -207,7 +201,6 @@
     "专业知识/Go/设计与实现/并发编程/定时器.md",
     "专业知识/计算机网络/IO模型.md",
     "专业知识/操作系统/基础知识/同步异步阻塞非阻塞.md",
-    "专业知识/好玩的东西/ftp服务器搭建.md",
     "未命名.canvas",
     "专业知识/Go/设计与实现/并发编程",
     "专业知识/Go/设计与实现",

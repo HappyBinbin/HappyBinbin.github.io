@@ -8,6 +8,9 @@
 
 - https://blog.csdn.net/qq_33589510/article/details/130455868
 - https://github.com/VictoriaMetrics/VictoriaMetrics/issues/3268
+- star !!! https://blog.51cto.com/u_16213702/10533915
+- https://docs.google.com/presentation/d/13kZ3W4CMz5WOuziNMGJ8okzPU6OHisqD4_pKXIcF5Z8/edit#slide=id.geadb6e000c_0_919
+- https://www.cnblogs.com/alchemystar/p/14462052.html
 
 ## Question
 
@@ -20,6 +23,7 @@
 7. 一个chunk 包含多少 series？
 8. series 如何确定唯一性？
 9. 查询过程如何体现在源码中？
+10. block 的 index 结构是怎样的？
 
 ## 定义
 
@@ -36,7 +40,6 @@
 
 流程大体逻辑：
 - 
- 
 从 query 或 query_range 接口分析
 
 ``` go
