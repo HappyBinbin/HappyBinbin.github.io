@@ -78,14 +78,14 @@ tree .
 - Block 块：
 	- Block 块 ID：01JNZ7Q3HVHAJMXQK923KMFTFY（ULID[[分布式ID#ULID]]）
 	- **Block 作用**：存储历史时间序列数据，按时间（每两小时）分割的独立存储单元。
-	- ​**chunks**：存放实际采样数据的块文件（如`000001`），每个块包含连续时间戳的数据，也就是一系列的 series
+	- **chunks**：存放实际采样数据的块文件（如`000001`），每个块包含连续时间戳的数据，也就是一系列的 series
 		- chunk 结构：
 			- **series ref**：唯一标识时间线，由文件series ID 和偏移量组成，用于区分不同的 series和快速索引样本数据的位置
-			- ​**mintime/maxtime**：记录该 chunk 的时间范围
-			- ​**data**：存储压缩后的样本数据（如 `[(t1, v1), (t2, v2), ...]`）
-	- ​**index**：索引文件，记录标签到数据块的反向映射，支持快速查询
-	- ​**meta.json**：元数据文件，包含块的时间范围、校验和等信息
-	- ​**tombstones**：墓碑文件，标记已删除的时间序列，用于数据清理
+			- **mintime/maxtime**：记录该 chunk 的时间范围
+			- **data**：存储压缩后的样本数据（如 `[(t1, v1), (t2, v2), ...]`）
+	- **index**：索引文件，记录标签到数据块的反向映射，支持快速查询
+	- **meta.json**：元数据文件，包含块的时间范围、校验和等信息
+	- **tombstones**：墓碑文件，标记已删除的时间序列，用于数据清理
 - Head Block（chunks_head）：
 	- 存储内存中尚未持久化的最新数据块，采用LRU策略定期刷盘
 - Lock：文件锁
@@ -212,8 +212,13 @@ Postings List: [ref(series1), ref(series2)]
 在了解了 index 文件的结构后，我们对其每个作用有了大体的认识，下面继续回到如何查询数据上；我们已经找到了数据所在的block，然后通过读取其 index 文件来定位 chunk；
 具体流程：
 1. 我们要找到 `job =～ api-server.*`的数据，会先访问TOC， 通过LabelOffsetTable 定位到 `job` 对应的值在 `labelIndies` 中的 `offset`
-2. 然后根据 `labelIndies` 找到所有满足的值， 根据这些值，到 `PostingOffsetTable` 中找到这些值对应在 `Postings` 中的 `offset`，从而找到所有的满足的 series ID，取并集
-3. Postings 中存储的是 `seriesid`，根据这个 `id`，遍历chunk文件，匹配 `Series Ref` 中的ID，然后根据 `Series Ref` 的偏移量，进行数据的读取
+2. 然后根据 `labelIndies` 找到所有满足的值， 根据这些值，到 `PostingOffsetTable` 中找到这些值对应在 `Postings` 中的 `offset`，从而找到所有的满足的 ``series ref id``，取交集
+3. 遍历series ref id： 
+	1. 提取4字节Chunk ID，根据index文件中的series机构，定位到具体chunk文件 
+	2. 提取4字节偏移量，在chunk文件内定位样本数据 
+	3. 检查Chunk的minTime/maxTime是否在查询范围内 
+	4. 是的话就进行扫描读取样本
+4. 有有效样本数据返回
 
 ### 结合源码分析
 
