@@ -7,7 +7,7 @@
 
 - https://blog.csdn.net/qq_33589510/article/details/130455868
 - https://github.com/VictoriaMetrics/VictoriaMetrics/issues/3268
-- star !!! https://blog.51cto.com/u_16213702/10533915
+- https://blog.51cto.com/u_16213702/10533915
 - https://docs.google.com/presentation/d/13kZ3W4CMz5WOuziNMGJ8okzPU6OHisqD4_pKXIcF5Z8/edit#slide=id.geadb6e000c_0_919
 - https://www.cnblogs.com/alchemystar/p/14462052.html
 
@@ -28,25 +28,6 @@
 
 - WAL：Write-Ahead-Log，预写日志，数据库系统中常见的一种手段，用于保证数据操作的原子性和持久性
 - 倒排索引：倒排索引是实现“单词-文档矩阵”的一种具体存储形式，通过倒排索引，可以根据单词快速获取包含这个单词的文档列表。**倒排索引主要由两个部分组成：“单词词典”和“倒排文件”** https://blog.csdn.net/qq_43403025/article/details/114779166
-
-
-## 查询流程图
-
-目的：分析一个query请求的整个流程
-
-前置知识：
-- 建议先讲prometheus的存储结构[[Prometheus查询和存储#存储结构]]了解之后，再去理解代码，会易懂很多，按照存储的设计原理，对照代码逻辑看； 
-
-流程大体逻辑：
-- 
-从 query 或 query_range 接口分析
-
-``` go
-// web/api/v1/api.go
-r.Get("/query_range", wrapAgent(api.queryRange))
-
-
-```
 
 ## 存储结构
 
@@ -136,7 +117,7 @@ PromQL `(http_requests{job=api-server,instance=0}) 时间范围 [start, end]`
 ```
 ``
 字段含义：
-1、​Symbol Tables
+#### 1、​Symbol Tables
 
 > 符号表，用于优化标签存储和索引效率的核心结构；将 lable 的 key 和 value 等字符串按照字典序排序，然后映射为唯一的数字标识符ID（以Block块为单位）
 
@@ -151,7 +132,7 @@ PromQL `(http_requests{job=api-server,instance=0}) 时间范围 [start, end]`
 - ​加速查询时的字符串匹配，不需要比较字符串，只需判断ID是否相等
 - 支持索引结构的紧凑存储，将长字符串转为ID，可以压缩存储体积
 
-2、Series
+#### 2、Series
 
 > 记录每个时间序列的元数据，包括标签、时间范围（`mint`/`maxt`）及对应的chunk文件引用信息
 
@@ -164,7 +145,7 @@ PromQL `(http_requests{job=api-server,instance=0}) 时间范围 [start, end]`
     - `mint`（起始时间戳）、`maxt`（结束时间戳）、`chunk size`
     - `ref`（chunk文件在磁盘中的偏移量）
 
-3、LabelIndices
+#### 3、LabelIndices
 
 > 标签名到其唯一值的映射关系，支持按标签名快速查找所有可能的标签值；主要用于标签合法性校验
 
@@ -179,7 +160,7 @@ Label Key: "job"
 Label Values: ["prometheus", "node-exporter", "k8s"]  
 ```
 
-4、Postings（倒排索引）
+#### 4、Postings（倒排索引）
 
 > 记录标签值组合到时间序列series的映射，支持高效查询特定标签组合下的所有时间序列
 
@@ -193,12 +174,12 @@ Label Pair: "job=prometheus AND status=200"
 Postings List: [ref(series1), ref(series2)] 
 ```
 
-​5、LabelIndicesTable & PostingsTable
+#### ​5、LabelIndicesTable & PostingsTable
 
 - ​**LabelIndicesOffsetTable**：将标签名映射到其在`LabelIndices`中的偏移量，加速标签名到索引的查找
 - ​**PostingsOffsetTable**：将`(name, value)`标签组合映射到其在`Postings`中的偏移量，支持快速定位倒排列表
 
-6、TOC 
+#### 6、TOC 
 
 > 目录表，存储索引文件各部分的偏移量，包括Symbol Table、Series、LabelIndices等，用于快速定位文件内容
 
@@ -220,7 +201,9 @@ Postings List: [ref(series1), ref(series2)]
 	4. 是的话就进行扫描读取样本
 4. 有有效样本数据返回
 
-### 结合源码分析
+总结一下，按照步骤的输入和输出，基本可以分为几步：
+
+![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250313232117.png)
 
 | **概念**     | **逻辑层级** | **唯一标识**                                                                        | **数据范围**             | **存储内容**                                                               |
 | ---------- | -------- | ------------------------------------------------------------------------------- | -------------------- | :--------------------------------------------------------------------- |
@@ -228,6 +211,7 @@ Postings List: [ref(series1), ref(series2)]
 | **Series** | 逻辑时间序列单元 | Metric名称 + 标签键值对集合（如 `http_requests_total{method="GET", instance="localhost"}`） | 所有时间（动态增长）           | 属于同一逻辑序列的所有样本数据（可能分散在多个 Block 的 Chunk 中）                               |
 | **Chunk**  | 物理数据片段   | Series 标识 + 时间范围（如 `01G7Z74ZPB79Z5Z1D234567890_000001`）                         | 固定时间段（默认2小时，可通过配置调整） | 单个 Series 的连续时间样本数据（压缩格式，如Snappy）                                      |
 | **Sample** | 样本数据     | value 某个具体的值                                                                    | 根据值类型来定义范围           | 指标在这个时间点的具体值                                                           |
+
 
 
 

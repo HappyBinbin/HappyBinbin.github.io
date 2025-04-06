@@ -6,6 +6,10 @@ K8s 源码
 - https://github.com/daniel-hutao/k8s-source-code-analysis/tree/master/core
 - https://cloud.tencent.com/developer/article/2173787
 - https://www.guoshaohe.com/category/cloud-computing/kubernetes-source-read
+- https://developer.ibm.com/articles/a-tour-of-the-kubernetes-source-code/
+
+youtube:
+- https://www.youtube.com/watch?v=F8dZMKP6xyg
 
 etcd 解析
 - https://www.lixueduan.com/categories/etcd/

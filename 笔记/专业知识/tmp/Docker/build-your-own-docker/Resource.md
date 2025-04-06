@@ -1,0 +1,3 @@
+- https://github.com/lixd/mydocker?tab=readme-ov-file
+- [GOTO 2018 • Containers From Scratch • Liz Rice](https://www.youtube.com/watch?v=8fi7uSYlOdc)
+- https://www.youtube.com/watch?v=TLg3QHaF0xM&list=PLTnRtjQN5ieYSFLCbxME5GvnlmSZjEJWg

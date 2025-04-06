@@ -116,6 +116,6 @@ cluster.local:53 {
 4、外部处理
 
 - 如果访问域是非内部集群的，例如：example.com，则会转发到Corefile中指定的上游 DNS 服务器，这里会转发到 8.8.8.8 
-
+## 整体流程图
 
 ![image.png](https://happychan.oss-cn-shenzhen.aliyuncs.com/picgo/20250103185205.png)
