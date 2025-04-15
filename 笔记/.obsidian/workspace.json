@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/云原生/GoodThing.md",
+                "file": "专业知识/工作问题记录/工作业务优化方案/云端代理改造.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GoodThing"
+              "title": "云端代理改造"
             }
           },
           {
@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/tmp/kubernetes/概念和原理/集群网络.md",
+                "file": "专业知识/工作问题记录/分布式锁的实现方式.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "集群网络"
+              "title": "分布式锁的实现方式"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -156,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/云原生/GoodThing.md",
+                "file": "专业知识/工作问题记录/分布式锁的实现方式.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "GoodThing 的大纲"
+              "title": "分布式锁的实现方式 的大纲"
             }
           },
           {
@@ -180,7 +181,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 260.5
+    "width": 284.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -196,6 +197,18 @@
   },
   "active": "5f4ab82e1f6ef789",
   "lastOpenFiles": [
+    "专业知识/计算机网络/websocket.md",
+    "专业知识/工作问题记录/分布式锁的实现方式.md",
+    "专业知识/计算机网络/HTTP、WebSocket、RPC.md",
+    "专业知识/tmp/kubernetes/概念和原理/集群网络.md",
+    "专业知识/工作问题记录/工作业务优化方案/云端代理改造.md",
+    "专业知识/工作问题记录/工作业务优化方案/frp 原理.md",
+    "专业知识/工作问题记录/工作业务优化方案/cmdb改造.md",
+    "专业知识/工作问题记录/工作业务优化方案/四层下的运维.md",
+    "专业知识/工作问题记录/工作业务优化方案/静态页面加载改造.md",
+    "专业知识/工作问题记录/工作业务优化方案/数据同步改造.md",
+    "专业知识/工作问题记录/工作业务优化方案",
+    "专业知识/云原生/GoodThing.md",
     "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
     "专业知识/tmp/kubernetes/概念和原理/学习资源.md",
     "专业知识/tmp/kubernetes/概念和原理/Service-Ingrss-Istio.md",
@@ -208,23 +221,12 @@
     "专业知识/tmp/Docker/概念/2、基本架构.md",
     "专业知识/tmp/Docker/概念/1、简介.md",
     "专业知识/云原生/kubernetes/环境搭建/mac 搭建k8s.md",
-    "专业知识/tmp/kubernetes/概念和原理/集群网络.md",
     "专业知识/tmp/时序数据无法落库.md",
     "专业知识/云原生/kubernetes/环境搭建/使用kubeadm快速部署一个K8s集群.md",
     "专业知识/tmp/net-http-transport.md",
-    "专业知识/工作问题记录/kakfa生产者消费者实践.md",
-    "专业知识/tmp/Apache Doria.md",
-    "专业知识/云原生/prometheus/Prometheus 存储结构浅析.md",
-    "专业知识/tmp/golang 三关.md",
-    "专业知识/tmp/VictoriaMetrics 存储结构浅析.md",
-    "专业知识/云原生/GoodThing.md",
-    "专业知识/云原生/kubernetes/源码解读/kube-apiserver/启动流程.md",
-    "专业知识/云原生/kubernetes/源码解读/kube-apiserver/001_scheme.md",
     "专业知识/tmp/kubernetes",
     "专业知识/tmp/Docker/概念",
     "专业知识/tmp/Docker/build-your-own-docker",
-    "专业知识/tmp/redis zadd 实战.md",
-    "专业知识/tmp/开源.md",
     "未命名.canvas",
     "专业知识/Go/设计与实现/并发编程",
     "专业知识/Go/设计与实现",
@@ -235,7 +237,6 @@
     "专业知识/photos/1553993244446.png",
     "专业知识/photos/1.jpg",
     "专业知识/photos/1-1616031353654.jpg",
-    "专业知识/算法/LeetCode/链表、二叉树与回溯（前后指针 快慢指针 DFS BFS 直径 LCA 一般树）/链表",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/net-http.drawio.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107193220177.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107193216910.png",

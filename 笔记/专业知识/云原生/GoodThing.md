@@ -23,3 +23,7 @@ kubernetes Tutorial
 
 书籍：
 - https://draveness.me/golang/
+
+免费试用：
+- https://cloud.google.com/kubernetes-engine
+- 
