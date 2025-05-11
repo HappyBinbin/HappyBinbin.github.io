@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "65cabe45aca8d6e7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "专业知识/工作问题记录/工作业务优化方案/云端代理改造.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "云端代理改造"
-            }
-          },
-          {
             "id": "76ada966e7e25924",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/工作问题记录/分布式锁的实现方式.md",
+                "file": "专业知识/tmp/面试准备.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "分布式锁的实现方式"
+              "title": "面试准备"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -157,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "专业知识/工作问题记录/分布式锁的实现方式.md",
+                "file": "专业知识/tmp/面试准备.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "分布式锁的实现方式 的大纲"
+              "title": "面试准备 的大纲"
             }
           },
           {
@@ -197,33 +182,37 @@
   },
   "active": "5f4ab82e1f6ef789",
   "lastOpenFiles": [
-    "专业知识/计算机网络/websocket.md",
-    "专业知识/工作问题记录/分布式锁的实现方式.md",
+    "个人规划.md",
+    "专业知识/tmp/面试准备.md",
+    "专业知识/计算机网络/图解网络/HTTPS详解.md",
+    "专业知识/计算机网络/图解网络/HTTP和HTTPS优化.md",
+    "专业知识/计算机网络/图解网络/HTTP详解.md",
+    "专业知识/计算机网络/图解网络/IP详解.md",
+    "专业知识/计算机网络/图解网络/TCP详解.md",
     "专业知识/计算机网络/HTTP、WebSocket、RPC.md",
-    "专业知识/tmp/kubernetes/概念和原理/集群网络.md",
-    "专业知识/工作问题记录/工作业务优化方案/云端代理改造.md",
-    "专业知识/工作问题记录/工作业务优化方案/frp 原理.md",
-    "专业知识/工作问题记录/工作业务优化方案/cmdb改造.md",
-    "专业知识/工作问题记录/工作业务优化方案/四层下的运维.md",
-    "专业知识/工作问题记录/工作业务优化方案/静态页面加载改造.md",
-    "专业知识/工作问题记录/工作业务优化方案/数据同步改造.md",
+    "专业知识/计算机网络/IO模型.md",
+    "专业知识/计算机网络/图解网络/HTTP2详解.md",
+    "专业知识/计算机网络/websocket.md",
+    "DevPlan/2025 每日作息表.md",
+    "DevPlan/2025 运动计划.md",
+    "DevPlan/2025 饮食计划.md",
+    "DevPlan/NotClassified/2025 发展规划完成度检视.md",
+    "DevPlan/NotClassified/2025 发展规划完成度检视表.md",
+    "DevPlan/PlanItem/2025 滚动计划.md",
+    "DevPlan/PlanItem/2025 年度计划项.md",
+    "DevPlan/PlanItem/2025 关键日期.md",
+    "DevPlan/Tips/2025 保持活力技巧.md",
+    "专业知识/tmp/开源.md",
+    "专业知识/计算机网络/VPC 网络.md",
+    "专业知识/tmp/如何安全正确地使用HTTPClient.md",
+    "成长/读书/《认知觉醒》.md",
+    "成长/读书/《软件开发者路线图》.md",
+    "成长/想看的书/bookList.md",
+    "专业知识/AI/未命名",
+    "专业知识/AI",
+    "专业知识/drawIO/COMPACT行格式.png",
+    "专业知识/drawIO/COMPACT行格式.jpg",
     "专业知识/工作问题记录/工作业务优化方案",
-    "专业知识/云原生/GoodThing.md",
-    "专业知识/云原生/kubernetes/源码解读/k8s 的代码结构.md",
-    "专业知识/tmp/kubernetes/概念和原理/学习资源.md",
-    "专业知识/tmp/kubernetes/概念和原理/Service-Ingrss-Istio.md",
-    "专业知识/tmp/kubernetes/概念和原理/POD 概念和特性.md",
-    "专业知识/tmp/kubernetes/概念和原理/k8s DNS.md",
-    "专业知识/tmp/kubernetes/概念和原理/整体架构和关键组件.md",
-    "专业知识/tmp/Docker/build-your-own-docker/Resource.md",
-    "专业知识/tmp/Docker/概念/4、快速入门.md",
-    "专业知识/tmp/Docker/概念/3、安装.md",
-    "专业知识/tmp/Docker/概念/2、基本架构.md",
-    "专业知识/tmp/Docker/概念/1、简介.md",
-    "专业知识/云原生/kubernetes/环境搭建/mac 搭建k8s.md",
-    "专业知识/tmp/时序数据无法落库.md",
-    "专业知识/云原生/kubernetes/环境搭建/使用kubeadm快速部署一个K8s集群.md",
-    "专业知识/tmp/net-http-transport.md",
     "专业知识/tmp/kubernetes",
     "专业知识/tmp/Docker/概念",
     "专业知识/tmp/Docker/build-your-own-docker",
@@ -232,8 +221,6 @@
     "专业知识/Go/设计与实现",
     "DevPlan/SummInTime",
     "DevPlan/Appendix",
-    "DevPlan/AhaMoment",
-    "DevPlan",
     "专业知识/photos/1553993244446.png",
     "专业知识/photos/1.jpg",
     "专业知识/photos/1-1616031353654.jpg",
@@ -242,8 +229,6 @@
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107193216910.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107145203476.png",
     "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107145021146.png",
-    "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107144950437.png",
-    "专业知识/工作问题记录/句柄数泄漏问题.assets/image-20250107144846361.png",
     "专业知识/云原生/prometheus/canvstest.canvas"
   ]
 }
