@@ -14,6 +14,11 @@
 - SPA (Super Agent): 超级代理，负责监控SPM进程并在异常时重启
 - aops-agent-service: 服务管理程序，负责整个系统的安装、卸载、启动、停止等操作
 
+#### 外部组件
+
+- sf-meta：接收aops-spm上报的心跳信息，并且将最新版本的aops-spm版本号以及各类agent版本号返回给aops-spm； 并且提供aops-spm和各类agent的安装包下载功能；
+- transfer-gateway：转发代理，负责同步sf-meta上的安装包，并对外提供包下载服务能力；每个数据中心都会部署一个独立的转发代理服务，承接分流下载、心跳上报等功能；
+
 项目架构特点：
 
 1. 双进程设计：spm(管理核心) + spa(监控和拉起)
@@ -27,13 +32,9 @@
 项目目录结构及功能分析：
 
 1. 根目录文件：
-   - README.md: 项目说明文档
    - Makefile: docker 构建脚本
    - go.mod/go.sum: Go模块依赖管理
-   - .gitignore: Git忽略规则
-   - LICENSE: 许可证文件
-   - .travis.yml: CI/CD配置
-- control：linux控制脚本
+   - control：linux控制脚本
      - 启动、停止 spm
 2. config/:
    - config.go: 配置管理模块，定义配置结构体和解析逻辑
@@ -189,6 +190,12 @@ Windows平台
 
 SPA 是 SPM 的伴生进程，两者相互监督，检测到异常就相互拉起
 
+1、windows watch 为什么只允许spm杀死spa，而允许 spa 杀死 spm？
+
+- 升级时，是由spm的心跳去拉取新版本的安装包，并解压，然后自动退出spm程序，等待spa拉起；spm启动后，会杀掉spa，升级场景下需要重启spa、替换exe文件。如果双方都能相互杀死、拉起，则会出现死循环的情况；
+
+2、值得注意的是，spa的拉起逻辑（如何替换备份文件等）是在spm的watch中实现的；而spm的拉起逻辑，则是由control.py这个脚本实现的；两边的逻辑都是类似；不过貌似统一放在control.py中也是可以的
+
 ![spm和spa watch 机制](agent.assets/spm和spa watch 机制.jpg)
 
 ### 升级场景
@@ -314,20 +321,20 @@ rpm build xxx   # 执行完整的多架构打包
 
 #### 手动安装
 
-托管云 agent 的手动安装命令可以拆分为两部分：
+托管云 agent 的手动安装命令可以拆分为两部分
 
 ```bash
-curl -kf4 -m 30 -X GET https://10.134.88.95:8888/api/download/aops-agent-service-linux-amd64 -H 'x-agent-id: 5402204854438' -o aops-agent-service-linux-amd64
+curl -kf4 -m 30 -X GET https://{{transfer-gateway-endpoint}}:8888/api/download/aops-agent-service-linux-amd64 -H 'x-agent-id: 5402204854438' -o aops-agent-service-linux-amd64
 && chmod +x aops-agent-service-linux-amd64 && ./aops-agent-service-linux-amd64 --control install --version c57f6a1d --agentId 5402204854438 --endpoint https://10.134.88.95:8888
 ```
 
-1、下载“下载器 aops-agent-service-linux-amd64” 
+1、下载 “下载器 aops-agent-service-linux-amd64” 
 
 ```bash
-curl -kf4 -m 30 -X GET https://10.134.88.95:8888/api/download/aops-agent-service-linux-amd64 -H 'x-agent-id: 5402204854438' -o aops-agent-service-linux-amd64
+curl -kf4 -m 30 -X GET https://{{transfer-gateway-endpoint}}:8888/api/download/aops-agent-service-linux-amd64 -H 'x-agent-id: 5402204854438' -o aops-agent-service-linux-amd64
 ```
 
-到 transfer-gateway 下载 super-agent 的可执行文件
+到 transfer-gateway 下载对应 版本-架构 的 super-agent 安装包
 
 2、给下载器执行权限、执行下载器的安装命令
 
@@ -335,9 +342,7 @@ curl -kf4 -m 30 -X GET https://10.134.88.95:8888/api/download/aops-agent-service
 && chmod +x aops-agent-service-linux-amd64 && ./aops-agent-service-linux-amd64 --control install --version c57f6a1d --agentId 5402204854438 --endpoint https://10.134.88.95:8888
 ```
 
-
-
-
+这个安装命令，就是通过调用 aops-agent-service（服务管理程序）来安装agent；
 
 
 
