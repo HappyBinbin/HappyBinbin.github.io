@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "专业知识/tmp/moogsoft.md",
+                "file": "专业知识/云原生/thanos/降采样.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "moogsoft"
+              "title": "降采样"
             }
           }
         ]
@@ -182,9 +182,16 @@
   },
   "active": "58ec81dafbefcd48",
   "lastOpenFiles": [
+    "专业知识/云原生/thanos/Pasted image 20250808100616.png",
+    "专业知识/云原生/thanos/降采样.md",
+    "专业知识/tmp/Docker/build-your-own-docker/Resource.md",
+    "专业知识/tmp/准备/项目经历.md",
+    "专业知识/云原生/thanos",
+    "专业知识/tmp/准备/数据统计.md",
+    "专业知识/Go/设计与实现/并发编程/syncMap.md",
+    "专业知识/tmp/moogsoft.md",
     "专业知识/tmp/准备/准备.md",
     "专业知识/tmp/准备/agent.md",
-    "专业知识/tmp/moogsoft.md",
     "moogsoft.md",
     "专业知识/tmp/准备/agent.assets/image-20250624160326290.png",
     "专业知识/tmp/moogsoft.assets/uuid-f4be89a5-b557-32f6-7a57-fdab3479d2c5.png",
@@ -196,7 +203,6 @@
     "专业知识/tmp/准备/agent.assets/spm 启动.jpg",
     "专业知识/tmp/准备/agent.assets/image-20250624105743655.png",
     "专业知识/tmp/准备/agent.assets/image-20250610100459129.png",
-    "专业知识/tmp/准备/agent.assets/agent架构.jpg",
     "专业知识/tmp/降采样.md",
     "专业知识/tmp/准备/sf-meta.md",
     "专业知识/tmp/准备/draw/spm心跳机制.drawio",
@@ -209,25 +215,18 @@
     "专业知识/tmp/准备/agent.assets",
     "专业知识/tmp/kubernetes/概念和原理/csi-s3和minio.md",
     "专业知识/tmp/frp.md",
-    "专业知识/tmp/Docker/build-your-own-docker/Resource.md",
     "专业知识/tmp/VictoriaMetrics 存储结构浅析.md",
     "专业知识/tmp/Apache Doria.md",
     "专业知识/tmp/缓存.md",
     "专业知识/AI/006、Transformer.md",
     "专业知识/AI/005、从RNN到Transformer.md",
     "专业知识/AI/001、从函数到神经网络.md",
-    "专业知识/tmp/准备/数据统计.md",
     "个人规划.md",
     "专业知识/tmp/面试准备.md",
-    "专业知识/tmp/准备",
     "专业知识/计算机网络/图解网络/HTTPS详解.md",
     "专业知识/计算机网络/图解网络/HTTP和HTTPS优化.md",
     "专业知识/计算机网络/图解网络/HTTP详解.md",
     "专业知识/计算机网络/图解网络/IP详解.md",
-    "专业知识/计算机网络/图解网络/TCP详解.md",
-    "专业知识/计算机网络/HTTP、WebSocket、RPC.md",
-    "专业知识/计算机网络/IO模型.md",
-    "专业知识/计算机网络/图解网络/HTTP2详解.md",
     "未命名.canvas",
     "专业知识/云原生/prometheus/canvstest.canvas"
   ]
