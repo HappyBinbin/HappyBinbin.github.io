@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a0031bbbd46b8a8f",
+        "id": "a6cfb1abd24692e3",
         "type": "tabs",
         "children": [
           {
-            "id": "136cc35ac7ee9edb",
+            "id": "a9c9484566627744",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "kafka",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -168,11 +168,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "136cc35ac7ee9edb",
+  "active": "a9c9484566627744",
   "lastOpenFiles": [
     "云原生/thanos/Pasted image 20250808100616.png",
-    "Pasted image 20250808100503.png",
     "云原生/thanos/降采样.md",
+    "项目笔记/Lottery/抽奖流程策略模式实现.png",
+    "工作问题记录/kakfa生产者消费者实践.md",
+    "项目笔记/Lottery/项目进度/015_搭建MQ消息组件Kafka.md",
+    "Pasted image 20250808100503.png",
     "云原生/prometheus/Prometheus 存储结构浅析.md",
     "云原生/prometheus/prometheus 架构.md",
     "效率工具/Git/git_工作常用.md",
