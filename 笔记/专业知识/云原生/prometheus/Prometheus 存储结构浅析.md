@@ -39,6 +39,7 @@ tree .
 ├── 01JNZ7Q3HVHAJMXQK923KMFTFY
 │   ├── chunks
 │   │   └── 000001
+|   |   └── 000002
 │   ├── index
 │   ├── meta.json
 │   └── tombstones
@@ -64,6 +65,7 @@ tree .
 			- **series ref**：唯一标识时间线，由文件series ID 和偏移量组成，用于区分不同的 series和快速索引样本数据的位置
 			- **mintime/maxtime**：记录该 chunk 的时间范围
 			- **data**：存储压缩后的样本数据（如 `[(t1, v1), (t2, v2), ...]`）
+		- 每个 series 时间序列，会在内存中存在单独的chunk链（逻辑上），而物理上chunk文件则是多个逻辑chunk链的总和；
 	- **index**：索引文件，记录标签到数据块的反向映射，支持快速查询
 	- **meta.json**：元数据文件，包含块的时间范围、校验和等信息
 	- **tombstones**：墓碑文件，标记已删除的时间序列，用于数据清理
@@ -211,14 +213,3 @@ Postings List: [ref(series1), ref(series2)]
 | **Series** | 逻辑时间序列单元 | Metric名称 + 标签键值对集合（如 `http_requests_total{method="GET", instance="localhost"}`） | 所有时间（动态增长）           | 属于同一逻辑序列的所有样本数据（可能分散在多个 Block 的 Chunk 中）                               |
 | **Chunk**  | 物理数据片段   | Series 标识 + 时间范围（如 `01G7Z74ZPB79Z5Z1D234567890_000001`）                         | 固定时间段（默认2小时，可通过配置调整） | 单个 Series 的连续时间样本数据（压缩格式，如Snappy）                                      |
 | **Sample** | 样本数据     | value 某个具体的值                                                                    | 根据值类型来定义范围           | 指标在这个时间点的具体值                                                           |
-
-
-
-
-
-
-
-
-
-
-
