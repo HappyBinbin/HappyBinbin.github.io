@@ -212,4 +212,5 @@ Postings List: [ref(series1), ref(series2)]
 | **Block**  | 物理存储单元   | ULID（Universally Unique Lexicographically Sortable Identifier）                  | 固定时间段（默认2小时）         | 包含 `chunks/`（数据文件）、`index`（倒排索引）、`meta.json`（元数据）、`tombstones`（逻辑删除标记） |
 | **Series** | 逻辑时间序列单元 | Metric名称 + 标签键值对集合（如 `http_requests_total{method="GET", instance="localhost"}`） | 所有时间（动态增长）           | 属于同一逻辑序列的所有样本数据（可能分散在多个 Block 的 Chunk 中）                               |
 | **Chunk**  | 物理数据片段   | Series 标识 + 时间范围（如 `01G7Z74ZPB79Z5Z1D234567890_000001`）                         | 固定时间段（默认2小时，可通过配置调整） | 单个 Series 的连续时间样本数据（压缩格式，如Snappy）                                      |
+| **Chunk链** | 逻辑数据片段   | Series 标识                                                                       | 固定时间段（默认2小时，可通过配置调整） | 某一类 Series 的集合组成链，保存在Prometheus 内存中                                    |
 | **Sample** | 样本数据     | value 某个具体的值                                                                    | 根据值类型来定义范围           | 指标在这个时间点的具体值                                                           |
