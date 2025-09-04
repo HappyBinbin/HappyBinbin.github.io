@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "云原生/prometheus/Prometheus 存储结构浅析.md",
+                "file": "工作问题记录/kafka 丢消息问题.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Prometheus 存储结构浅析"
+              "title": "kafka 丢消息问题"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "云原生/prometheus/Prometheus 存储结构浅析.md",
+                "file": "工作问题记录/kafka 丢消息问题.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Prometheus 存储结构浅析 的大纲"
+              "title": "kafka 丢消息问题 的大纲"
             }
           }
         ],
@@ -171,13 +171,15 @@
   },
   "active": "a9c9484566627744",
   "lastOpenFiles": [
+    "工作问题记录/kakfa生产者消费者实践.md",
+    "工作问题记录/kafka 丢消息问题.md",
+    "云原生/prometheus/Prometheus 存储结构浅析.md",
     "云原生/thanos/thanos 降采样分析.md",
     "云原生/thanos/查询引擎.md",
     "云原生/thanos/可行性分析.md",
     "云原生/thanos/简介.md",
     "云原生/thanos/降采样.md",
     "云原生/thanos/部署和使用.md",
-    "云原生/prometheus/Prometheus 存储结构浅析.md",
     "云原生/thanos/Pasted image 20250825101730.png",
     "云原生/prometheus/源码阅读.md",
     "云原生/minio/安装部署.md",
@@ -188,7 +190,6 @@
     "云原生/thanos 1",
     "云原生/thanos/Pasted image 20250808100616.png",
     "项目笔记/Lottery/抽奖流程策略模式实现.png",
-    "工作问题记录/kakfa生产者消费者实践.md",
     "项目笔记/Lottery/项目进度/015_搭建MQ消息组件Kafka.md",
     "Pasted image 20250808100503.png",
     "效率工具/Git/git_工作常用.md",
