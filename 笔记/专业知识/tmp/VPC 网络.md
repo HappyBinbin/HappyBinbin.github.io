@@ -203,3 +203,69 @@ flowchart LR
 
 > **总结**：每个场景都回答了“是什么”“为什么需要”“如何实现”。先理解这些“家常比喻”，再去看具体云厂商的参数/命令，就能很快入门 VPC 设计。
 
+
+---
+
+## 综合示例：一张图看懂 VPC 南北 / 东西流量 + 专线 + VPN + 隧道
+**What：** 一个典型的企业级 VPC，既要对外提供服务（南北向），又要东西向分层部署，还要和自建机房、远程办公点互联。
+
+**Why：**
+- 对外业务需要通过 NAT/VPN 接入公网，满足客户访问（南北向）。
+- 内部微服务/数据库之间有大量东西向通信，需要分层安全策略。
+- 公司总部 / 分支机构 / 生产 IDC 要和云上互通，依赖专线与 VPN。
+
+**How（示意图）：**
+```mermaid
+flowchart TB
+    subgraph Users[互联网用户]
+        ClientA[移动端/浏览器]
+    end
+
+    subgraph VPC[云上私有小区]
+        subgraph PublicSubnet[公有子网]
+            ALB[负载均衡]
+            WAF[WAF/NFV]
+        end
+        subgraph SecChain[服务链]
+            FW[防火墙]
+            IDS[入侵检测]
+        end
+        subgraph EastWest[东西向区域]
+            direction LR
+            subgraph AppSubnet[应用子网]
+                App1[应用集群 A]
+                App2[应用集群 B]
+            end
+            subgraph DataSubnet[数据子网]
+                DB[数据库]
+            end
+        end
+        VRouter[虚拟路由器]
+        NATGW[NAT 网关]
+        VPNGW[VPN 网关]
+        DirectGW[专线网关]
+
+        ClientA -->|HTTP/TLS| ALB --> WAF --> FW --> IDS --> App1
+        WAF --> App2
+        App1 <--> App2
+        App1 <-->|东西向流量| DB
+        App2 --> DB
+        App1 -.VXLAN/Overlay.- App2
+
+        App1 --> VRouter
+        DB --> VRouter
+        VRouter --> NATGW --> Internet[公网]
+        VRouter --> VPNGW --> BranchVPN[分支 VPN]
+        VRouter --> DirectGW --> IDC[自建 IDC]
+    end
+
+    BranchVPN --> RemoteUsers[远程办公]
+```
+
+- **南北向流量**：Client → 负载均衡 → WAF → 服务链 → 应用，再经 NAT/出口访问公网或被公网访问。
+- **东西向流量**：应用子网之间、应用与数据库之间通过 VXLAN/虚拟交换机互通，并由服务链策略检查。
+- **VPN**：VPN 网关为远程办公或分支机构提供加密通道。
+- **专线**：DirectGW 通过物理专线或 MPLS 连接 IDC，常上线 BGP 以实现动态路由。
+- **隧道**：VPC 内部使用 VXLAN/隧道隔离不同子网，也可能在跨 AZ、专线、VPN 中叠加隧道封装。
+
+通过这张图可以把前面各个场景串起来：VPC 就像一座有完善门禁、道路和跨城高速的小区，南北向、东西向、专线、VPN、NFV 安检都能在同一架构里组合使用。
