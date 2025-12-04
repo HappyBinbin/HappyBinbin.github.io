@@ -6,12 +6,17 @@
 - K8s Ingress or APISIX
 - LoadBalancer
 - Kube-vip or (HAProxy and keepalived)
+- Istio 
+- Serverless
+- Cass、Fass
 
 疑问：
 1. 为什么要有 Ingress ？
 2. 为什么有 k8s ingress 还需要 apisix ingress ？
 3. 目前的 vip 方案有哪些？（https://www.qikqiak.com/post/use-kube-vip-ha-k8s-lb/）
 4. LoadBalancer 和 Ingress 的区别？
+5. Istio 的作用是什么？能否替代 k8s ingress ？
+6. 
 
 
 

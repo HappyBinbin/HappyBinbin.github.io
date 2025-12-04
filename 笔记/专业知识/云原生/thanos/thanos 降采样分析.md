@@ -463,7 +463,7 @@ type QueryableCreator func(
 
 #### 6. `query.exec` -> `vectorSelector` -> `loadSeries` -> `queryable.Select`
 
-这是对 `Exec` 流程更底层的细化，完全正确。
+这是对 `Exec` 流程更底层的细化
 
 *   `query.exec` 是Prometheus引擎内部的执行体。
 *   当它解析到 `vectorSelector`（向量选择器）时，它知道需要去加载时序数据了。
