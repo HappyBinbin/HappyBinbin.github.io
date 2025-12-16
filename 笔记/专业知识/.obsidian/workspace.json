@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tmp/VPC 网络.md",
-                "mode": "preview",
+                "file": "tmp/victoriametrics/VictoriaMetrics Part Merge & Downsampling 机制解析.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "VPC 网络"
+              "title": "VictoriaMetrics Part Merge & Downsampling 机制解析"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tmp/VPC 网络.md",
+                "file": "tmp/victoriametrics/VictoriaMetrics Part Merge & Downsampling 机制解析.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "VPC 网络 的大纲"
+              "title": "VictoriaMetrics Part Merge & Downsampling 机制解析 的大纲"
             }
           }
         ],
@@ -171,8 +171,11 @@
   },
   "active": "a9c9484566627744",
   "lastOpenFiles": [
-    "云原生/GoodThing.md",
+    "tmp/victoriametrics/VictoriaMetrics 存储结构浅析.md",
+    "tmp/victoriametrics/VictoriaMetrics Part Merge & Downsampling 机制解析.md",
+    "tmp/victoriametrics",
     "tmp/VPC 网络.md",
+    "云原生/GoodThing.md",
     "云原生/thanos/简介.md",
     "云原生/thanos/查询引擎.md",
     "云原生/thanos/部署和使用.md",
@@ -180,7 +183,6 @@
     "云原生/thanos/thanos 降采样分析.md",
     "云原生/thanos/Pasted image 20250825101730.png",
     "云原生/thanos/可行性分析.md",
-    "tmp/VictoriaMetrics 存储结构浅析.md",
     "tmp/降采样.md",
     "tmp/开源.md",
     "tmp/准备/sf-meta.md",
@@ -197,7 +199,6 @@
     "tmp/Apache Doria.md",
     "tmp/bilibili 评论系统.md",
     "tmp/frp.md",
-    "tmp/golang 三关.md",
     "AI/LLM",
     "AI/原理学习",
     "云原生/minio",
